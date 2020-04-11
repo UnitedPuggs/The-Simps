@@ -11,21 +11,23 @@ CONFIG -= app_bundle
 DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
-        administrator.cpp \
+        Admin.cpp \
+        Manager.cpp \
         main.cpp \
         mainwindow.cpp \
-        sqldatabase.cpp \
-        storemanager.cpp
+        sqldatabase.cpp
 
 FORMS += \
-    mainwindow.ui
+    Admin.ui \
+    Manager.ui \
+    mainWindow.ui
 
 HEADERS += \
-    administrator.h \
+    Admin.h \
+    Manager.h \
     header.h \
     mainwindow.h \
-    sqldatabase.h \
-    storemanager.h
+    sqldatabase.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

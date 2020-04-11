@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include "header.h"
+#include "Admin.h"
+#include "Manager.h"
+#include "QMessageBox"
 
 enum setIndex
 {
@@ -22,8 +25,13 @@ public:
     explicit mainWindow(QWidget *parent = nullptr);
     ~mainWindow();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::mainWindow *ui;
+    Admin          *admin;
+    Manager        *manager;
 };
 
 #endif // MAINWINDOW_H
