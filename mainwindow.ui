@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="LoginButton">
     <property name="geometry">
      <rect>
       <x>300</x>
@@ -106,7 +106,7 @@
      <string notr="true"/>
     </property>
    </widget>
-   <zorder>pushButton</zorder>
+   <zorder>LoginButton</zorder>
    <zorder>UsernameLineEdit</zorder>
    <zorder>label</zorder>
    <zorder>label_2</zorder>
