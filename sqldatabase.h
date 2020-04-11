@@ -6,6 +6,7 @@
 class sqlDatabase
 {
 private:
+    QSqlDatabase database;
 
 public:
     sqlDatabase();

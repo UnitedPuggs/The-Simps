@@ -13,17 +13,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         administrator.cpp \
         main.cpp \
-        mainmenu.cpp \
+        mainwindow.cpp \
         sqldatabase.cpp \
         storemanager.cpp
 
 FORMS += \
-    mainmenu.ui
+    mainwindow.ui
 
 HEADERS += \
     administrator.h \
     header.h \
-    mainmenu.h \
+    mainwindow.h \
     sqldatabase.h \
     storemanager.h
 
