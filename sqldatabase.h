@@ -28,7 +28,10 @@ public:
 
     void createDatabase();
     void readFileCustomer();
-    void addCustomerIntoDatabase(customerTableInfo& customerData);
+    void readFileSales();
+    void addCustomerIntoTable(customerTableInfo& customerData);
+    void addSalesIntoTable(salesTableInfo& salesData);
+
 };
 
 #endif // SQLDATABASE_H
