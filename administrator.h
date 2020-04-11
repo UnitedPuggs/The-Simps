@@ -2,10 +2,26 @@
 #define ADMINISTRATOR_H
 
 #include "header.h"
-
+#include "sqldatabase.h"
+struct uiCustomerInput{
+    QString name;
+    QString customerID;
+    QString executiveType;
+    QString expDate;
+};
+struct uiSalesInput{
+    QString purchaseDate;
+    QString customerID;
+    QString itemName;
+    QString itemPrice;
+    QString quantity;
+};
 class administrator
 {
 public:
+    //Instance of the database
+    QSqlDatabase database;
+
     administrator();
     ~administrator();
 
