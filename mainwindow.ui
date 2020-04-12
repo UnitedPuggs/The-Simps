@@ -26,7 +26,7 @@
     <property name="font">
      <font>
       <family>Arial</family>
-      <pointsize>10</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="text">
@@ -44,8 +44,8 @@
     </property>
     <property name="font">
      <font>
-      <family>Arial</family>
-      <pointsize>10</pointsize>
+      <family>Lucida Sans</family>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="inputMask">
@@ -56,6 +56,9 @@
     </property>
    </widget>
    <widget class="QLineEdit" name="PasswordLineEdit">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>200</x>
@@ -66,8 +69,8 @@
     </property>
     <property name="font">
      <font>
-      <family>Arial</family>
-      <pointsize>10</pointsize>
+      <family>Lucida Sans</family>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="inputMask">
@@ -100,6 +103,44 @@
     </property>
     <property name="text">
      <string>💪 Bulk Club Inc. 💪</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="companyLabel_2">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>390</y>
+      <width>131</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Lucida Sans Unicode</family>
+      <pointsize>6</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Developed by The Simps.</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>410</y>
+      <width>291</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>7</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>© COPYRIGHT 2020 Bulk Club. All Rights Reserved.</string>
     </property>
    </widget>
   </widget>
