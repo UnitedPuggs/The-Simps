@@ -15,24 +15,25 @@ mainWindow::~mainWindow()
 
 void mainWindow::on_pushButton_clicked()
 {
-    QString username = ui -> UsernameLineEdit -> text();
-    QString password = ui -> PasswordLineEdit -> text();
+    QString username = ui->UsernameLineEdit->text();
+    QString password = ui->PasswordLineEdit->text();
 
     if(username == "admin" && password == "admin")
     {
-        admin =  new Admin(this);
-        admin -> setWindowTitle("Administrator Page");
-        admin -> show();
+        admin = new Admin(this);
+        admin->setWindowTitle("Administrator Page");
+        admin->show();
     }
+
     else if(username == "manager" && password == "manager")
     {
-        manager =  new Manager(this);
-        manager -> setWindowTitle("Store Manager Page");
-        manager -> show();
+        manager = new Manager(this);
+        manager->setWindowTitle("Store Manager Page");
+        manager->show();
     }
     else
     {
-        QMessageBox::information(this, "Error", "Username and/or password is incorrect!");
+        QMessageBox::information(this, "", "Username and/or password is incorrect!");
     }
 
 }

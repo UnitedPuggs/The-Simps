@@ -15,6 +15,17 @@ public:
     explicit Manager(QWidget *parent = nullptr);
     ~Manager();
 
+private slots:
+    void on_salesButton_clicked();
+
+    void on_customerButton_clicked();
+
+    void on_inventoryButton_clicked();
+
+    void on_customerButton_2_clicked();
+
+    void on_membershipButton_clicked();
+
 private:
     Ui::Manager *ui;
 };

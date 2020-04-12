@@ -69,11 +69,18 @@
         <height>251</height>
        </rect>
       </property>
+      <property name="selectedDate">
+       <date>
+        <year>2020</year>
+        <month>4</month>
+        <day>11</day>
+       </date>
+      </property>
       <property name="minimumDate">
        <date>
         <year>2020</year>
-        <month>3</month>
-        <day>31</day>
+        <month>4</month>
+        <day>1</day>
        </date>
       </property>
       <property name="firstDayOfWeek">
@@ -193,8 +200,76 @@
       </property>
      </widget>
     </widget>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>330</y>
+       <width>341</width>
+       <height>181</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>GroupBox</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>330</y>
+       <width>241</width>
+       <height>181</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>GroupBox</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="customerPage">
+    <widget class="QComboBox" name="customerPage_sortBox">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>10</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="customerPage_searchBar">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>10</y>
+       <width>251</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Search Customer Name/ID here...</string>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="customerPage_refreshButton">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>10</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>🗘</string>
+     </property>
+    </widget>
     <widget class="QTableWidget" name="customerPage_tableWidget">
      <property name="geometry">
       <rect>
@@ -204,8 +279,51 @@
        <height>461</height>
       </rect>
      </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
     </widget>
-    <widget class="QToolButton" name="customerPage_refreshButton">
+    <widget class="QPushButton" name="customerPage_searchButton">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>10</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Search</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="membershipPage">
+    <widget class="QTableWidget" name="membershipPage_tableWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>50</y>
+       <width>601</width>
+       <height>461</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="membershipPage_refreshButton">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -243,26 +361,46 @@
       </rect>
      </property>
     </widget>
+    <widget class="QLineEdit" name="inventoryPage_searchBar">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>10</y>
+       <width>251</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Search Item here...</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="inventoryPage_searchButton">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>10</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Search</string>
+     </property>
+    </widget>
    </widget>
-  </widget>
-  <widget class="QPushButton" name="customerButton">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>90</y>
-     <width>121</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Memberships</string>
-   </property>
+   <widget class="QWidget" name="rebatePage"/>
   </widget>
   <widget class="QPushButton" name="inventoryButton">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>130</y>
+     <y>170</y>
      <width>121</width>
      <height>31</height>
     </rect>
@@ -284,30 +422,43 @@
     <string>Sales Info</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="salesPage_refreshButton">
+  <widget class="QPushButton" name="membershipButton">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>210</y>
-     <width>31</width>
+     <x>10</x>
+     <y>130</y>
+     <width>121</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>🗘</string>
+    <string>Memberships</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="salesPage_printButton">
+  <widget class="QPushButton" name="customerButton">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>280</y>
-     <width>101</width>
+     <x>10</x>
+     <y>90</y>
+     <width>121</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>Print Report</string>
+    <string>Customer Details</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="rebatesButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>210</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>View Rebates</string>
    </property>
   </widget>
  </widget>
