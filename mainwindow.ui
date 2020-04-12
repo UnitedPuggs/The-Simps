@@ -17,9 +17,9 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>260</y>
-      <width>91</width>
+      <x>270</x>
+      <y>270</y>
+      <width>101</width>
       <height>31</height>
      </rect>
     </property>
@@ -27,49 +27,11 @@
      <string>Login</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>150</y>
-      <width>141</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Franklin Gothic Book</family>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Username</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>200</y>
-      <width>141</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Franklin Gothic Book</family>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Password</string>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="UsernameLineEdit">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>150</y>
+      <x>200</x>
+      <y>180</y>
       <width>241</width>
       <height>31</height>
      </rect>
@@ -83,12 +45,15 @@
     <property name="inputMask">
      <string extracomment="Enter username..."/>
     </property>
+    <property name="placeholderText">
+     <string>Enter username here...</string>
+    </property>
    </widget>
    <widget class="QLineEdit" name="PasswordLineEdit">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>200</y>
+      <x>200</x>
+      <y>220</y>
       <width>241</width>
       <height>31</height>
      </rect>
@@ -105,12 +70,15 @@
     <property name="text">
      <string notr="true"/>
     </property>
+    <property name="placeholderText">
+     <string>Enter password here...</string>
+    </property>
    </widget>
    <widget class="QLabel" name="companyLabel">
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>50</y>
+      <y>120</y>
       <width>241</width>
       <height>51</height>
      </rect>
@@ -125,12 +93,6 @@
      <string>💪 Bulk Club Inc. 💪</string>
     </property>
    </widget>
-   <zorder>pushButton</zorder>
-   <zorder>UsernameLineEdit</zorder>
-   <zorder>label</zorder>
-   <zorder>label_2</zorder>
-   <zorder>PasswordLineEdit</zorder>
-   <zorder>companyLabel</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
