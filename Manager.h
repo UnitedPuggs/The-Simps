@@ -16,15 +16,17 @@ public:
     ~Manager();
 
 private slots:
+    void setupSalesPage();
+    void setupCustomerPage();
+    void setupInventoryPage();
+    void setupMembershipPage();
+    void setupRebatesPage();
+
     void on_salesButton_clicked();
-
     void on_customerButton_clicked();
-
     void on_inventoryButton_clicked();
-
-    void on_customerButton_2_clicked();
-
     void on_membershipButton_clicked();
+    void on_rebatesButton_clicked();
 
 private:
     Ui::Manager *ui;

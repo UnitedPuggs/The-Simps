@@ -13,6 +13,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         Admin.cpp \
         Manager.cpp \
+        SalesReport.cpp \
         main.cpp \
         mainwindow.cpp \
         sqldatabase.cpp
@@ -20,11 +21,13 @@ SOURCES += \
 FORMS += \
     Admin.ui \
     Manager.ui \
+    SalesReport.ui \
     mainWindow.ui
 
 HEADERS += \
     Admin.h \
     Manager.h \
+    SalesReport.h \
     header.h \
     mainwindow.h \
     sqldatabase.h

@@ -22,6 +22,11 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Lucida Sans</family>
+    </font>
+   </property>
    <property name="text">
     <string>Customer Info</string>
    </property>
@@ -34,6 +39,11 @@
      <width>121</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Lucida Sans</family>
+    </font>
    </property>
    <property name="text">
     <string>View Inventory</string>
@@ -68,6 +78,12 @@
        <height>31</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>Delete</string>
      </property>
@@ -80,6 +96,12 @@
        <width>71</width>
        <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Add New</string>
@@ -94,21 +116,14 @@
        <height>31</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>Edit Info</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="customerPage_convertButton">
-     <property name="geometry">
-      <rect>
-       <x>230</x>
-       <y>10</y>
-       <width>131</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Convert Membership</string>
      </property>
     </widget>
     <widget class="QToolButton" name="customerPage_refreshButton">
@@ -119,6 +134,12 @@
        <width>31</width>
        <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>🗘</string>
@@ -135,6 +156,12 @@
        <height>31</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>🗘</string>
      </property>
@@ -147,6 +174,12 @@
        <width>71</width>
        <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Delete</string>
@@ -171,6 +204,12 @@
        <height>31</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>Add New</string>
      </property>
@@ -184,8 +223,64 @@
        <height>31</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>Edit Info</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="membershipPage">
+    <widget class="QTableWidget" name="membershipPage_tableWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>50</y>
+       <width>601</width>
+       <height>461</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="membershipPage_convertButton">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>10</y>
+       <width>161</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Convert Memberships</string>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="membershipPage_refreshButton">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>10</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>🗘</string>
      </property>
     </widget>
    </widget>
@@ -207,6 +302,24 @@
    </property>
    <property name="text">
     <string>💪 Bulk Club Inc.💪</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="membershipButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>130</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Lucida Sans</family>
+    </font>
+   </property>
+   <property name="text">
+    <string>Memberships</string>
    </property>
   </widget>
  </widget>

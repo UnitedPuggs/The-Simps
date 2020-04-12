@@ -7,14 +7,47 @@ Manager::Manager(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
-    ui->customerPage_sortBox->addItem("All");
-    ui->customerPage_sortBox->addItem("Regular");
-    ui->customerPage_sortBox->addItem("Executive");
+    setupSalesPage();
+    setupCustomerPage();
+    setupMembershipPage();
+    setupInventoryPage();
+    setupRebatesPage();
 }
 
 Manager::~Manager()
 {
     delete ui;
+}
+
+void Manager::setupSalesPage()
+{
+
+}
+
+void Manager::setupCustomerPage()
+{
+    ui->customerPage_sortBox->addItem("All");
+    ui->customerPage_sortBox->addItem("Regular");
+    ui->customerPage_sortBox->addItem("Executive");
+}
+
+void Manager::setupInventoryPage()
+{
+    ui->inventoryPage_sortBox->addItem("Ascending");
+    ui->inventoryPage_sortBox->addItem("Descending");
+    ui->inventoryPage_sortBox->addItem("Most Sold");
+    ui->inventoryPage_sortBox->addItem("Least Sold");
+}
+
+void Manager::setupMembershipPage()
+{
+
+}
+
+void Manager::setupRebatesPage()
+{
+    ui->rebatePage_sortBox->addItem("Ascending");
+    ui->rebatePage_sortBox->addItem("Descending");
 }
 
 void Manager::on_salesButton_clicked()
@@ -37,3 +70,7 @@ void Manager::on_inventoryButton_clicked()
     ui->stackedWidget->setCurrentIndex(3);
 }
 
+void Manager::on_rebatesButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
+}
