@@ -23,3 +23,8 @@ void Admin::on_inventoryButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
 }
+
+void Admin::on_membershipButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+}

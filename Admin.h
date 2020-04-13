@@ -18,6 +18,7 @@ public:
 private slots:
     void on_customerButton_clicked();
     void on_inventoryButton_clicked();
+    void on_membershipButton_clicked();
 
 private:
     Ui::Admin *ui;
