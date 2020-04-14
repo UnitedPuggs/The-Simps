@@ -28,6 +28,8 @@ private slots:
     void on_membershipButton_clicked();
     void on_rebatesButton_clicked();
 
+    void on_salesPage_previewButton_clicked();
+
 private:
     Ui::Manager *ui;
 };

@@ -1,4 +1,5 @@
 #include "Manager.h"
+#include "SalesReport.h"
 #include "ui_Manager.h"
 
 Manager::Manager(QWidget *parent) :
@@ -7,6 +8,7 @@ Manager::Manager(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
+
     setupSalesPage();
     setupCustomerPage();
     setupMembershipPage();
@@ -73,4 +75,10 @@ void Manager::on_inventoryButton_clicked()
 void Manager::on_rebatesButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(4);
+}
+
+void Manager::on_salesPage_previewButton_clicked()
+{
+    SalesReport *newSales = new SalesReport;
+    newSales->show();
 }

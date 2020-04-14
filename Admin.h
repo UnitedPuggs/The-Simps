@@ -20,6 +20,9 @@ private slots:
     void on_inventoryButton_clicked();
     void on_membershipButton_clicked();
 
+    void setupCustomerPage();
+    void setupInventoryPage();
+
 private:
     Ui::Admin *ui;
 };

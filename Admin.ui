@@ -6,12 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>749</width>
-    <height>519</height>
+    <width>750</width>
+    <height>520</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>false</bool>
   </property>
   <widget class="QPushButton" name="customerButton">
    <property name="geometry">
@@ -59,16 +68,6 @@
     </rect>
    </property>
    <widget class="QWidget" name="customerPage">
-    <widget class="QTableWidget" name="customerPage_tableWidget">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>50</y>
-       <width>601</width>
-       <height>461</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QPushButton" name="customerPage_deleteButton">
      <property name="geometry">
       <rect>
@@ -143,6 +142,25 @@
      </property>
      <property name="text">
       <string>🗘</string>
+     </property>
+    </widget>
+    <widget class="QTableView" name="customerPage_tableView">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>50</y>
+       <width>601</width>
+       <height>461</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
      </property>
     </widget>
    </widget>
