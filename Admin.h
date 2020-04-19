@@ -23,6 +23,8 @@ private slots:
     void setupCustomerPage();
     void setupInventoryPage();
 
+    void on_inventoryPage_addButton_clicked();
+
 private:
     Ui::Admin *ui;
 };

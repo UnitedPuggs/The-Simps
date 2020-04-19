@@ -54,3 +54,8 @@ void Admin::on_membershipButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
 }
+
+void Admin::on_inventoryPage_addButton_clicked()
+{
+
+}
