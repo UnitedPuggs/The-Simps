@@ -25,10 +25,6 @@ private slots:
 
     void on_inventoryPage_addButton_clicked();
 
-    void on_customerPage_addButton_clicked();
-
-    void on_customerPage_deleteButton_clicked();
-
 private:
     Ui::Admin *ui;
 };

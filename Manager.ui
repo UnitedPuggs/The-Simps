@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>748</width>
-    <height>518</height>
+    <width>908</width>
+    <height>599</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -46,25 +46,15 @@
     <rect>
      <x>140</x>
      <y>0</y>
-     <width>611</width>
-     <height>521</height>
+     <width>771</width>
+     <height>601</height>
     </rect>
    </property>
    <widget class="QWidget" name="salesPage">
-    <widget class="QTableWidget" name="salesPage_tableWidget">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>50</y>
-       <width>601</width>
-       <height>461</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QPushButton" name="salesPage_previewButton">
      <property name="geometry">
       <rect>
-       <x>490</x>
+       <x>650</x>
        <y>10</y>
        <width>111</width>
        <height>31</height>
@@ -80,6 +70,16 @@
       <string>Preview Report</string>
      </property>
     </widget>
+    <widget class="QTableView" name="salesPage_tableView">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>50</y>
+       <width>761</width>
+       <height>541</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="customerPage">
     <property name="font">
@@ -91,7 +91,7 @@
     <widget class="QComboBox" name="customerPage_sortBox">
      <property name="geometry">
       <rect>
-       <x>460</x>
+       <x>620</x>
        <y>10</y>
        <width>141</width>
        <height>31</height>
@@ -130,22 +130,6 @@
       <string>🗘</string>
      </property>
     </widget>
-    <widget class="QTableWidget" name="customerPage_tableWidget">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>50</y>
-       <width>601</width>
-       <height>461</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-    </widget>
     <widget class="QPushButton" name="customerPage_searchButton">
      <property name="geometry">
       <rect>
@@ -165,24 +149,18 @@
       <string>Search</string>
      </property>
     </widget>
-   </widget>
-   <widget class="QWidget" name="membershipPage">
-    <widget class="QTableWidget" name="membershipPage_tableWidget">
+    <widget class="QTableView" name="customerPage_tableView">
      <property name="geometry">
       <rect>
        <x>0</x>
        <y>50</y>
-       <width>601</width>
-       <height>461</height>
+       <width>761</width>
+       <height>541</height>
       </rect>
      </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
     </widget>
+   </widget>
+   <widget class="QWidget" name="membershipPage">
     <widget class="QToolButton" name="membershipPage_refreshButton">
      <property name="geometry">
       <rect>
@@ -207,7 +185,7 @@
       <rect>
        <x>40</x>
        <y>10</y>
-       <width>251</width>
+       <width>301</width>
        <height>31</height>
       </rect>
      </property>
@@ -218,13 +196,13 @@
       </font>
      </property>
      <property name="placeholderText">
-      <string>Enter in month e.g. November...</string>
+      <string>Enter in a month e.g. November...</string>
      </property>
     </widget>
     <widget class="QPushButton" name="membershipPage_searchButton">
      <property name="geometry">
       <rect>
-       <x>300</x>
+       <x>350</x>
        <y>10</y>
        <width>71</width>
        <height>31</height>
@@ -238,6 +216,16 @@
      </property>
      <property name="text">
       <string>Search</string>
+     </property>
+    </widget>
+    <widget class="QTableView" name="membershipPage_tableView">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>50</y>
+       <width>761</width>
+       <height>541</height>
+      </rect>
      </property>
     </widget>
    </widget>
@@ -261,22 +249,12 @@
       <string>🗘</string>
      </property>
     </widget>
-    <widget class="QTableWidget" name="inventoryPage_tableWidget">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>50</y>
-       <width>601</width>
-       <height>461</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QLineEdit" name="inventoryPage_searchBar">
      <property name="geometry">
       <rect>
        <x>40</x>
        <y>10</y>
-       <width>251</width>
+       <width>281</width>
        <height>31</height>
       </rect>
      </property>
@@ -293,7 +271,7 @@
     <widget class="QPushButton" name="inventoryPage_searchButton">
      <property name="geometry">
       <rect>
-       <x>300</x>
+       <x>330</x>
        <y>10</y>
        <width>71</width>
        <height>31</height>
@@ -312,7 +290,7 @@
     <widget class="QComboBox" name="inventoryPage_sortBox">
      <property name="geometry">
       <rect>
-       <x>460</x>
+       <x>620</x>
        <y>10</y>
        <width>141</width>
        <height>31</height>
@@ -325,22 +303,22 @@
       </font>
      </property>
     </widget>
-   </widget>
-   <widget class="QWidget" name="rebatePage">
-    <widget class="QTableWidget" name="rebatePage_tableWidget">
+    <widget class="QTableView" name="inventoryPage_tableView">
      <property name="geometry">
       <rect>
        <x>0</x>
        <y>50</y>
-       <width>601</width>
-       <height>461</height>
+       <width>761</width>
+       <height>541</height>
       </rect>
      </property>
     </widget>
+   </widget>
+   <widget class="QWidget" name="rebatePage">
     <widget class="QComboBox" name="rebatePage_sortBox">
      <property name="geometry">
       <rect>
-       <x>460</x>
+       <x>620</x>
        <y>10</y>
        <width>141</width>
        <height>31</height>
@@ -370,6 +348,16 @@
      </property>
      <property name="text">
       <string>🗘</string>
+     </property>
+    </widget>
+    <widget class="QTableView" name="rebatePage_tableView">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>50</y>
+       <width>761</width>
+       <height>541</height>
+      </rect>
      </property>
     </widget>
    </widget>

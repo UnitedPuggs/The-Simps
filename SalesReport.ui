@@ -41,11 +41,31 @@
        <height>25</height>
       </rect>
      </property>
+     <property name="maximumDateTime">
+      <datetime>
+       <hour>23</hour>
+       <minute>59</minute>
+       <second>59</second>
+       <year>2020</year>
+       <month>3</month>
+       <day>17</day>
+      </datetime>
+     </property>
+     <property name="minimumDateTime">
+      <datetime>
+       <hour>0</hour>
+       <minute>0</minute>
+       <second>0</second>
+       <year>2020</year>
+       <month>3</month>
+       <day>12</day>
+      </datetime>
+     </property>
      <property name="date">
       <date>
        <year>2020</year>
-       <month>4</month>
-       <day>12</day>
+       <month>3</month>
+       <day>17</day>
       </date>
      </property>
     </widget>
@@ -77,11 +97,31 @@
        <height>25</height>
       </rect>
      </property>
+     <property name="maximumDateTime">
+      <datetime>
+       <hour>23</hour>
+       <minute>59</minute>
+       <second>59</second>
+       <year>2020</year>
+       <month>3</month>
+       <day>18</day>
+      </datetime>
+     </property>
+     <property name="minimumDateTime">
+      <datetime>
+       <hour>0</hour>
+       <minute>0</minute>
+       <second>0</second>
+       <year>2020</year>
+       <month>3</month>
+       <day>13</day>
+      </datetime>
+     </property>
      <property name="date">
       <date>
        <year>2020</year>
-       <month>4</month>
-       <day>19</day>
+       <month>3</month>
+       <day>18</day>
       </date>
      </property>
     </widget>

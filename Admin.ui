@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>750</width>
-    <height>520</height>
+    <width>859</width>
+    <height>598</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -63,15 +63,15 @@
     <rect>
      <x>140</x>
      <y>0</y>
-     <width>611</width>
-     <height>521</height>
+     <width>721</width>
+     <height>601</height>
     </rect>
    </property>
    <widget class="QWidget" name="customerPage">
     <widget class="QPushButton" name="customerPage_deleteButton">
      <property name="geometry">
       <rect>
-       <x>530</x>
+       <x>640</x>
        <y>10</y>
        <width>71</width>
        <height>31</height>
@@ -90,7 +90,7 @@
     <widget class="QPushButton" name="customerPage_addButton">
      <property name="geometry">
       <rect>
-       <x>450</x>
+       <x>560</x>
        <y>10</y>
        <width>71</width>
        <height>31</height>
@@ -109,7 +109,7 @@
     <widget class="QPushButton" name="customerPage_editButton">
      <property name="geometry">
       <rect>
-       <x>370</x>
+       <x>480</x>
        <y>10</y>
        <width>71</width>
        <height>31</height>
@@ -149,8 +149,8 @@
       <rect>
        <x>0</x>
        <y>50</y>
-       <width>601</width>
-       <height>461</height>
+       <width>711</width>
+       <height>541</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -187,7 +187,7 @@
     <widget class="QPushButton" name="inventoryPage_deleteButton">
      <property name="geometry">
       <rect>
-       <x>530</x>
+       <x>640</x>
        <y>10</y>
        <width>71</width>
        <height>31</height>
@@ -208,15 +208,15 @@
       <rect>
        <x>0</x>
        <y>50</y>
-       <width>601</width>
-       <height>461</height>
+       <width>711</width>
+       <height>541</height>
       </rect>
      </property>
     </widget>
     <widget class="QPushButton" name="inventoryPage_addButton">
      <property name="geometry">
       <rect>
-       <x>450</x>
+       <x>560</x>
        <y>10</y>
        <width>71</width>
        <height>31</height>
@@ -235,7 +235,7 @@
     <widget class="QPushButton" name="inventoryPage_editButton">
      <property name="geometry">
       <rect>
-       <x>370</x>
+       <x>480</x>
        <y>10</y>
        <width>71</width>
        <height>31</height>
@@ -258,8 +258,8 @@
       <rect>
        <x>0</x>
        <y>50</y>
-       <width>601</width>
-       <height>461</height>
+       <width>711</width>
+       <height>541</height>
       </rect>
      </property>
     </widget>

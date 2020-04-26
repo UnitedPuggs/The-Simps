@@ -21,7 +21,7 @@ void sqlDatabase::createDatabase()
     query.exec("CREATE TABLE   CustomerTable("
                "Name           VARCHAR(50),"
                "CustomerID     INTEGER NOT NULL PRIMARY KEY,"
-               "ExecutiveType  VARCHAR(4),"
+               "CustomerType   VARCHAR(4),"
                "ExpirationDate VARCHAR(15),"
                "TotalSpent     DECIMAL(10,2),"
                "TotalRebate    DECIMAL(10,2),"
@@ -41,6 +41,7 @@ void sqlDatabase::readFileCustomer()
     QFile file("D:/Programming/CS-1C-master/Project 2/CS 1C Spring 2020 Bulk Club Project/warehouse shoppers.txt");
     file.open(QIODevice::ReadOnly);
     QTextStream inFile(&file);
+
     if(file.isOpen())
     {
         qDebug() << "Opened File";
@@ -51,10 +52,11 @@ void sqlDatabase::readFileCustomer()
             customerData.executiveType = inFile.readLine();
             customerData.expDate = inFile.readLine();
 
-           // This function populates customerTable so dont uncomment it unless your table is empty.
-           addCustomerIntoTable(customerData);
+            // This function populates customerTable so dont uncomment it unless your table is empty.
+            addCustomerIntoTable(customerData);
+        }
 
-        }   file.close();
+        file.close();
     }
 
     else
@@ -96,7 +98,7 @@ void sqlDatabase::addCustomerIntoTable(customerTableInfo& customerData)
     query.prepare("CREATE UNIQUE INDEX uidx_customerID"
                   "ON CustomerTable (CustomerID);");
 
-    query.prepare("INSERT OR IGNORE INTO CustomerTable(Name, CustomerID, ExecutiveType, ExpirationDate)"
+    query.prepare("INSERT OR IGNORE INTO CustomerTable(Name, CustomerID, CustomerType, ExpirationDate)"
                   "VALUES(:name, :ID, :Type, :ExpDate)");
 
     query.bindValue(":name", customerData.name);

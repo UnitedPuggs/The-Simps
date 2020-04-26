@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>../CS 1C Spring 2020 Bulk Club Project/day1.txt</file>
+        <file>../CS 1C Spring 2020 Bulk Club Project/day2.txt</file>
+        <file>../CS 1C Spring 2020 Bulk Club Project/day3.txt</file>
+        <file>../CS 1C Spring 2020 Bulk Club Project/day4.txt</file>
+        <file>../CS 1C Spring 2020 Bulk Club Project/day5.txt</file>
+        <file>../CS 1C Spring 2020 Bulk Club Project/day6.txt</file>
+        <file>../CS 1C Spring 2020 Bulk Club Project/day7.txt</file>
+        <file>../CS 1C Spring 2020 Bulk Club Project/warehouse shoppers.txt</file>
+    </qresource>
+</RCC>

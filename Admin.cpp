@@ -31,6 +31,7 @@ void Admin::setupCustomerPage()
     ui->customerPage_tableView->setColumnWidth(1, 100);
     ui->customerPage_tableView->setColumnWidth(2, 100);
     ui->customerPage_tableView->setColumnWidth(3, 110);
+
     for (int i = 0; i < model->rowCount(); ++i)
         ui->customerPage_tableView->resizeRowToContents(i);
 }
@@ -56,16 +57,6 @@ void Admin::on_membershipButton_clicked()
 }
 
 void Admin::on_inventoryPage_addButton_clicked()
-{
-
-}
-
-void Admin::on_customerPage_addButton_clicked()
-{
-
-}
-
-void Admin::on_customerPage_deleteButton_clicked()
 {
 
 }

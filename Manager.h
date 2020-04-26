@@ -30,6 +30,14 @@ private slots:
 
     void on_salesPage_previewButton_clicked();
 
+    void on_customerPage_sortBox_activated(int index);
+
+    void on_rebatePage_sortBox_activated(int index);
+
+    void on_customerPage_searchButton_clicked();
+
+    void on_membershipPage_searchButton_clicked();
+
 private:
     Ui::Manager *ui;
 };
