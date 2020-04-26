@@ -59,3 +59,13 @@ void Admin::on_inventoryPage_addButton_clicked()
 {
 
 }
+
+void Admin::on_customerPage_addButton_clicked()
+{
+
+}
+
+void Admin::on_customerPage_deleteButton_clicked()
+{
+
+}
