@@ -29,7 +29,7 @@ void sqlDatabase::createDatabase()
 
     query.exec("CREATE TABLE  SalesTable("
                "PurchaseDate  VARCHAR(15),"
-               "CustomerID    INTEGER NOT NULL UNIQUE,"
+               "CustomID      INTEGER NOT NULL,"
                "ItemName      VARCHAR(50),"
                "ItemPrice     DECIMAL(10,2),"
                "Quantity      INTEGER NOT NULL);");
@@ -38,7 +38,7 @@ void sqlDatabase::createDatabase()
 //Reads the warehouse shoppers .txt file (Make sure to change the file path to make it work for you)
 void sqlDatabase::readFileCustomer()
 {
-    QFile file("D:/Programming/CS-1C-master/Project 2/CS 1C Spring 2020 Bulk Club Project/warehouse shoppers.txt");
+    QFile file("D:/CS1C/ProjectInfo/warehouse shoppers.txt");
     file.open(QIODevice::ReadOnly);
     QTextStream inFile(&file);
 
@@ -60,13 +60,13 @@ void sqlDatabase::readFileCustomer()
     }
 
     else
-        qDebug() << "Cannot open file";
+        qDebug() << "Cannot open file thats used to Read File from Customer list";
 }
 
 //Reads the Sales .txt file (Make sure to change the file path to make it work for you)
 void sqlDatabase::readFileSales()
 {
-    QFile file("D:/Programming/CS-1C-master/Project 2/CS 1C Spring 2020 Bulk Club Project/day1.txt");
+    QFile file("D:/CS1C/SalesReport/day7.txt");
     file.open(QIODevice::ReadOnly);
     QTextStream inFile(&file);
 
@@ -80,15 +80,14 @@ void sqlDatabase::readFileSales()
             salesData.itemName      = inFile.readLine();
             salesData.itemPrice     = inFile.readLine();
             salesData.quantity      = inFile.readLine();
-
-
             // Don't uncomment unless your table is empty
             addSalesIntoTable(salesData);
         }   file.close();
     }
 
     else
-        qDebug() << "Cannot open file";
+        qDebug() << "Cannot open file that reads from the Sales list";
+
 }
 
 //Inserts warehouse info into the customerTable
@@ -114,8 +113,10 @@ void sqlDatabase::addCustomerIntoTable(customerTableInfo& customerData)
 //Inserts Sales info into the salesTable
 void sqlDatabase::addSalesIntoTable(salesTableInfo& salesData)
 {
+
     QSqlQuery query;
-    query.prepare("INSERT OR IGNORE INTO SalesTable(PurchaseDate, CustomerID, ItemName, ItemPrice, Quantity)"
+
+    query.prepare("INSERT INTO SalesTable(PurchaseDate, CustomID, ItemName, ItemPrice, Quantity)"
                   "VALUES(:date, :ID, :itemName, :itemPrice, :quantity)");
 
     query.bindValue(":date", salesData.purchaseDate);
@@ -123,6 +124,11 @@ void sqlDatabase::addSalesIntoTable(salesTableInfo& salesData)
     query.bindValue(":itemName", salesData.itemName);
     query.bindValue(":itemPrice", salesData.itemPrice);
     query.bindValue(":quantity", salesData.quantity);
+    qDebug() << salesData.purchaseDate;
+    qDebug() << salesData.itemName;
+    qDebug() << salesData.customerID;
+    qDebug() << salesData.itemPrice;
+    qDebug() << salesData.quantity;
 
     if(!query.exec())
         qDebug() << "Failed: " << query.lastError();
