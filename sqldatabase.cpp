@@ -37,7 +37,7 @@ void sqlDatabase::createDatabase()
     query.exec("CREATE TABLE  InventoryTable("
                "ItemName      VARCHAR(50),"
                "ItemPrice     DECIMAL(10,2),"
-               "Quantity      INTEGER NOT NULL),"
+               "Quantity      INTEGER NOT NULL,"
                "InStock       INTEGER NOT NULL);");
 }
 
@@ -72,7 +72,7 @@ void sqlDatabase::readFileCustomer()
 //Reads the Sales .txt file (Make sure to change the file path to make it work for you)
 void sqlDatabase::readFileSales()
 {
-    QFile file("D:/CS1C/SalesReport/day7.txt");
+    QFile file("D:/CS1C/SalesReport/day6.txt");
     file.open(QIODevice::ReadOnly);
     QTextStream inFile(&file);
 
@@ -86,11 +86,6 @@ void sqlDatabase::readFileSales()
             salesData.itemName      = inFile.readLine();
             salesData.itemPrice     = inFile.readLine();
             salesData.quantity      = inFile.readLine();
-
-            inventoryData.itemName = salesData.itemName;
-            inventoryData.itemPrice = salesData.itemPrice;
-            inventoryData.quantityPurchased = salesData.quantity;
-            handleInventory(inventoryData);
             // Don't uncomment unless your table is empty
             addSalesIntoTable(salesData);
         }   file.close();
@@ -134,25 +129,30 @@ void sqlDatabase::addSalesIntoTable(salesTableInfo& salesData)
     query.bindValue(":itemName", salesData.itemName);
     query.bindValue(":itemPrice", salesData.itemPrice);
     query.bindValue(":quantity", salesData.quantity);
-
+    inventoryData.itemName = salesData.itemName;
+    inventoryData.itemPrice = salesData.itemPrice;
+    inventoryData.quantityPurchased = salesData.quantity;
+    handleInventory(inventoryData);
 
     if(!query.exec())
         qDebug() << "Failed: " << query.lastError();
 }
-void handleInventory(InventoryList& inventoryData)
+void sqlDatabase::handleInventory(InventoryList& inventoryData)
 {
     QSqlQuery query;
 
     query.prepare("INSERT INTO InventoryTable(ItemName, ItemPrice, Quantity, InStock)"
                   "VALUES(:name, :price, :quant, :stock)");
-
     query.bindValue(":name", inventoryData.itemName);
     query.bindValue(":price", inventoryData.itemPrice);
     query.bindValue(":quant", inventoryData.quantityPurchased);
     query.bindValue(":stock", inventoryData.inStock);
 
-    if(!query.exec())
+
+    if(!query.exec()){
+
         qDebug() << "Failed: " << query.lastError();
+    }
 }
 
 
