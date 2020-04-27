@@ -20,6 +20,14 @@ struct salesTableInfo
     QString quantity;
 };
 
+struct InventoryList
+{
+    QString itemName;
+    QString itemPrice;
+    QString quantityPurchased;
+    QString inStock = "100";
+};
+
 
 class sqlDatabase
 {
@@ -27,6 +35,7 @@ private:
     QSqlDatabase database;
     customerTableInfo customerData;
     salesTableInfo salesData;
+    InventoryList inventoryData;
 
 public:
     sqlDatabase();
@@ -37,6 +46,7 @@ public:
     void readFileSales();
     void addCustomerIntoTable(customerTableInfo& customerData);
     void addSalesIntoTable(salesTableInfo& salesData);
+    void handleInventory(InventoryList& inventoryData);
 
 };
 
