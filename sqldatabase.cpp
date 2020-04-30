@@ -118,7 +118,6 @@ void sqlDatabase::addCustomerIntoTable(customerTableInfo& customerData)
 //Inserts Sales info into the salesTable
 void sqlDatabase::addSalesIntoTable(salesTableInfo& salesData)
 {
-
     QSqlQuery query;
 
     query.prepare("INSERT INTO SalesTable(PurchaseDate, CustomID, ItemName, ItemPrice, Quantity)"
@@ -129,15 +128,13 @@ void sqlDatabase::addSalesIntoTable(salesTableInfo& salesData)
     query.bindValue(":itemName", salesData.itemName);
     query.bindValue(":itemPrice", salesData.itemPrice);
     query.bindValue(":quantity", salesData.quantity);
-    inventoryData.itemName = salesData.itemName;
-    inventoryData.itemPrice = salesData.itemPrice;
-    inventoryData.quantityPurchased = salesData.quantity;
-    handleInventory(inventoryData);
+
+    fix();
 
     if(!query.exec())
         qDebug() << "Failed: " << query.lastError();
 }
-void sqlDatabase::handleInventory(InventoryList& inventoryData)
+void sqlDatabase::handleInventory()
 {
     QSqlQuery query;
 
@@ -153,6 +150,36 @@ void sqlDatabase::handleInventory(InventoryList& inventoryData)
         qDebug() << "Failed: " << query.lastError();
     }
 }
+void sqlDatabase::fix(){
+
+    QSqlQuery query;
+    query.prepare("SELECT * FROM InventoryTable"
+                  " WHERE ItemName       LIKE '%" + salesData.itemName + "%'");
+
+    query.bindValue(":searchingFor", salesData.itemName);
+
+    if(!query.exec()) {
+        qDebug() << query.lastError();
+    }
+    if(!query.nextResult()){
+    while (query.next()) {
+           QString name = query.value(0).toString();
+           QString quant = query.value(3).toString();
+           qDebug() << "These are the same Items: " + name;
+           int newAmount = quant.toInt();
+
+           qDebug() << quant + " New Amount: " + newAmount;
+       }
+    }
+    else{
+        qDebug() << "No Matching Items";
+        inventoryData.itemName = salesData.itemName;
+        inventoryData.itemPrice = salesData.itemPrice;
+        inventoryData.quantityPurchased = salesData.quantity;
+        handleInventory();
+        }
+}
+
 
 
 

@@ -46,7 +46,8 @@ public:
     void readFileSales();
     void addCustomerIntoTable(customerTableInfo& customerData);
     void addSalesIntoTable(salesTableInfo& salesData);
-    void handleInventory(InventoryList& inventoryData);
+    void handleInventory();
+    void fix();
 
 };
 
