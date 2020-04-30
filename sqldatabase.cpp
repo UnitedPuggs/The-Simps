@@ -72,7 +72,7 @@ void sqlDatabase::readFileCustomer()
 //Reads the Sales .txt file (Make sure to change the file path to make it work for you)
 void sqlDatabase::readFileSales()
 {
-    QFile file("D:/CS1C/SalesReport/day6.txt");
+    QFile file("D:/CS1C/SalesReport/day1.txt");
     file.open(QIODevice::ReadOnly);
     QTextStream inFile(&file);
 
@@ -147,7 +147,6 @@ void sqlDatabase::handleInventory(InventoryList& inventoryData)
     query.bindValue(":price", inventoryData.itemPrice);
     query.bindValue(":quant", inventoryData.quantityPurchased);
     query.bindValue(":stock", inventoryData.inStock);
-
 
     if(!query.exec()){
 

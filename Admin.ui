@@ -203,16 +203,6 @@
       <string>Delete</string>
      </property>
     </widget>
-    <widget class="QTableWidget" name="inventoryPage_tableWidget">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>50</y>
-       <width>711</width>
-       <height>541</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QPushButton" name="inventoryPage_addButton">
      <property name="geometry">
       <rect>
@@ -249,6 +239,19 @@
      </property>
      <property name="text">
       <string>Edit Info</string>
+     </property>
+    </widget>
+    <widget class="QTableView" name="inventoryPage_tableView">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>50</y>
+       <width>711</width>
+       <height>541</height>
+      </rect>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
      </property>
     </widget>
    </widget>
