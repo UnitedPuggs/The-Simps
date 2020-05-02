@@ -166,9 +166,11 @@ void sqlDatabase::fix(){
            QString name = query.value(0).toString();
            QString quant = query.value(3).toString();
            qDebug() << "These are the same Items: " + name;
-           int newAmount = quant.toInt();
-
-           qDebug() << quant + " New Amount: " + newAmount;
+           bool ok;
+           int newAmount = quant.toInt(&ok);
+            QString a;
+           a.number(newAmount);
+           qDebug() << quant + " New Amount: " + a + " " + newAmount;
        }
     }
     else{
