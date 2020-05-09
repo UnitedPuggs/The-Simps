@@ -68,63 +68,6 @@
     </rect>
    </property>
    <widget class="QWidget" name="customerPage">
-    <widget class="QPushButton" name="customerPage_deleteButton">
-     <property name="geometry">
-      <rect>
-       <x>640</x>
-       <y>10</y>
-       <width>71</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>9</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Delete</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="customerPage_addButton">
-     <property name="geometry">
-      <rect>
-       <x>560</x>
-       <y>10</y>
-       <width>71</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>9</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Add New</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="customerPage_editButton">
-     <property name="geometry">
-      <rect>
-       <x>480</x>
-       <y>10</y>
-       <width>71</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>9</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Edit Info</string>
-     </property>
-    </widget>
     <widget class="QToolButton" name="customerPage_refreshButton">
      <property name="geometry">
       <rect>
@@ -249,19 +192,6 @@
      </property>
      <property name="text">
       <string>Edit Info</string>
-     </property>
-    </widget>
-    <widget class="QTableView" name="inventoryPage_tableView">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>50</y>
-       <width>711</width>
-       <height>541</height>
-      </rect>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
      </property>
     </widget>
    </widget>
