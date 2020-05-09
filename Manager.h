@@ -37,6 +37,7 @@ private slots:
     void on_customerPage_searchButton_clicked();
 
     void on_membershipPage_searchButton_clicked();
+    void on_inventoryPage_searchButton_clicked();
 
 private:
     Ui::Manager *ui;

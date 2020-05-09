@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-=======
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.12.0, 2020-05-05T13:59:47. -->
+<!-- Written by QtCreator 4.12.0, 2020-05-08T22:06:02. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -340,4 +338,3 @@
   <value type="int">22</value>
  </data>
 </qtcreator>
->>>>>>> d3787074abe4a62f8a65148155dd9b5df373f541
