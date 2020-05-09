@@ -11,23 +11,31 @@ CONFIG -= app_bundle
 DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
-        administrator.cpp \
+        Admin.cpp \
+        Manager.cpp \
+        SalesReport.cpp \
         main.cpp \
         mainwindow.cpp \
-        sqldatabase.cpp \
-        storemanager.cpp
+        sqldatabase.cpp
 
 FORMS += \
-    mainwindow.ui
+    Admin.ui \
+    Manager.ui \
+    SalesReport.ui \
+    mainWindow.ui
 
 HEADERS += \
-    administrator.h \
+    Admin.h \
+    Manager.h \
+    SalesReport.h \
     header.h \
     mainwindow.h \
-    sqldatabase.h \
-    storemanager.h
+    sqldatabase.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    data.qrc
