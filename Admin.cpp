@@ -76,6 +76,7 @@ void Admin::on_inventoryPage_addButton_clicked()
  *************************************************************/
 void Admin::on_customerPage_addButton_clicked()
 {
+    Admin     admin;
     QString   name    = ui -> NameLineEdit           -> text();
     QString   id      = ui -> IDLineEdit             -> text();
     QString   type    = ui -> MemberTypeLineEdit     -> text();
@@ -99,13 +100,27 @@ void Admin::on_customerPage_addButton_clicked()
     query.bindValue(":type",    type);
     query.bindValue(":expDate", expDate);
 
+
     //Error message to console if query fails
     if(!query.exec())
     {
         qDebug() << "Failed: " << query.lastError();
     }
 
+    QSqlQueryModel *model = new QSqlQueryModel();
 
+    query.prepare("SELECT * FROM CustomerTable");
+    query.exec();
+
+    model->setQuery(query);
+    ui->customerPage_tableView->setModel(model);
+    ui->customerPage_tableView->setColumnWidth(0, 210);
+    ui->customerPage_tableView->setColumnWidth(1, 100);
+    ui->customerPage_tableView->setColumnWidth(2, 100);
+    ui->customerPage_tableView->setColumnWidth(3, 110);
+
+    for (int i = 0; i < model->rowCount(); ++i)
+        ui->customerPage_tableView->resizeRowToContents(i);
 }
 
 /**************************************************************
@@ -130,4 +145,19 @@ void Admin::on_customerPage_deleteButton_clicked()
     {
         qDebug() << "Failed: " << query.lastError();
     }
+
+    QSqlQueryModel *model = new QSqlQueryModel();
+
+    query.prepare("SELECT * FROM CustomerTable");
+    query.exec();
+
+    model->setQuery(query);
+    ui->customerPage_tableView->setModel(model);
+    ui->customerPage_tableView->setColumnWidth(0, 210);
+    ui->customerPage_tableView->setColumnWidth(1, 100);
+    ui->customerPage_tableView->setColumnWidth(2, 100);
+    ui->customerPage_tableView->setColumnWidth(3, 110);
+
+    for (int i = 0; i < model->rowCount(); ++i)
+        ui->customerPage_tableView->resizeRowToContents(i);
 }
