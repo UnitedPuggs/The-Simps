@@ -48,6 +48,7 @@ public:
     void addSalesIntoTable(salesTableInfo& salesData);
     void handleInventory();
     void fix();
+    QSqlDatabase GetDatabase() const;
 
 };
 

@@ -39,12 +39,13 @@ void sqlDatabase::createDatabase()
                "ItemPrice     DECIMAL(10,2),"
                "Quantity      INTEGER NOT NULL,"
                "InStock       INTEGER NOT NULL);");
+
 }
 
 //Reads the warehouse shoppers .txt file (Make sure to change the file path to make it work for you)
 void sqlDatabase::readFileCustomer()
 {
-    QFile file("D:/CS1C/ProjectInfo/warehouse shoppers.txt");
+    QFile file(":/Shoppers/warehouse shoppers.txt");
     file.open(QIODevice::ReadOnly);
     QTextStream inFile(&file);
 
@@ -72,7 +73,8 @@ void sqlDatabase::readFileCustomer()
 //Reads the Sales .txt file (Make sure to change the file path to make it work for you)
 void sqlDatabase::readFileSales()
 {
-    QFile file("D:/CS1C/SalesReport/day1.txt");
+
+    QFile file(":/Days/day1.txt");
     file.open(QIODevice::ReadOnly);
     QTextStream inFile(&file);
 
@@ -103,7 +105,8 @@ void sqlDatabase::addCustomerIntoTable(customerTableInfo& customerData)
     query.prepare("CREATE UNIQUE INDEX uidx_customerID"
                   "ON CustomerTable (CustomerID);");
 
-    query.prepare("INSERT OR IGNORE INTO CustomerTable(Name, CustomerID, CustomerType, ExpirationDate)"
+    query.prepare("INSERT OR IGNORE INTO CustomerTable(Name, CustomerID, "
+                  "CustomerType, ExpirationDate)"
                   "VALUES(:name, :ID, :Type, :ExpDate)");
 
     query.bindValue(":name", customerData.name);
@@ -118,6 +121,7 @@ void sqlDatabase::addCustomerIntoTable(customerTableInfo& customerData)
 //Inserts Sales info into the salesTable
 void sqlDatabase::addSalesIntoTable(salesTableInfo& salesData)
 {
+
     QSqlQuery query;
 
     query.prepare("INSERT INTO SalesTable(PurchaseDate, CustomID, ItemName, ItemPrice, Quantity)"
@@ -149,6 +153,12 @@ void sqlDatabase::handleInventory()
 
         qDebug() << "Failed: " << query.lastError();
     }
+
+}
+
+QSqlDatabase sqlDatabase::GetDatabase() const
+{
+    return database;
 }
 void sqlDatabase::fix(){
 

@@ -135,6 +135,7 @@ void Manager::on_inventoryButton_clicked()
         ui->inventoryPage_tableView->resizeRowToContents(i);
 
     setupInventoryPage();
+
     ui->stackedWidget->setCurrentIndex(3);
 }
 
@@ -313,6 +314,7 @@ void Manager::on_membershipPage_searchButton_clicked()
             ui->customerPage_tableView->resizeRowToContents(i);
     }
 }
+
 void Manager::on_inventoryPage_searchButton_clicked()
 {
     QSqlQuery query;

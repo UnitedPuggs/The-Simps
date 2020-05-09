@@ -1,5 +1,6 @@
 #include "Admin.h"
 #include "ui_Admin.h"
+#include "sqldatabase.h"
 
 Admin::Admin(QWidget *parent) :
     QDialog(parent),
@@ -79,4 +80,75 @@ void Admin::on_membershipButton_clicked()
 void Admin::on_inventoryPage_addButton_clicked()
 {
 
+}
+
+
+/**************************************************************
+ * void Admin::on_customerPage_addButton_clicked()
+ * ------------------------------------------------------------
+ *
+ * This function will read in the data inserted by the user.
+ * It will create add these values to a single row in the
+ * database table.
+ *
+ * If the NAME, ID, MEMBERSHIP TYPE, OR EXPERATION DATE are
+ * left blank, an error window will appear
+ *
+ *************************************************************/
+void Admin::on_customerPage_addButton_clicked()
+{
+    QString   name    = ui -> NameLineEdit           -> text();
+    QString   id      = ui -> IDLineEdit             -> text();
+    QString   type    = ui -> MemberTypeLineEdit     -> text();
+    QString   expDate = ui -> ExpirationDateLineEdit -> text();
+    QSqlQuery query;
+
+    //If any fields are empty, send an error window to the user
+    if(name == "" || id == "" || type == "" || expDate =="")
+    {
+        QMessageBox::information(this, "Warning", "Please fill in Name, ID, MemberType,"
+                                                  " and Expiration date to ADD a customer.");
+    }
+
+    //Prepare the database for query to add values to the table
+    query.prepare("INSERT OR IGNORE INTO CustomerTable(Name,CustomerID, CustomerType, ExpirationDate)"
+                  "VALUES(:name, :id, :type, :expDate)");
+
+    //bind values
+    query.bindValue(":name",    name);
+    query.bindValue(":id"  ,    id);
+    query.bindValue(":type",    type);
+    query.bindValue(":expDate", expDate);
+
+    //Error message to console if query fails
+    if(!query.exec())
+    {
+        qDebug() << "Failed: " << query.lastError();
+    }
+
+
+}
+
+/**************************************************************
+ * void Admin::on_customerPage_addButton_clicked()
+ * ------------------------------------------------------------
+ *
+ * This function will read in the ID number inserted by the
+ * user. It will delete all information pertaining to a user
+ * with that ID number.
+ *
+ *************************************************************/
+void Admin::on_customerPage_deleteButton_clicked()
+{
+    QString   id      = ui -> IDLineEdit -> text();
+    QSqlQuery query;
+
+    query.prepare("DELETE FROM CustomerTable WHERE customerID = :customerID");
+
+    query.bindValue(":customerID", id);
+
+    if(!query.exec())
+    {
+        qDebug() << "Failed: " << query.lastError();
+    }
 }

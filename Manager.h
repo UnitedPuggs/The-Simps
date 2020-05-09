@@ -40,7 +40,6 @@ private slots:
 
     void on_inventoryPage_searchButton_clicked();
 
-
 private:
     Ui::Manager *ui;
 };
