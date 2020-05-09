@@ -1,6 +1,7 @@
-    #include "Manager.h"
+#include "Manager.h"
 #include "SalesReport.h"
 #include "ui_Manager.h"
+#include <QTimer>
 
 Manager::Manager(QWidget *parent) :
     QDialog(parent),
@@ -333,7 +334,7 @@ void Manager::on_inventoryPage_searchButton_clicked()
     }
 
     if(ui->inventoryPage_searchBar->text().isEmpty()) {
-        QMessageBox::information(this, "Info Box", "Searched string was empty! Search did not find anything of use.");
+        on_inventoryButton_clicked();
     }
 
     else {
@@ -350,3 +351,8 @@ void Manager::on_inventoryPage_searchButton_clicked()
             ui->inventoryPage_tableView->resizeRowToContents(i);
     }
 }
+
+void Manager::refreshSearch() {
+    on_inventoryPage_searchButton_clicked();
+}
+

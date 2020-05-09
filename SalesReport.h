@@ -1,5 +1,6 @@
 #ifndef SALESREPORT_H
 #define SALESREPORT_H
+#include "Manager.h"
 
 #include <QMainWindow>
 
@@ -14,7 +15,8 @@ class SalesReport : public QMainWindow
 public:
     explicit SalesReport(QWidget *parent = nullptr);
     ~SalesReport();
-
+private slots:
+    void generateReport();
 private:
     Ui::SalesReport *ui;
 };

@@ -456,5 +456,26 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>inventoryPage_searchBar</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>Manager</receiver>
+   <slot>refreshSearch()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>318</x>
+     <y>22</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>98</x>
+     <y>264</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>refreshSearch()</slot>
+  <slot>generateReport()</slot>
+ </slots>
 </ui>

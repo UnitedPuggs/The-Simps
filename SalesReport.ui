@@ -48,7 +48,7 @@
        <second>59</second>
        <year>2020</year>
        <month>3</month>
-       <day>17</day>
+       <day>18</day>
       </datetime>
      </property>
      <property name="minimumDateTime">
@@ -61,11 +61,37 @@
        <day>12</day>
       </datetime>
      </property>
+     <property name="maximumDate">
+      <date>
+       <year>2020</year>
+       <month>3</month>
+       <day>18</day>
+      </date>
+     </property>
+     <property name="minimumDate">
+      <date>
+       <year>2020</year>
+       <month>3</month>
+       <day>12</day>
+      </date>
+     </property>
+     <property name="currentSection">
+      <enum>QDateTimeEdit::DaySection</enum>
+     </property>
+     <property name="displayFormat">
+      <string>M/d/yyyy</string>
+     </property>
+     <property name="calendarPopup">
+      <bool>true</bool>
+     </property>
+     <property name="currentSectionIndex">
+      <number>1</number>
+     </property>
      <property name="date">
       <date>
        <year>2020</year>
        <month>3</month>
-       <day>17</day>
+       <day>12</day>
       </date>
      </property>
     </widget>
@@ -114,8 +140,21 @@
        <second>0</second>
        <year>2020</year>
        <month>3</month>
-       <day>13</day>
+       <day>12</day>
       </datetime>
+     </property>
+     <property name="minimumDate">
+      <date>
+       <year>2020</year>
+       <month>3</month>
+       <day>12</day>
+      </date>
+     </property>
+     <property name="currentSection">
+      <enum>QDateTimeEdit::DaySection</enum>
+     </property>
+     <property name="calendarPopup">
+      <bool>true</bool>
      </property>
      <property name="date">
       <date>
@@ -220,5 +259,25 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>SalesReport</receiver>
+   <slot>generateReport()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>115</x>
+     <y>274</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>148</x>
+     <y>314</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>generateReport()</slot>
+ </slots>
 </ui>
