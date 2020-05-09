@@ -113,6 +113,29 @@ void Manager::on_membershipButton_clicked()
 
 void Manager::on_inventoryButton_clicked()
 {
+    QSqlQuery query;
+    QSqlRecord record;
+    QSqlQueryModel *model = new QSqlQueryModel();
+
+    query.prepare("SELECT * FROM InventoryTable");
+
+
+    if(!query.exec())
+        qDebug() << query.lastError();
+
+    model->setQuery(query);
+    ui->inventoryPage_tableView->setModel(model);
+    ui->inventoryPage_tableView->setColumnWidth(0, 210);
+    ui->inventoryPage_tableView->setColumnWidth(1, 100);
+    ui->inventoryPage_tableView->setColumnWidth(2, 100);
+    ui->inventoryPage_tableView->setColumnWidth(3, 110);
+    ui->inventoryPage_tableView->setColumnWidth(4, 110);
+
+    for (int i = 0; i < model->rowCount(); ++i)
+        ui->inventoryPage_tableView->resizeRowToContents(i);
+
+    setupInventoryPage();
+
     ui->stackedWidget->setCurrentIndex(3);
 }
 
@@ -289,5 +312,40 @@ void Manager::on_membershipPage_searchButton_clicked()
 
         for (int i = 0; i < model->rowCount(); ++i)
             ui->customerPage_tableView->resizeRowToContents(i);
+    }
+}
+
+void Manager::on_inventoryPage_searchButton_clicked()
+{
+    QSqlQuery query;
+    QSqlRecord record;
+    QSqlQueryModel *model = new QSqlQueryModel();
+    QString searchingFor = ui->inventoryPage_searchBar->text();
+
+
+    query.prepare("SELECT ItemName, ItemPrice, Quantity, InStock FROM InventoryTable"
+                  " WHERE ItemName       LIKE '%" + searchingFor + "%'"
+                  " OR    ItemPrice LIKE '%" + searchingFor + "%';");
+
+    query.bindValue(":searchingFor", searchingFor);
+
+    if(!query.exec()) {
+        qDebug() << query.lastError();
+    }
+
+    if(ui->inventoryPage_searchBar->text().isEmpty()) {
+        QMessageBox::information(this, "Info Box", "Searched string was empty! Search did not find anything of use.");
+    }
+
+    else {
+        model->setQuery(query);
+        ui->inventoryPage_tableView->setModel(model);
+        ui->inventoryPage_tableView->setColumnWidth(0, 210);
+        ui->inventoryPage_tableView->setColumnWidth(1, 100);
+        ui->inventoryPage_tableView->setColumnWidth(2, 100);
+        ui->inventoryPage_tableView->setColumnWidth(3, 110);
+
+        for (int i = 0; i < model->rowCount(); ++i)
+            ui->inventoryPage_tableView->resizeRowToContents(i);
     }
 }

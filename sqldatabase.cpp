@@ -33,6 +33,13 @@ void sqlDatabase::createDatabase()
                "ItemName      VARCHAR(50),"
                "ItemPrice     DECIMAL(10,2),"
                "Quantity      INTEGER NOT NULL);");
+
+    query.exec("CREATE TABLE  InventoryTable("
+               "ItemName      VARCHAR(50),"
+               "ItemPrice     DECIMAL(10,2),"
+               "Quantity      INTEGER NOT NULL,"
+               "InStock       INTEGER NOT NULL);");
+
 }
 
 //Reads the warehouse shoppers .txt file (Make sure to change the file path to make it work for you)
@@ -66,6 +73,7 @@ void sqlDatabase::readFileCustomer()
 //Reads the Sales .txt file (Make sure to change the file path to make it work for you)
 void sqlDatabase::readFileSales()
 {
+
     QFile file(":/Days/day1.txt");
     file.open(QIODevice::ReadOnly);
     QTextStream inFile(&file);
@@ -106,7 +114,6 @@ void sqlDatabase::addCustomerIntoTable(customerTableInfo& customerData)
     query.bindValue(":Type", customerData.executiveType);
     query.bindValue(":ExpDate", customerData.expDate);
 
-
     if(!query.exec())
         qDebug() << "Failed: " << query.lastError();
 }
@@ -126,13 +133,65 @@ void sqlDatabase::addSalesIntoTable(salesTableInfo& salesData)
     query.bindValue(":itemPrice", salesData.itemPrice);
     query.bindValue(":quantity", salesData.quantity);
 
+    fix();
+
     if(!query.exec())
         qDebug() << "Failed: " << query.lastError();
+}
+void sqlDatabase::handleInventory()
+{
+    QSqlQuery query;
+
+    query.prepare("INSERT INTO InventoryTable(ItemName, ItemPrice, Quantity, InStock)"
+                  "VALUES(:name, :price, :quant, :stock)");
+    query.bindValue(":name", inventoryData.itemName);
+    query.bindValue(":price", inventoryData.itemPrice);
+    query.bindValue(":quant", inventoryData.quantityPurchased);
+    query.bindValue(":stock", inventoryData.inStock);
+
+    if(!query.exec()){
+
+        qDebug() << "Failed: " << query.lastError();
+    }
+
 }
 
 QSqlDatabase sqlDatabase::GetDatabase() const
 {
     return database;
 }
+void sqlDatabase::fix(){
+
+    QSqlQuery query;
+    query.prepare("SELECT * FROM InventoryTable"
+                  " WHERE ItemName       LIKE '%" + salesData.itemName + "%'");
+
+    query.bindValue(":searchingFor", salesData.itemName);
+
+    if(!query.exec()) {
+        qDebug() << query.lastError();
+    }
+    if(!query.nextResult()){
+    while (query.next()) {
+           QString name = query.value(0).toString();
+           QString quant = query.value(3).toString();
+           qDebug() << "These are the same Items: " + name;
+           bool ok;
+           int newAmount = quant.toInt(&ok);
+            QString a;
+           a.number(newAmount);
+           qDebug() << quant + " New Amount: " + a + " " + newAmount;
+       }
+    }
+    else{
+        qDebug() << "No Matching Items";
+        inventoryData.itemName = salesData.itemName;
+        inventoryData.itemPrice = salesData.itemPrice;
+        inventoryData.quantityPurchased = salesData.quantity;
+        handleInventory();
+        }
+}
+
+
 
 
