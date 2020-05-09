@@ -26,6 +26,8 @@ struct InventoryList
     QString itemPrice;
     QString quantityPurchased;
     QString inStock;
+    double revenue;
+
 };
 
 
@@ -47,8 +49,8 @@ public:
     void addCustomerIntoTable(customerTableInfo& customerData);
     void addSalesIntoTable(salesTableInfo& salesData);
     void handleInventory();
-    void fix();
-    void updateDB(int,int,double);
+    void checkInventory();
+    void updateDB(int,int,double,double);
 
 };
 
