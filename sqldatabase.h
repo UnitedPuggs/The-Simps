@@ -25,7 +25,7 @@ struct InventoryList
     QString itemName;
     QString itemPrice;
     QString quantityPurchased;
-    QString inStock = "100";
+    QString inStock;
 };
 
 
@@ -48,6 +48,7 @@ public:
     void addSalesIntoTable(salesTableInfo& salesData);
     void handleInventory();
     void fix();
+    void updateDB(int,int,double);
 
 };
 

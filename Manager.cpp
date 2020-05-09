@@ -342,6 +342,8 @@ void Manager::on_inventoryPage_searchButton_clicked()
         ui->inventoryPage_tableView->setColumnWidth(1, 100);
         ui->inventoryPage_tableView->setColumnWidth(2, 100);
         ui->inventoryPage_tableView->setColumnWidth(3, 110);
+        ui->inventoryPage_tableView->setColumnWidth(4, 110);
+
 
         for (int i = 0; i < model->rowCount(); ++i)
             ui->inventoryPage_tableView->resizeRowToContents(i);
