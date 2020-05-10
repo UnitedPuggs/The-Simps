@@ -33,6 +33,8 @@ private slots:
 
     void on_rebatePage_sortBox_activated(int index);
 
+    void on_inventoryPage_sortBox_activated(int index);
+
     void on_customerPage_searchButton_clicked();
     void refreshSearch();
 
