@@ -73,7 +73,7 @@ void sqlDatabase::readFileCustomer()
 void sqlDatabase::readFileSales()
 {
 
-    QFile file("D:/CS1C/SalesReport/day7.txt");
+    QFile file(":/Days/day1.txt");
     file.open(QIODevice::ReadOnly);
     QTextStream inFile(&file);
 

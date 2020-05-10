@@ -49,6 +49,28 @@ void Admin::on_customerButton_clicked()
 
 void Admin::on_inventoryButton_clicked()
 {
+    QSqlQuery query;
+    QSqlRecord record;
+    QSqlQueryModel *model = new QSqlQueryModel();
+
+    query.prepare("SELECT * FROM InventoryTable");
+
+
+    if(!query.exec())
+        qDebug() << query.lastError();
+
+    model->setQuery(query);
+    ui->InventoryTableView->setModel(model);
+    ui->InventoryTableView->setColumnWidth(0, 210);
+    ui->InventoryTableView->setColumnWidth(1, 100);
+    ui->InventoryTableView->setColumnWidth(2, 100);
+    ui->InventoryTableView->setColumnWidth(3, 110);
+    ui->InventoryTableView->setColumnWidth(4, 110);
+
+    for (int i = 0; i < model->rowCount(); ++i)
+        ui->InventoryTableView->resizeRowToContents(i);
+
+    setupInventoryPage();
     ui->stackedWidget->setCurrentIndex(1);
 }
 
@@ -59,6 +81,52 @@ void Admin::on_membershipButton_clicked()
 
 void Admin::on_inventoryPage_addButton_clicked()
 {
+    Admin     admin;
+    QString   itemName  = ui -> ItemNameLineEdit  -> text();
+    QString   price     = ui -> ItemPriceLineEdit -> text();
+    QString   quantity  = ui -> QuantityLineEdit  -> text();
+    QString   inStock   = ui -> InStockLineEdit   -> text();
+    QString   revenue   = ui -> RevenueLineEdit   -> text();
+    QSqlQuery query;
+
+    //If any fields are empty, send an error window to the user
+    if(itemName == "" && price == "" && quantity == "" && inStock == "" && revenue == "")
+    {
+        QMessageBox::information(this, "Warning", "Please fill in Item Name and Price to ADD an item.");
+    }
+
+    //Prepare the database for query to add values to the table
+    query.prepare("INSERT OR IGNORE INTO InventoryTable(ItemName, ItemPrice, Quantity, InStock, Revenue)"
+                  "VALUES(:itemName, :price, :quantity, :inStock, :revenue)");
+
+    //bind values
+    query.bindValue(":itemName", itemName);
+    query.bindValue(":price"  ,  price);
+    query.bindValue(":quantity", quantity);
+    query.bindValue(":inStock",  inStock);
+    query.bindValue(":revenue",  revenue);
+
+
+    //Error message to console if query fails
+    if(!query.exec())
+    {
+        qDebug() << "Failed: " << query.lastError();
+    }
+
+    QSqlQueryModel *model = new QSqlQueryModel();
+
+    query.prepare("SELECT * FROM InventoryTable");
+    query.exec();
+
+    model->setQuery(query);
+    ui->InventoryTableView->setModel(model);
+    ui->InventoryTableView->setColumnWidth(0, 210);
+    ui->InventoryTableView->setColumnWidth(1, 100);
+    ui->InventoryTableView->setColumnWidth(2, 100);
+    ui->InventoryTableView->setColumnWidth(3, 110);
+
+    for (int i = 0; i < model->rowCount(); ++i)
+        ui->InventoryTableView->resizeRowToContents(i);
 
 }
 
@@ -160,4 +228,51 @@ void Admin::on_customerPage_deleteButton_clicked()
 
     for (int i = 0; i < model->rowCount(); ++i)
         ui->customerPage_tableView->resizeRowToContents(i);
+}
+
+void Admin::on_inventoryPage_deleteButton_clicked()
+{
+    Admin     admin;
+    QString   itemName  = ui -> ItemNameLineEdit  -> text();
+    QString   price     = ui -> ItemPriceLineEdit -> text();
+    QString   quantity  = ui -> QuantityLineEdit  -> text();
+    QString   inStock   = ui -> InStockLineEdit   -> text();
+    QString   revenue   = ui -> RevenueLineEdit   -> text();
+    QSqlQuery query;
+
+    //If any fields are empty, send an error window to the user
+    if(itemName == "")
+    {
+        QMessageBox::information(this, "Warning", "Please fill in the Item Name to DELETE an item.");
+    }
+
+    //Prepare the database for query to add values to the table
+    query.prepare("DELETE FROM InventoryTable WHERE ItemName = :itemName");
+
+    //bind values
+    query.bindValue(":itemName", itemName);
+
+
+    //Error message to console if query fails
+    if(!query.exec())
+    {
+        qDebug() << "Failed: " << query.lastError();
+    }
+
+    QSqlQueryModel *model = new QSqlQueryModel();
+
+    query.prepare("SELECT * FROM InventoryTable");
+    query.exec();
+
+    model->setQuery(query);
+    ui->InventoryTableView->setModel(model);
+    ui->InventoryTableView->setColumnWidth(0, 210);
+    ui->InventoryTableView->setColumnWidth(1, 100);
+    ui->InventoryTableView->setColumnWidth(2, 100);
+    ui->InventoryTableView->setColumnWidth(3, 110);
+
+    for (int i = 0; i < model->rowCount(); ++i)
+        ui->InventoryTableView->resizeRowToContents(i);
+
+
 }
