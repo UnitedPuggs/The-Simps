@@ -132,9 +132,9 @@
      <property name="geometry">
       <rect>
        <x>700</x>
-       <y>90</y>
+       <y>30</y>
        <width>181</width>
-       <height>41</height>
+       <height>71</height>
       </rect>
      </property>
      <property name="font">
@@ -145,25 +145,6 @@
      </property>
      <property name="text">
       <string>Add Customer</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="customerPage_editButton">
-     <property name="geometry">
-      <rect>
-       <x>700</x>
-       <y>30</y>
-       <width>181</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>9</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Edit Customer</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="RebateLineEdit">
@@ -345,9 +326,9 @@
      <property name="geometry">
       <rect>
        <x>700</x>
-       <y>150</y>
+       <y>120</y>
        <width>181</width>
-       <height>41</height>
+       <height>71</height>
       </rect>
      </property>
      <property name="font">
