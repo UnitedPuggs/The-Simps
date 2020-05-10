@@ -17,12 +17,15 @@ SalesReport::~SalesReport() {
 }
 
 void SalesReport::generateReport() {
-    QSqlQuery query;
-    query.exec("CREATE TABLE SalesReport("
-               "PurchaseDate VARCHAR(15),"
-               "CustomerID INTEGER NOT NULL,"
-               "ItemName VARCHAR(50),"
-               "Quantity INTEGER NOT NULL);");
+    QSqlQuery query1;
+    query1.exec("DELETE FROM SalesReport;");
+    if (!query1.exec())
+        qDebug() << query1.lastError();
+//    query1.exec("CREATE TABLE SalesReport("
+//               "Date VARCHAR(15),"
+//               "CustomerID INTEGER NOT NULL,"
+//                "ItemName VARCHAR(50),"
+//               "Quantity INTEGER NOT NULL);");
     QDate endDate, startDate;
     endDate = this->ui->salesPage_endDate->date();
     startDate = this->ui->salesPage_startDate->date();
@@ -31,11 +34,16 @@ void SalesReport::generateReport() {
         QMessageBox::warning(this, "Invalid!", "Please enter a valid start and end date!");
     }
     for (int i = startDate.day(); i <= endDate.day(); ++i) {
-        std::string date = "3/" + std::to_string(i) + "/2020";
+        QSqlQuery query;
+        std::string date = "03/" + std::to_string(i) + "/2020";
         QString qDate = QString::fromStdString(date);
-        query.prepare("INSERT INTO SalesReport SELECT * FROM SalesTable WHERE PurchaseDate LIKE '%" + qDate + "%';");
+        query.prepare("INSERT INTO SalesReport(Date, CustomerID, ItemName, Quantity) "
+                      "SELECT PurchaseDate, CustomID, ItemName, Quantity "
+                      "FROM SalesTable WHERE PurchaseDate='" + qDate + "';");
         qDebug() << qDate;
-        query.exec();
+        if (!query.exec())
+            qDebug() << query.lastError();
     }
-            QMessageBox::information(this, "Success!", "Report has been generated!");
+    QMessageBox::information(this, "Success!", "Report has been generated!");
+    this->destroy();
 }

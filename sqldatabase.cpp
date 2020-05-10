@@ -40,6 +40,7 @@ void sqlDatabase::createDatabase()
                "Quantity      INTEGER NOT NULL,"
                "InStock       INTEGER NOT NULL,"
                "Revenue       Decimal(10,2));");
+    query.exec("DELETE FROM SalesReport");
 }
 
 //Reads the warehouse shoppers .txt file (Make sure to change the file path to make it work for you)
