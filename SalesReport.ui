@@ -196,7 +196,7 @@
     <property name="title">
      <string>Select Members</string>
     </property>
-    <widget class="QRadioButton" name="radioButton">
+    <widget class="QRadioButton" name="execButton">
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -209,7 +209,7 @@
       <string>Include Only Executives</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_2">
+    <widget class="QRadioButton" name="regularButton">
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -241,7 +241,7 @@
       <string>Generate Report</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_3">
+    <widget class="QRadioButton" name="allButton">
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -252,6 +252,9 @@
      </property>
      <property name="text">
       <string>Include All Members</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>

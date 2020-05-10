@@ -360,7 +360,6 @@ void Manager::generateReport() {
     QSqlQuery query;
     QSqlRecord record;
     QSqlQueryModel *model = new QSqlQueryModel();
-
     query.prepare("SELECT * FROM SalesReport");
     if (!query.exec())
         qDebug() << query.lastError();
@@ -375,5 +374,19 @@ void Manager::generateReport() {
     for (int i = 0; i < model->rowCount(); ++i) {
         ui->salesPage_tableView->resizeRowToContents(i);
     }
+    QSqlQuery query1("SELECT DISTINCT CustomerTable.CustomerID, CustomerTable.CustomerType FROM CustomerTable INNER JOIN SalesReport ON SalesReport.CustomerID = CustomerTable.CustomerID");
+
+    int execCount = 0, normalCount = 0;
+
+    while (query1.next()) {
+        QString customerType = query1.value(1).toString();
+        if (customerType == "Executive")
+            execCount++;
+        else
+            normalCount++;
+    }
+
+    ui->normalLine->setText(QString::number(normalCount));
+    ui->executiveLine->setText(QString::number(execCount));
 }
 

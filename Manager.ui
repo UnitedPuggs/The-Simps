@@ -76,7 +76,7 @@
        <x>0</x>
        <y>50</y>
        <width>761</width>
-       <height>541</height>
+       <height>491</height>
       </rect>
      </property>
     </widget>
@@ -91,6 +91,58 @@
      </property>
      <property name="text">
       <string>🗘</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="executiveLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>540</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Executive Shoppers:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="normalLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>560</y>
+       <width>91</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Normal Shoppers:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="executiveLine">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>542</y>
+       <width>30</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="normalLine">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>560</y>
+       <width>30</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
