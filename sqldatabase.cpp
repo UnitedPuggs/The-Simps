@@ -73,27 +73,45 @@ void sqlDatabase::readFileCustomer()
 void sqlDatabase::readFileSales()
 {
 
-    QFile file(":/Days/day1.txt");
-    file.open(QIODevice::ReadOnly);
-    QTextStream inFile(&file);
+    std::string day = "day";
+    std::string txt = ".txt";
+    for (int i = 1; i <= 7; ++i) {
+        if (day[3])
+            day = "day";
+        day = day + std::to_string(i) + txt;
+        QString qstrDay = ":/Days/" + QString::fromStdString(day);
+        QFile file(qstrDay);
+        file.open(QIODevice::ReadOnly);
+        QTextStream inFile(&file);
 
-    if(file.isOpen())
-    {
-        qDebug() << "Opened File";
-        while(!inFile.atEnd())
+        if(file.isOpen())
         {
-            salesData.purchaseDate  = inFile.readLine();
-            salesData.customerID    = inFile.readLine();
-            salesData.itemName      = inFile.readLine();
-            salesData.itemPrice     = inFile.readLine();
-            salesData.quantity      = inFile.readLine();
-            // Don't uncomment unless your table is empty
-            addSalesIntoTable(salesData);
-        }   file.close();
-    }
+            qDebug() << "Opened File";
+            while(!inFile.atEnd())
+            {
+                salesData.purchaseDate  = inFile.readLine();
+                salesData.customerID    = inFile.readLine();
+                salesData.itemName      = inFile.readLine();
+                salesData.itemPrice     = inFile.readLine();
+                salesData.quantity      = inFile.readLine();
+                // Don't uncomment unless your table is empty
+                addSalesIntoTable(salesData);
 
-    else
-        qDebug() << "Cannot open file that reads from the Sales list";
+                qDebug() << "purchase date" << salesData.purchaseDate;
+                qDebug() << "customerID   " << salesData.customerID;
+                qDebug() << "itemName     " << salesData.itemName;
+                qDebug() << "itemPrice    " << salesData.itemPrice;
+                qDebug() << "quantity     " << salesData.quantity << endl;
+
+
+            }
+            file.close();
+            qDebug() << "day file: " << qstrDay << endl << endl;
+        }
+
+        else
+            qDebug() << "Cannot open file that reads from the Sales list";
+    }
 
 }
 QSqlDatabase sqlDatabase::GetDatabase() const
