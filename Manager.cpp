@@ -356,3 +356,24 @@ void Manager::refreshSearch() {
     on_inventoryPage_searchButton_clicked();
 }
 
+void Manager::generateReport() {
+    QSqlQuery query;
+    QSqlRecord record;
+    QSqlQueryModel *model = new QSqlQueryModel();
+
+    query.prepare("SELECT * FROM SalesReport");
+    if (!query.exec())
+        qDebug() << query.lastError();
+
+    model->setQuery(query);
+    ui->salesPage_tableView->setModel(model);
+    ui->salesPage_tableView->setColumnWidth(0, 205);
+    ui->salesPage_tableView->setColumnWidth(1, 205);
+    ui->salesPage_tableView->setColumnWidth(3, 205);
+    ui->salesPage_tableView->setColumnWidth(4, 205);
+
+    for (int i = 0; i < model->rowCount(); ++i) {
+        ui->salesPage_tableView->resizeRowToContents(i);
+    }
+}
+

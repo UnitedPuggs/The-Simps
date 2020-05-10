@@ -19,6 +19,7 @@ private slots:
     void generateReport();
 private:
     Ui::SalesReport *ui;
+    Manager manager;
 };
 
 #endif // SALESREPORT_H

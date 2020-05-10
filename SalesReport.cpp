@@ -21,11 +21,11 @@ void SalesReport::generateReport() {
     query1.exec("DELETE FROM SalesReport;");
     if (!query1.exec())
         qDebug() << query1.lastError();
-//    query1.exec("CREATE TABLE SalesReport("
-//               "Date VARCHAR(15),"
-//               "CustomerID INTEGER NOT NULL,"
-//                "ItemName VARCHAR(50),"
-//               "Quantity INTEGER NOT NULL);");
+    query1.exec("CREATE TABLE SalesReport("
+               "Date VARCHAR(15),"
+               "CustomerID INTEGER NOT NULL,"
+                "ItemName VARCHAR(50),"
+               "Quantity INTEGER NOT NULL);");
     QDate endDate, startDate;
     endDate = this->ui->salesPage_endDate->date();
     startDate = this->ui->salesPage_startDate->date();
@@ -45,5 +45,6 @@ void SalesReport::generateReport() {
             qDebug() << query.lastError();
     }
     QMessageBox::information(this, "Success!", "Report has been generated!");
-    this->destroy();
+    manager.activateWindow();
+    this->hide();
 }

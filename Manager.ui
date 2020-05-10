@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>908</width>
+    <width>920</width>
     <height>599</height>
    </rect>
   </property>
@@ -78,6 +78,19 @@
        <width>761</width>
        <height>541</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="sales_refresh">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>20</y>
+       <width>26</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>🗘</string>
      </property>
     </widget>
    </widget>
@@ -470,6 +483,38 @@
     <hint type="destinationlabel">
      <x>98</x>
      <y>264</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>salesPage_tableView</sender>
+   <signal>viewportEntered()</signal>
+   <receiver>Manager</receiver>
+   <slot>generateReport()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>251</x>
+     <y>334</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>60</x>
+     <y>361</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sales_refresh</sender>
+   <signal>clicked()</signal>
+   <receiver>Manager</receiver>
+   <slot>generateReport()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>153</x>
+     <y>24</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>55</x>
+     <y>333</y>
     </hint>
    </hints>
   </connection>
