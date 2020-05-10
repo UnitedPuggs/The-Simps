@@ -14,7 +14,6 @@ class Manager : public QDialog
 public:
     explicit Manager(QWidget *parent = nullptr);
     ~Manager();
-
 private slots:
     void setupSalesPage();
     void setupCustomerPage();
@@ -35,12 +34,15 @@ private slots:
     void on_rebatePage_sortBox_activated(int index);
 
     void on_customerPage_searchButton_clicked();
+    void refreshSearch();
 
     void on_membershipPage_searchButton_clicked();
     void on_inventoryPage_searchButton_clicked();
-
+public slots:
+    void generateReport();
 private:
     Ui::Manager *ui;
+
 };
 
 #endif // MANAGER_H

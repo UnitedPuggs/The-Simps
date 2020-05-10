@@ -1,6 +1,7 @@
-    #include "Manager.h"
+#include "Manager.h"
 #include "SalesReport.h"
 #include "ui_Manager.h"
+#include <QTimer>
 
 Manager::Manager(QWidget *parent) :
     QDialog(parent),
@@ -333,7 +334,7 @@ void Manager::on_inventoryPage_searchButton_clicked()
     }
 
     if(ui->inventoryPage_searchBar->text().isEmpty()) {
-        QMessageBox::information(this, "Info Box", "Searched string was empty! Search did not find anything of use.");
+        on_inventoryButton_clicked();
     }
 
     else {
@@ -350,3 +351,42 @@ void Manager::on_inventoryPage_searchButton_clicked()
             ui->inventoryPage_tableView->resizeRowToContents(i);
     }
 }
+
+void Manager::refreshSearch() {
+    on_inventoryPage_searchButton_clicked();
+}
+
+void Manager::generateReport() {
+    QSqlQuery query;
+    QSqlRecord record;
+    QSqlQueryModel *model = new QSqlQueryModel();
+    query.prepare("SELECT * FROM SalesReport");
+    if (!query.exec())
+        qDebug() << query.lastError();
+
+    model->setQuery(query);
+    ui->salesPage_tableView->setModel(model);
+    ui->salesPage_tableView->setColumnWidth(0, 205);
+    ui->salesPage_tableView->setColumnWidth(1, 205);
+    ui->salesPage_tableView->setColumnWidth(3, 205);
+    ui->salesPage_tableView->setColumnWidth(4, 205);
+
+    for (int i = 0; i < model->rowCount(); ++i) {
+        ui->salesPage_tableView->resizeRowToContents(i);
+    }
+    QSqlQuery query1("SELECT DISTINCT CustomerTable.CustomerID, CustomerTable.CustomerType FROM CustomerTable INNER JOIN SalesReport ON SalesReport.CustomerID = CustomerTable.CustomerID");
+
+    int execCount = 0, normalCount = 0;
+
+    while (query1.next()) {
+        QString customerType = query1.value(1).toString();
+        if (customerType == "Executive")
+            execCount++;
+        else
+            normalCount++;
+    }
+
+    ui->normalLine->setText(QString::number(normalCount));
+    ui->executiveLine->setText(QString::number(execCount));
+}
+
