@@ -22,22 +22,23 @@ void sqlDatabase::createDatabase()
                "CustomerID     INTEGER NOT NULL PRIMARY KEY,"
                "CustomerType   VARCHAR(4),"
                "ExpirationDate VARCHAR(15),"
-               "TotalSpent     DECIMAL(10,2),"
-               "TotalRebate    DECIMAL(10,2),"
-               "PaidAnnualFee  VARCHAR(4));");
+               "QtyBought      INTEGER DEFAULT 0,"
+               "TotalSpent     DECIMAL(10,2) DEFAULT 0,"
+               "TotalRebate    DECIMAL(10,2) DEFAULT 0,"
+               "AnnualFee      DECIMAL(10,2) DEFAULT 0);");
 
     query.exec("CREATE TABLE  SalesTable("
-               "PurchaseDate  VARCHAR(15),"
+               "PurchaseDate  TEXT,"
                "CustomID      INTEGER NOT NULL,"
                "ItemName      VARCHAR(50),"
-               "ItemPrice     DECIMAL(10,2),"
-               "Quantity      INTEGER NOT NULL);");
+               "ItemPrice     DECIMAL(10,2) DEFAULT 0,"
+               "Quantity      INTEGER DEFAULT 0 NOT NULL);");
 
     query.exec("CREATE TABLE  InventoryTable("
-               "ItemName      VARCHAR(50) UNIQUE,"
+               "ItemName      VARCHAR(50),"
                "ItemPrice     DECIMAL(10,2),"
-               "Quantity      INTEGER NOT NULL,"
-               "InStock       INTEGER NOT NULL,"
+               "Quantity      INTEGER DEFAULT 0 NOT NULL,"
+               "InStock       INTEGER DEFAULT 0 NOT NULL,"
                "Revenue       Decimal(10,2));");
 }
 
@@ -160,9 +161,6 @@ void sqlDatabase::addSalesIntoTable(salesTableInfo& salesData)
         qDebug() << "Failed: " << query.lastError();
 
     checkInventory();
-
-    if(!query.exec())
-        qDebug() << "Failed: " << query.lastError();
 }
 
 void sqlDatabase::handleInventory()
