@@ -36,6 +36,7 @@ private slots:
 
     void on_inventoryPage_editButton_clicked();
 
+    void determineUpgradeOrDowngrade();
 private:
     Ui::Admin *ui;
 };

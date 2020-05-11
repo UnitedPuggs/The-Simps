@@ -76,6 +76,7 @@ void Admin::on_inventoryButton_clicked()
 
 void Admin::on_membershipButton_clicked()
 {
+    determineUpgradeOrDowngrade();
     ui->stackedWidget->setCurrentIndex(2);
 }
 
@@ -320,5 +321,39 @@ void Admin::on_inventoryPage_editButton_clicked()
 
     for (int i = 0; i < model->rowCount(); ++i)
         ui->InventoryTableView->resizeRowToContents(i);
+
+}
+
+void Admin::determineUpgradeOrDowngrade()
+{
+    Admin admin;
+    QString   name    = ui->NameLineEdit -> text();
+    QString   id      = ui->IDLineEdit -> text();
+    QString   type    = ui->MemberTypeLineEdit->text();
+    QString   expDate = ui->ExpirationDateLineEdit->text();
+    QSqlQuery query, upgrade, downgrade;
+    QSqlRecord record;
+    QSqlQueryModel *model = new QSqlQueryModel();
+
+    query.prepare("SELECT Name, CustomerID, CustomerType, ShouldUpgrade FROM CustomerTable");
+    upgrade.prepare("UPDATE CustomerTable SET ShouldUpgrade = \"Yes\" WHERE TotalRebate > 120");
+    downgrade.prepare("UPDATE CustomerTable SET ShouldUpgrade = \"No\" WHERE TotalRebate < 120");
+    if(!query.exec())
+        qDebug() << query.lastError();
+    if (!upgrade.exec())
+        qDebug() << upgrade.lastError();
+    if (!downgrade.exec())
+        qDebug() << downgrade.lastError();
+    model->setQuery(query);
+    ui->MembershipTableView->setModel(model);
+    ui->MembershipTableView->setColumnWidth(0, 210);
+    ui->MembershipTableView->setColumnWidth(1, 100);
+    ui->MembershipTableView->setColumnWidth(2, 100);
+    ui->MembershipTableView->setColumnWidth(3, 110);
+    ui->MembershipTableView->setColumnWidth(4, 110);
+
+    for (int i = 0; i < model->rowCount(); ++i)
+        ui->MembershipTableView->resizeRowToContents(i);
+
 
 }

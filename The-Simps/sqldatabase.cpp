@@ -25,7 +25,8 @@ void sqlDatabase::createDatabase()
                "QtyBought      INTEGER DEFAULT 0,"
                "TotalSpent     DECIMAL(10,2) DEFAULT 0,"
                "TotalRebate    DECIMAL(10,2) DEFAULT 0,"
-               "AnnualFee      DECIMAL(10,2) DEFAULT 0);");
+               "AnnualFee      DECIMAL(10,2) DEFAULT 0,"
+               "ShouldUpgrade  VARCHAR(3));");
 
     query.exec("CREATE TABLE  SalesTable("
                "PurchaseDate  TEXT,"

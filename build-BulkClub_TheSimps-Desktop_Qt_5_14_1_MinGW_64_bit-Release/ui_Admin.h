@@ -18,7 +18,6 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QTableView>
-#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QWidget>
 
@@ -64,9 +63,9 @@ public:
     QLabel *label_10;
     QLineEdit *RevenueLineEdit;
     QWidget *membershipPage;
-    QTableWidget *membershipPage_tableWidget;
     QPushButton *membershipPage_convertButton;
     QToolButton *membershipPage_refreshButton;
+    QTableView *MembershipTableView;
     QLabel *companyLabel;
     QPushButton *membershipButton;
 
@@ -236,9 +235,6 @@ public:
         stackedWidget->addWidget(inventoryPage);
         membershipPage = new QWidget();
         membershipPage->setObjectName(QString::fromUtf8("membershipPage"));
-        membershipPage_tableWidget = new QTableWidget(membershipPage);
-        membershipPage_tableWidget->setObjectName(QString::fromUtf8("membershipPage_tableWidget"));
-        membershipPage_tableWidget->setGeometry(QRect(0, 50, 711, 541));
         membershipPage_convertButton = new QPushButton(membershipPage);
         membershipPage_convertButton->setObjectName(QString::fromUtf8("membershipPage_convertButton"));
         membershipPage_convertButton->setGeometry(QRect(40, 10, 161, 31));
@@ -247,6 +243,9 @@ public:
         membershipPage_refreshButton->setObjectName(QString::fromUtf8("membershipPage_refreshButton"));
         membershipPage_refreshButton->setGeometry(QRect(0, 10, 31, 31));
         membershipPage_refreshButton->setFont(font1);
+        MembershipTableView = new QTableView(membershipPage);
+        MembershipTableView->setObjectName(QString::fromUtf8("MembershipTableView"));
+        MembershipTableView->setGeometry(QRect(0, 50, 711, 541));
         stackedWidget->addWidget(membershipPage);
         companyLabel = new QLabel(Admin);
         companyLabel->setObjectName(QString::fromUtf8("companyLabel"));
@@ -261,8 +260,9 @@ public:
         membershipButton->setFont(font);
 
         retranslateUi(Admin);
+        QObject::connect(membershipButton, SIGNAL(clicked()), Admin, SLOT(determineUpgradeOrDowngrade()));
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(Admin);

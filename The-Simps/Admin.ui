@@ -68,7 +68,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="customerPage">
     <widget class="QToolButton" name="customerPage_refreshButton">
@@ -622,16 +622,6 @@
     </widget>
    </widget>
    <widget class="QWidget" name="membershipPage">
-    <widget class="QTableWidget" name="membershipPage_tableWidget">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>50</y>
-       <width>711</width>
-       <height>541</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QPushButton" name="membershipPage_convertButton">
      <property name="geometry">
       <rect>
@@ -668,6 +658,16 @@
      </property>
      <property name="text">
       <string>🗘</string>
+     </property>
+    </widget>
+    <widget class="QTableView" name="MembershipTableView">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>50</y>
+       <width>711</width>
+       <height>541</height>
+      </rect>
      </property>
     </widget>
    </widget>
@@ -711,5 +711,25 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>membershipButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Admin</receiver>
+   <slot>determineUpgradeOrDowngrade()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>76</x>
+     <y>379</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>75</x>
+     <y>435</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>determineUpgradeOrDowngrade()</slot>
+ </slots>
 </ui>
