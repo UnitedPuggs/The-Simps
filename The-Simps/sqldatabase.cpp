@@ -188,12 +188,12 @@ void sqlDatabase::checkInventory(){
         double itemPrice = query.value(1).toDouble();
         int quantFromDB = query.value(2).toInt();
         double totalRevenue = query.value(4).toDouble();  
-        double tax = totalRevenue * .0775;
-        double newAfterTax = tax + totalRevenue;
         int quantToInput = salesData.quantity.toInt();
         int newQuantForDb =  quantFromDB + quantToInput;
         int newStockForDb = 500 - newQuantForDb;
         totalRevenue = newQuantForDb * itemPrice;
+        double tax = totalRevenue * .0775;
+        double newAfterTax = tax + totalRevenue;
         double dec = query.value(1).toString().toDouble();
 
        if(newStockForDb <= 0 || newStockForDb < 0){
