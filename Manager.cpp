@@ -1,4 +1,4 @@
-    #include "Manager.h"
+#include "Manager.h"
 #include "SalesReport.h"
 #include "ui_Manager.h"
 

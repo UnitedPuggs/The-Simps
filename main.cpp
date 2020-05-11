@@ -1,7 +1,5 @@
 #include "sqldatabase.h"
 #include "mainwindow.h"
-#include "Manager.h"
-#include "Admin.h"
 
 int main(int argc, char *argv[])
 {

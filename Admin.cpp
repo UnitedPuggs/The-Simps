@@ -1,6 +1,5 @@
 #include "Admin.h"
 #include "ui_Admin.h"
-#include "sqldatabase.h"
 
 Admin::Admin(QWidget *parent) :
     QDialog(parent),
