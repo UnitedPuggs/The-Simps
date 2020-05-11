@@ -27,7 +27,6 @@ struct inventoryData
     QString quantityPurchased;
     QString inStock;
     double revenue;
-    double afterTax;
 };
 
 
@@ -51,7 +50,7 @@ public:
     QSqlDatabase GetDatabase() const;
     void handleInventory();
     void checkInventory();
-    void updateDB(int,int,double,double,double);
+    void updateDB(int,int,double,double);
 
 };
 

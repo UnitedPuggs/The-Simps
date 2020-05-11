@@ -23,24 +23,24 @@ void sqlDatabase::createDatabase()
                "CustomerID     INTEGER NOT NULL PRIMARY KEY,"
                "CustomerType   VARCHAR(4),"
                "ExpirationDate VARCHAR(15),"
-               "TotalSpent     DECIMAL(10,2),"
-               "TotalRebate    DECIMAL(10,2),"
-               "AnnualFee  VARCHAR(4));");
+               "QtyBought      INTEGER DEFAULT 0,"
+               "TotalSpent     DECIMAL(10,2) DEFAULT 0,"
+               "TotalRebate    DECIMAL(10,2) DEFAULT 0,"
+               "AnnualFee      DECIMAL(10,2) DEFAULT 0);");
 
     query.exec("CREATE TABLE  SalesTable("
                "PurchaseDate  TEXT,"
                "CustomID      INTEGER NOT NULL,"
                "ItemName      VARCHAR(50),"
-               "ItemPrice     DECIMAL(10,2),"
-               "Quantity      INTEGER NOT NULL);");
+               "ItemPrice     DECIMAL(10,2) DEFAULT 0,"
+               "Quantity      INTEGER DEFAULT 0 NOT NULL);");
 
     query.exec("CREATE TABLE  InventoryTable("
                "ItemName      VARCHAR(50),"
                "ItemPrice     DECIMAL(10,2),"
-               "Quantity      INTEGER NOT NULL,"
-               "InStock       INTEGER NOT NULL,"
-               "Revenue       Decimal(10,2),"
-               "AfterTax     Decimal(10,2));");
+               "Quantity      INTEGER DEFAULT 0 NOT NULL,"
+               "InStock       INTEGER DEFAULT 0 NOT NULL,"
+               "Revenue       Decimal(10,2));");
     query.exec("DELETE FROM SalesReport");
 }
 
@@ -158,15 +158,13 @@ void sqlDatabase::handleInventory()
 {
     QSqlQuery query;
 
-    query.prepare("INSERT INTO InventoryTable(ItemName, ItemPrice, Quantity, InStock,Revenue,AfterTax)"
-                  "VALUES(:name, :price, :quant, :stock,:rev,:tax)");
+    query.prepare("INSERT INTO InventoryTable(ItemName, ItemPrice, Quantity, InStock,Revenue)"
+                  "VALUES(:name, :price, :quant, :stock,:rev)");
     query.bindValue(":name", inventoryData.itemName);
     query.bindValue(":price", inventoryData.itemPrice);
     query.bindValue(":quant", inventoryData.quantityPurchased);
     query.bindValue(":stock", inventoryData.inStock);
     query.bindValue(":rev", inventoryData.revenue);
-    query.bindValue(":tax", inventoryData.afterTax);
-
 
     if(!query.exec()){
         qDebug() << "Failed: " << query.lastError();
@@ -185,22 +183,21 @@ void sqlDatabase::checkInventory(){
     }
 
     if (query.next()) {
+
         double itemPrice = query.value(1).toDouble();
         int quantFromDB = query.value(2).toInt();
-        double totalRevenue = query.value(4).toDouble();  
+        double totalRevenue = query.value(4).toDouble();
         int quantToInput = salesData.quantity.toInt();
         int newQuantForDb =  quantFromDB + quantToInput;
         int newStockForDb = 500 - newQuantForDb;
         totalRevenue = newQuantForDb * itemPrice;
-        double tax = totalRevenue * .0775;
-        double newAfterTax = tax + totalRevenue;
         double dec = query.value(1).toString().toDouble();
 
        if(newStockForDb <= 0 || newStockForDb < 0){
-            updateDB(0,quantFromDB,dec,query.value(4).toDouble(),query.value(5).toDouble());
+            updateDB(0,quantFromDB,dec,query.value(4).toDouble());
        }
        else{
-            updateDB(newStockForDb,newQuantForDb,dec,totalRevenue,newAfterTax);
+            updateDB(newStockForDb,newQuantForDb,dec,totalRevenue);
            }
        }    
     else{
@@ -211,32 +208,31 @@ void sqlDatabase::checkInventory(){
         QString m;
         inventoryData.inStock = m.number(newStock);
         double totalRev = salesData.quantity.toInt() * inventoryData.itemPrice.toDouble();
-        double tax = totalRev * 0.0775;
-        inventoryData.afterTax = tax + totalRev;
         inventoryData.revenue = totalRev;
         handleInventory();
         }
 
 }
-void sqlDatabase::updateDB(int stock,int quant,double dec,double totalRevenue,double afterTax){
+void sqlDatabase::updateDB(int stock,int quant,double dec,double totalRevenue){
     QSqlQuery query;
     query.prepare("UPDATE InventoryTable "
                      "SET ItemName = :name, "
                      "    ItemPrice = :price, "
                      "    Quantity = :quant, "
                      "    InStock = :stock, "
-                     "    Revenue = :rev,"
-                     "    AfterTax = :tax "
+                     "    Revenue = :rev "
                      "WHERE ItemName = :c;");
 
+       QString price = price.number(dec,'f',2);
+       QString rev = rev.number(totalRevenue,'f',2);
+       qDebug() << price << " " << rev;
+
        query.bindValue(":name", salesData.itemName);
-       query.bindValue(":price", dec);
+       query.bindValue(":price", price);
        query.bindValue(":quant", quant);
        query.bindValue(":stock", stock);
-       query.bindValue(":rev", totalRevenue);
+       query.bindValue(":rev", rev);
        query.bindValue(":c",salesData.itemName);
-       query.bindValue(":tax", afterTax);
-
 
        if(!query.exec())
             qDebug() << query.lastError();
