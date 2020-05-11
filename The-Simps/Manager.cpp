@@ -33,6 +33,10 @@ void Manager::setupCustomerPage()
     ui->customerPage_sortBox->addItem("All");
     ui->customerPage_sortBox->addItem("Regular");
     ui->customerPage_sortBox->addItem("Executive");
+    ui->customerPage_sortBox->addItem("Exec Rebate ASC");
+    ui->customerPage_sortBox->addItem("Exec Rebate DESC");
+
+
 }
 
 void Manager::setupInventoryPage()
@@ -40,8 +44,8 @@ void Manager::setupInventoryPage()
     ui->inventoryPage_sortBox->clear();
     ui->inventoryPage_sortBox->addItem("Ascending");
     ui->inventoryPage_sortBox->addItem("Descending");
-    ui->inventoryPage_sortBox->addItem("Most Sold");
-    ui->inventoryPage_sortBox->addItem("Least Sold");
+    ui->inventoryPage_sortBox->addItem("Revenue ASC");
+    ui->inventoryPage_sortBox->addItem("Revenue DESC");
 }
 
 void Manager::setupMembershipPage()
@@ -195,6 +199,20 @@ void Manager::on_customerPage_sortBox_activated(int index)
         query.prepare("SELECT Name, CustomerID, CustomerType, TotalSpent"
                       " FROM CustomerTable"
                       " WHERE CustomerType = 'Executive'");
+    }
+    // Regular
+    else if(index == 3) {
+        query.prepare("SELECT Name, CustomerID, CustomerType, TotalSpent"
+                      " FROM CustomerTable"
+                      " WHERE CustomerType = 'Executive'"
+                      " ORDER BY Name ASC");    }
+
+    // Executive
+    else if(index == 4) {
+        query.prepare("SELECT Name, CustomerID, CustomerType, TotalSpent"
+                      " FROM CustomerTable"
+                      " WHERE CustomerType = 'Executive'"
+                      " ORDER BY Name DESC");
     }
 
     if(!query.exec())
