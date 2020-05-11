@@ -200,19 +200,23 @@ void Manager::on_customerPage_sortBox_activated(int index)
                       " FROM CustomerTable"
                       " WHERE CustomerType = 'Executive'");
     }
-    // Regular
+
+ //THIS IS WHERE STORY 4 WILL BE!
+
     else if(index == 3) {
-        query.prepare("SELECT Name, CustomerID, CustomerType, TotalSpent"
+        query.prepare("SELECT Name, CustomerID, CustomerType, TotalSpent" // <<< HAVE TO ADD THE REBATE
                       " FROM CustomerTable"
                       " WHERE CustomerType = 'Executive'"
                       " ORDER BY Name ASC");    }
+                    //NEED TO CHANGE "NAME" TO REBATE ^^^^
 
-    // Executive
     else if(index == 4) {
-        query.prepare("SELECT Name, CustomerID, CustomerType, TotalSpent"
+        query.prepare("SELECT Name, CustomerID, CustomerType, TotalSpent"   // <<< HAVE TO ADD THE REBATE
                       " FROM CustomerTable"
                       " WHERE CustomerType = 'Executive'"
                       " ORDER BY Name DESC");
+        //NEED TO CHANGE "NAME" TO REBATE ^^^
+
     }
 
     if(!query.exec())
@@ -225,6 +229,7 @@ void Manager::on_customerPage_sortBox_activated(int index)
     ui->customerPage_tableView->setColumnWidth(2, 100);
     ui->customerPage_tableView->setColumnWidth(3, 110);
     ui->customerPage_tableView->setColumnWidth(4, 110);
+
 
     for (int i = 0; i < model->rowCount(); ++i)
         ui->customerPage_tableView->resizeRowToContents(i);
@@ -273,24 +278,24 @@ void Manager::on_inventoryPage_sortBox_activated(int index)
 
     // Ascending
     if(index == 0) {
-        query.prepare("SELECT ItemName, ItemPrice, Quantity, InStock, Revenue"
+        query.prepare("SELECT ItemName, ItemPrice, Quantity, InStock, Revenue, AfterTax"
                       " FROM InventoryTable"
                       " ORDER BY ItemName ASC");
     }
 
     // Descending
     else if(index == 1) {
-        query.prepare("SELECT ItemName, ItemPrice, Quantity, InStock, Revenue"
+        query.prepare("SELECT ItemName, ItemPrice, Quantity, InStock, Revenue, AfterTax"
                       " FROM InventoryTable"
                       " ORDER BY ItemName DESC");
     }
     else if(index == 2) {
-        query.prepare("SELECT ItemName, ItemPrice, Quantity, InStock, Revenue"
+        query.prepare("SELECT ItemName, ItemPrice, Quantity, InStock, Revenue, AfterTax"
                       " FROM InventoryTable"
                       " ORDER BY Revenue DESC");
     }
     else if(index == 3) {
-        query.prepare("SELECT ItemName, ItemPrice, Quantity, InStock, Revenue"
+        query.prepare("SELECT ItemName, ItemPrice, Quantity, InStock, Revenue, AfterTax"
                       " FROM InventoryTable"
                       " ORDER BY Revenue ASC");
     }
@@ -305,6 +310,8 @@ void Manager::on_inventoryPage_sortBox_activated(int index)
     ui->inventoryPage_tableView->setColumnWidth(2, 100);
     ui->inventoryPage_tableView->setColumnWidth(3, 110);
     ui->inventoryPage_tableView->setColumnWidth(4, 110);
+    ui->inventoryPage_tableView->setColumnWidth(5, 110);
+
 
     for (int i = 0; i < model->rowCount(); ++i)
         ui->inventoryPage_tableView->resizeRowToContents(i);
@@ -412,7 +419,7 @@ void Manager::on_inventoryPage_searchButton_clicked()
     QString searchingFor = ui->inventoryPage_searchBar->text();
 
 
-    query.prepare("SELECT ItemName, ItemPrice, Quantity, InStock FROM InventoryTable"
+    query.prepare("SELECT ItemName, ItemPrice, Quantity, InStock , AfterTax FROM InventoryTable"
                   " WHERE ItemName       LIKE '%" + searchingFor + "%'"
                   " OR    ItemPrice LIKE '%" + searchingFor + "%';");
 
@@ -434,6 +441,8 @@ void Manager::on_inventoryPage_searchButton_clicked()
         ui->inventoryPage_tableView->setColumnWidth(2, 100);
         ui->inventoryPage_tableView->setColumnWidth(3, 110);
         ui->inventoryPage_tableView->setColumnWidth(4, 110);
+        ui->inventoryPage_tableView->setColumnWidth(5, 110);
+
 
 
         for (int i = 0; i < model->rowCount(); ++i)
