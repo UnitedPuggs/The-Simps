@@ -17,6 +17,8 @@ sqlDatabase::~sqlDatabase()
 void sqlDatabase::createDatabase()
 {
     QSqlQuery query;
+
+
     query.exec("CREATE TABLE   CustomerTable("
                "Name           VARCHAR(50),"
                "CustomerID     INTEGER NOT NULL PRIMARY KEY,"
@@ -97,16 +99,8 @@ void sqlDatabase::readFileSales()
                 // Don't uncomment unless your table is empty
                 addSalesIntoTable(salesData);
 
-                qDebug() << "purchase date" << salesData.purchaseDate;
-                qDebug() << "customerID   " << salesData.customerID;
-                qDebug() << "itemName     " << salesData.itemName;
-                qDebug() << "itemPrice    " << salesData.itemPrice;
-                qDebug() << "quantity     " << salesData.quantity << endl;
-
-
             }
             file.close();
-            qDebug() << "day file: " << qstrDay << endl << endl;
         }
 
         else
@@ -236,7 +230,6 @@ void sqlDatabase::updateDB(int stock,int quant,double dec,double totalRevenue){
 
        QString price = price.number(dec,'f',2);
        QString rev = rev.number(totalRevenue,'f',2);
-       qDebug() << price << " " << rev;
 
        query.bindValue(":name", salesData.itemName);
        query.bindValue(":price", price);

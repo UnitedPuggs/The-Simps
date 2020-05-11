@@ -90,47 +90,45 @@ void Admin::on_inventoryPage_addButton_clicked()
     QSqlQuery query;
 
     //If any fields are empty, send an error window to the user
-    if(itemName == "" || price == "" || quantity == "" || inStock == "" || revenue == "")
+    if(itemName == "" || price == "")
     {
         QMessageBox::information(this, "Warning", "Please fill in Item Name and Price to ADD an item.");
     }
-
-    //Prepare the database for query to add values to the table
-    query.prepare("INSERT OR IGNORE INTO InventoryTable(ItemName, ItemPrice, Quantity, InStock, Revenue)"
-                  "VALUES(:itemName, :price, :quantity, :inStock, :revenue)");
-
-    qDebug() << itemName << endl;
-    qDebug() << "void Admin::on_inventoryPage_addButton_clicked()" << endl;
-
-    //bind values
-    query.bindValue(":itemName", itemName);
-    query.bindValue(":price"  ,  price);
-    query.bindValue(":quantity", quantity);
-    query.bindValue(":inStock",  inStock);
-    query.bindValue(":revenue",  revenue);
-
-
-    //Error message to console if query fails
-    if(!query.exec())
+    else
     {
-        qDebug() << "Failed: " << query.lastError();
+        //Prepare the database for query to add values to the table
+        query.prepare("INSERT OR IGNORE INTO InventoryTable(ItemName, ItemPrice, Quantity, InStock, Revenue)"
+                      "VALUES(:itemName, :price, :quantity, :inStock, :revenue);");
+
+        //bind values
+        query.bindValue(":itemName", itemName);
+        query.bindValue(":price"  ,  price);
+        query.bindValue(":quantity", quantity);
+        query.bindValue(":inStock",  inStock);
+        query.bindValue(":revenue",  revenue);
+
+
+        //Error message to console if query fails
+        if(!query.exec())
+        {
+            qDebug() << "Failed: " << query.lastError();
+        }
+
+        QSqlQueryModel *model = new QSqlQueryModel();
+
+        query.prepare("SELECT * FROM InventoryTable");
+        query.exec();
+
+        model->setQuery(query);
+        ui->InventoryTableView->setModel(model);
+        ui->InventoryTableView->setColumnWidth(0, 210);
+        ui->InventoryTableView->setColumnWidth(1, 100);
+        ui->InventoryTableView->setColumnWidth(2, 100);
+        ui->InventoryTableView->setColumnWidth(3, 110);
+
+        for (int i = 0; i < model->rowCount(); ++i)
+            ui->InventoryTableView->resizeRowToContents(i);
     }
-
-    QSqlQueryModel *model = new QSqlQueryModel();
-
-    query.prepare("SELECT * FROM InventoryTable");
-    query.exec();
-
-    model->setQuery(query);
-    ui->InventoryTableView->setModel(model);
-    ui->InventoryTableView->setColumnWidth(0, 210);
-    ui->InventoryTableView->setColumnWidth(1, 100);
-    ui->InventoryTableView->setColumnWidth(2, 100);
-    ui->InventoryTableView->setColumnWidth(3, 110);
-
-    for (int i = 0; i < model->rowCount(); ++i)
-        ui->InventoryTableView->resizeRowToContents(i);
-
 }
 
 /**************************************************************
@@ -160,38 +158,41 @@ void Admin::on_customerPage_addButton_clicked()
         QMessageBox::information(this, "Warning", "Please fill in Name, ID, MemberType,"
                                                   " and Expiration date to ADD a customer.");
     }
-
-    //Prepare the database for query to add values to the table
-    query.prepare("INSERT OR IGNORE INTO CustomerTable(Name,CustomerID, CustomerType, ExpirationDate)"
-                  "VALUES(:name, :id, :type, :expDate)");
-
-    //bind values
-    query.bindValue(":name",    name);
-    query.bindValue(":id"  ,    id);
-    query.bindValue(":type",    type);
-    query.bindValue(":expDate", expDate);
-
-
-    //Error message to console if query fails
-    if(!query.exec())
+    else
     {
-        qDebug() << "Failed: " << query.lastError();
+        //Prepare the database for query to add values to the table
+        query.prepare("INSERT OR IGNORE INTO CustomerTable(Name,CustomerID, CustomerType, ExpirationDate)"
+                      "VALUES(:name, :id, :type, :expDate)");
+
+        //bind values
+        query.bindValue(":name",    name);
+        query.bindValue(":id"  ,    id);
+        query.bindValue(":type",    type);
+        query.bindValue(":expDate", expDate);
+
+
+        //Error message to console if query fails
+        if(!query.exec())
+        {
+            qDebug() << "Failed: " << query.lastError();
+        }
+
+        QSqlQueryModel *model = new QSqlQueryModel();
+
+        query.prepare("SELECT * FROM CustomerTable");
+        query.exec();
+
+        model->setQuery(query);
+        ui->customerPage_tableView->setModel(model);
+        ui->customerPage_tableView->setColumnWidth(0, 210);
+        ui->customerPage_tableView->setColumnWidth(1, 100);
+        ui->customerPage_tableView->setColumnWidth(2, 100);
+        ui->customerPage_tableView->setColumnWidth(3, 110);
+
+        for (int i = 0; i < model->rowCount(); ++i)
+            ui->customerPage_tableView->resizeRowToContents(i);
     }
 
-    QSqlQueryModel *model = new QSqlQueryModel();
-
-    query.prepare("SELECT * FROM CustomerTable");
-    query.exec();
-
-    model->setQuery(query);
-    ui->customerPage_tableView->setModel(model);
-    ui->customerPage_tableView->setColumnWidth(0, 210);
-    ui->customerPage_tableView->setColumnWidth(1, 100);
-    ui->customerPage_tableView->setColumnWidth(2, 100);
-    ui->customerPage_tableView->setColumnWidth(3, 110);
-
-    for (int i = 0; i < model->rowCount(); ++i)
-        ui->customerPage_tableView->resizeRowToContents(i);
 }
 
 /**************************************************************
@@ -216,21 +217,24 @@ void Admin::on_customerPage_deleteButton_clicked()
     {
         qDebug() << "Failed: " << query.lastError();
     }
+    else
+    {
+        QSqlQueryModel *model = new QSqlQueryModel();
 
-    QSqlQueryModel *model = new QSqlQueryModel();
+        query.prepare("SELECT * FROM CustomerTable");
+        query.exec();
 
-    query.prepare("SELECT * FROM CustomerTable");
-    query.exec();
+        model->setQuery(query);
+        ui->customerPage_tableView->setModel(model);
+        ui->customerPage_tableView->setColumnWidth(0, 210);
+        ui->customerPage_tableView->setColumnWidth(1, 100);
+        ui->customerPage_tableView->setColumnWidth(2, 100);
+        ui->customerPage_tableView->setColumnWidth(3, 110);
 
-    model->setQuery(query);
-    ui->customerPage_tableView->setModel(model);
-    ui->customerPage_tableView->setColumnWidth(0, 210);
-    ui->customerPage_tableView->setColumnWidth(1, 100);
-    ui->customerPage_tableView->setColumnWidth(2, 100);
-    ui->customerPage_tableView->setColumnWidth(3, 110);
+        for (int i = 0; i < model->rowCount(); ++i)
+            ui->customerPage_tableView->resizeRowToContents(i);
+    }
 
-    for (int i = 0; i < model->rowCount(); ++i)
-        ui->customerPage_tableView->resizeRowToContents(i);
 }
 
 void Admin::on_inventoryPage_deleteButton_clicked()
@@ -249,35 +253,36 @@ void Admin::on_inventoryPage_deleteButton_clicked()
     {
         QMessageBox::information(this, "Warning", "Please fill in the Item Name to DELETE an item.");
     }
-
-    //Prepare the database for query to add values to the table
-    query.prepare("DELETE FROM InventoryTable WHERE ItemName = :itemName");
-
-    //bind values
-    query.bindValue(":itemName", itemName);
-
-
-    //Error message to console if query fails
-    if(!query.exec())
+    else
     {
-        qDebug() << "Failed: " << query.lastError();
+        //Prepare the database for query to add values to the table
+        query.prepare("DELETE FROM InventoryTable WHERE ItemName = :itemName");
+
+        //bind values
+        query.bindValue(":itemName", itemName);
+
+
+        //Error message to console if query fails
+        if(!query.exec())
+        {
+            qDebug() << "Failed: " << query.lastError();
+        }
+
+
+        query.prepare("SELECT * FROM InventoryTable");
+        query.exec();
+
+        model->setQuery(query);
+        ui->InventoryTableView->setModel(model);
+        ui->InventoryTableView->setColumnWidth(0, 210);
+        ui->InventoryTableView->setColumnWidth(1, 100);
+        ui->InventoryTableView->setColumnWidth(2, 100);
+        ui->InventoryTableView->setColumnWidth(3, 110);
+
+        for (int i = 0; i < model->rowCount(); ++i)
+            ui->InventoryTableView->resizeRowToContents(i);
+
     }
-
-
-    query.prepare("SELECT * FROM InventoryTable");
-    query.exec();
-
-    model->setQuery(query);
-    ui->InventoryTableView->setModel(model);
-    ui->InventoryTableView->setColumnWidth(0, 210);
-    ui->InventoryTableView->setColumnWidth(1, 100);
-    ui->InventoryTableView->setColumnWidth(2, 100);
-    ui->InventoryTableView->setColumnWidth(3, 110);
-
-    for (int i = 0; i < model->rowCount(); ++i)
-        ui->InventoryTableView->resizeRowToContents(i);
-
-
 }
 
 void Admin::on_inventoryPage_editButton_clicked()
