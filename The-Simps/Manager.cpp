@@ -247,6 +247,50 @@ void Manager::on_rebatePage_sortBox_activated(int index)
     for (int i = 0; i < model->rowCount(); ++i)
         ui->rebatePage_tableView->resizeRowToContents(i);
 }
+void Manager::on_inventoryPage_sortBox_activated(int index)
+{
+
+    QSqlQuery query;
+    QSqlQueryModel *model = new QSqlQueryModel();
+
+    // Ascending
+    if(index == 0) {
+        query.prepare("SELECT ItemName, ItemPrice, Quantity, InStock, Revenue"
+                      " FROM InventoryTable"
+                      " ORDER BY ItemName ASC");
+    }
+
+    // Descending
+    else if(index == 1) {
+        query.prepare("SELECT ItemName, ItemPrice, Quantity, InStock, Revenue"
+                      " FROM InventoryTable"
+                      " ORDER BY ItemName DESC");
+    }
+    else if(index == 2) {
+        query.prepare("SELECT ItemName, ItemPrice, Quantity, InStock, Revenue"
+                      " FROM InventoryTable"
+                      " ORDER BY Revenue DESC");
+    }
+    else if(index == 3) {
+        query.prepare("SELECT ItemName, ItemPrice, Quantity, InStock, Revenue"
+                      " FROM InventoryTable"
+                      " ORDER BY Revenue ASC");
+    }
+
+    if(!query.exec())
+        qDebug() << query.lastError();
+
+    model->setQuery(query);
+    ui->inventoryPage_tableView->setModel(model);
+    ui->inventoryPage_tableView->setColumnWidth(0, 210);
+    ui->inventoryPage_tableView->setColumnWidth(1, 100);
+    ui->inventoryPage_tableView->setColumnWidth(2, 100);
+    ui->inventoryPage_tableView->setColumnWidth(3, 110);
+    ui->inventoryPage_tableView->setColumnWidth(4, 110);
+
+    for (int i = 0; i < model->rowCount(); ++i)
+        ui->inventoryPage_tableView->resizeRowToContents(i);
+}
 
 // Searching the Customer Page
 void Manager::on_customerPage_searchButton_clicked()
