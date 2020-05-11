@@ -147,14 +147,15 @@ void Manager::on_inventoryButton_clicked()
 
 void Manager::on_rebatesButton_clicked()
 {
-    QSqlQuery query;
+    QSqlQuery query, rebate;
     QSqlQueryModel *model = new QSqlQueryModel();
 
     query.prepare("SELECT Name, CustomerID, CustomerType, TotalRebate FROM CustomerTable WHERE CustomerType = 'Executive'");
-
+    rebate.prepare("UPDATE CustomerTable SET TotalRebate = TotalSpent * 0.02");
     if(!query.exec())
         qDebug() << query.lastError();
-
+    if (!rebate.exec())
+        qDebug() << rebate.lastError();
     model->setQuery(query);
     ui->rebatePage_tableView->setModel(model);
     ui->rebatePage_tableView->setColumnWidth(0, 210);
