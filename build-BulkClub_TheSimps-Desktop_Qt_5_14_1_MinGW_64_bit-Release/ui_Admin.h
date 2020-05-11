@@ -35,7 +35,6 @@ public:
     QTableView *customerPage_tableView;
     QLabel *label_2;
     QPushButton *customerPage_addButton;
-    QPushButton *customerPage_editButton;
     QLineEdit *RebateLineEdit;
     QLineEdit *NameLineEdit;
     QLabel *label_4;
@@ -122,12 +121,8 @@ public:
         label_2->setFont(font2);
         customerPage_addButton = new QPushButton(customerPage);
         customerPage_addButton->setObjectName(QString::fromUtf8("customerPage_addButton"));
-        customerPage_addButton->setGeometry(QRect(700, 90, 181, 41));
+        customerPage_addButton->setGeometry(QRect(700, 30, 181, 71));
         customerPage_addButton->setFont(font1);
-        customerPage_editButton = new QPushButton(customerPage);
-        customerPage_editButton->setObjectName(QString::fromUtf8("customerPage_editButton"));
-        customerPage_editButton->setGeometry(QRect(700, 30, 181, 41));
-        customerPage_editButton->setFont(font1);
         RebateLineEdit = new QLineEdit(customerPage);
         RebateLineEdit->setObjectName(QString::fromUtf8("RebateLineEdit"));
         RebateLineEdit->setGeometry(QRect(480, 150, 131, 31));
@@ -170,7 +165,7 @@ public:
         TotalSpentLineEdit->setFont(font2);
         customerPage_deleteButton = new QPushButton(customerPage);
         customerPage_deleteButton->setObjectName(QString::fromUtf8("customerPage_deleteButton"));
-        customerPage_deleteButton->setGeometry(QRect(700, 150, 181, 41));
+        customerPage_deleteButton->setGeometry(QRect(700, 120, 181, 71));
         customerPage_deleteButton->setFont(font1);
         IDLineEdit = new QLineEdit(customerPage);
         IDLineEdit->setObjectName(QString::fromUtf8("IDLineEdit"));
@@ -281,7 +276,6 @@ public:
         customerPage_refreshButton->setText(QCoreApplication::translate("Admin", "\360\237\227\230", nullptr));
         label_2->setText(QCoreApplication::translate("Admin", "ID Number:", nullptr));
         customerPage_addButton->setText(QCoreApplication::translate("Admin", "Add Customer", nullptr));
-        customerPage_editButton->setText(QCoreApplication::translate("Admin", "Edit Customer", nullptr));
         label_4->setText(QCoreApplication::translate("Admin", "Experation Date:", nullptr));
         label->setText(QCoreApplication::translate("Admin", "Name:", nullptr));
         label_5->setText(QCoreApplication::translate("Admin", "Total Spent:", nullptr));

@@ -90,7 +90,7 @@ void Admin::on_inventoryPage_addButton_clicked()
     QSqlQuery query;
 
     //If any fields are empty, send an error window to the user
-    if(itemName == "" && price == "" && quantity == "" && inStock == "" && revenue == "")
+    if(itemName == "" || price == "" || quantity == "" || inStock == "" || revenue == "")
     {
         QMessageBox::information(this, "Warning", "Please fill in Item Name and Price to ADD an item.");
     }
@@ -98,6 +98,9 @@ void Admin::on_inventoryPage_addButton_clicked()
     //Prepare the database for query to add values to the table
     query.prepare("INSERT OR IGNORE INTO InventoryTable(ItemName, ItemPrice, Quantity, InStock, Revenue)"
                   "VALUES(:itemName, :price, :quantity, :inStock, :revenue)");
+
+    qDebug() << itemName << endl;
+    qDebug() << "void Admin::on_inventoryPage_addButton_clicked()" << endl;
 
     //bind values
     query.bindValue(":itemName", itemName);
@@ -112,11 +115,7 @@ void Admin::on_inventoryPage_addButton_clicked()
     {
         qDebug() << "Failed: " << query.lastError();
     }
-    ui->ItemNameLineEdit->setText("");
-    ui->ItemPriceLineEdit->setText("");
-    ui->QuantityLineEdit->setText("");
-    ui->InStockLineEdit->setText("");
-    ui->RevenueLineEdit->setText("");
+
     QSqlQueryModel *model = new QSqlQueryModel();
 
     query.prepare("SELECT * FROM InventoryTable");
@@ -178,10 +177,7 @@ void Admin::on_customerPage_addButton_clicked()
     {
         qDebug() << "Failed: " << query.lastError();
     }
-    ui->NameLineEdit->setText("");
-    ui->IDLineEdit->setText("");
-    ui->MemberTypeLineEdit->setText("");
-    ui->ExpirationDateLineEdit->setText("");
+
     QSqlQueryModel *model = new QSqlQueryModel();
 
     query.prepare("SELECT * FROM CustomerTable");
@@ -194,8 +190,6 @@ void Admin::on_customerPage_addButton_clicked()
     ui->customerPage_tableView->setColumnWidth(2, 100);
     ui->customerPage_tableView->setColumnWidth(3, 110);
 
-    query.exec("UPDATE CustomerTable SET AnnualFee = \"$65\" WHERE CustomerType LIKE '%Regular%'");
-    query.exec("UPDATE CustomerTable SET AnnualFee = \"$120\" WHERE CustomerType LIKE '%Executive%'");
     for (int i = 0; i < model->rowCount(); ++i)
         ui->customerPage_tableView->resizeRowToContents(i);
 }
@@ -241,7 +235,8 @@ void Admin::on_customerPage_deleteButton_clicked()
 
 void Admin::on_inventoryPage_deleteButton_clicked()
 {
-    Admin     admin;
+    QSqlQueryModel *model = new QSqlQueryModel();
+
     QString   itemName  = ui -> ItemNameLineEdit  -> text();
     QString   price     = ui -> ItemPriceLineEdit -> text();
     QString   quantity  = ui -> QuantityLineEdit  -> text();
@@ -268,7 +263,6 @@ void Admin::on_inventoryPage_deleteButton_clicked()
         qDebug() << "Failed: " << query.lastError();
     }
 
-    QSqlQueryModel *model = new QSqlQueryModel();
 
     query.prepare("SELECT * FROM InventoryTable");
     query.exec();
@@ -283,5 +277,48 @@ void Admin::on_inventoryPage_deleteButton_clicked()
     for (int i = 0; i < model->rowCount(); ++i)
         ui->InventoryTableView->resizeRowToContents(i);
 
+
+}
+
+void Admin::on_inventoryPage_editButton_clicked()
+{
+    QSqlQueryModel *model = new QSqlQueryModel();
+    QString   itemName  = ui -> ItemNameLineEdit  -> text();
+    QString   price     = ui -> ItemPriceLineEdit -> text();
+    QString   quantity  = ui -> QuantityLineEdit  -> text();
+    QString   inStock   = ui -> InStockLineEdit   -> text();
+    QString   revenue   = ui -> RevenueLineEdit   -> text();
+
+    QSqlQuery query;
+
+    query.prepare("UPDATE InventoryTable "
+                  "SET ItemPrice  = :itemPrice, "
+                  "    Quantity   = :quantity, "
+                  "    InStock    = :inStock, "
+                  "    Revenue    = :revenue "
+                  "WHERE ItemName = :itemName;");
+
+    query.bindValue(":itemName",  itemName);
+    query.bindValue(":itemPrice", price);
+    query.bindValue(":quantity",  quantity);
+    query.bindValue(":inStock",   inStock);
+    query.bindValue(":revenue",   revenue);
+
+    if(!query.exec())
+        qDebug() << "Could not update item info." << query.lastError();
+
+
+    query.prepare("SELECT * FROM InventoryTable");
+    query.exec();
+
+    model->setQuery(query);
+    ui->InventoryTableView->setModel(model);
+    ui->InventoryTableView->setColumnWidth(0, 210);
+    ui->InventoryTableView->setColumnWidth(1, 100);
+    ui->InventoryTableView->setColumnWidth(2, 100);
+    ui->InventoryTableView->setColumnWidth(3, 110);
+
+    for (int i = 0; i < model->rowCount(); ++i)
+        ui->InventoryTableView->resizeRowToContents(i);
 
 }

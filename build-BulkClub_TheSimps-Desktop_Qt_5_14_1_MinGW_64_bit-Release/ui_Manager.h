@@ -37,6 +37,10 @@ public:
     QLabel *normalLabel;
     QLineEdit *executiveLine;
     QLineEdit *normalLine;
+    QLineEdit *sales_searchBar;
+    QPushButton *sales_searchButton;
+    QLabel *totalLabel;
+    QLineEdit *grandTotalLin;
     QWidget *customerPage;
     QComboBox *customerPage_sortBox;
     QLineEdit *customerPage_searchBar;
@@ -114,6 +118,20 @@ public:
         normalLine->setObjectName(QString::fromUtf8("normalLine"));
         normalLine->setGeometry(QRect(90, 560, 30, 16));
         normalLine->setReadOnly(true);
+        sales_searchBar = new QLineEdit(salesPage);
+        sales_searchBar->setObjectName(QString::fromUtf8("sales_searchBar"));
+        sales_searchBar->setGeometry(QRect(30, 10, 251, 31));
+        sales_searchButton = new QPushButton(salesPage);
+        sales_searchButton->setObjectName(QString::fromUtf8("sales_searchButton"));
+        sales_searchButton->setGeometry(QRect(290, 10, 71, 31));
+        sales_searchButton->setFont(font1);
+        totalLabel = new QLabel(salesPage);
+        totalLabel->setObjectName(QString::fromUtf8("totalLabel"));
+        totalLabel->setGeometry(QRect(600, 540, 41, 16));
+        grandTotalLin = new QLineEdit(salesPage);
+        grandTotalLin->setObjectName(QString::fromUtf8("grandTotalLin"));
+        grandTotalLin->setGeometry(QRect(640, 542, 113, 16));
+        grandTotalLin->setReadOnly(true);
         stackedWidget->addWidget(salesPage);
         customerPage = new QWidget();
         customerPage->setObjectName(QString::fromUtf8("customerPage"));
@@ -217,6 +235,10 @@ public:
         QObject::connect(inventoryPage_searchBar, SIGNAL(textChanged(QString)), Manager, SLOT(refreshSearch()));
         QObject::connect(salesPage_tableView, SIGNAL(viewportEntered()), Manager, SLOT(generateReport()));
         QObject::connect(sales_refresh, SIGNAL(clicked()), Manager, SLOT(generateReport()));
+        QObject::connect(membershipPage_searchBar, SIGNAL(textChanged(QString)), Manager, SLOT(refreshMonthsSearch()));
+        QObject::connect(customerPage_searchBar, SIGNAL(textChanged(QString)), Manager, SLOT(refreshCustomerSearch()));
+        QObject::connect(sales_searchBar, SIGNAL(textChanged(QString)), Manager, SLOT(refreshSalesSearch()));
+        QObject::connect(sales_searchButton, SIGNAL(clicked()), Manager, SLOT(sales_search()));
 
         QMetaObject::connectSlotsByName(Manager);
     } // setupUi
@@ -229,6 +251,9 @@ public:
         sales_refresh->setText(QCoreApplication::translate("Manager", "\360\237\227\230", nullptr));
         executiveLabel->setText(QCoreApplication::translate("Manager", "Executive Shoppers:", nullptr));
         normalLabel->setText(QCoreApplication::translate("Manager", "Normal Shoppers:", nullptr));
+        sales_searchBar->setPlaceholderText(QCoreApplication::translate("Manager", "Enter Customer Name/ID here...", nullptr));
+        sales_searchButton->setText(QCoreApplication::translate("Manager", "Search", nullptr));
+        totalLabel->setText(QCoreApplication::translate("Manager", "Total: $", nullptr));
         customerPage_searchBar->setPlaceholderText(QCoreApplication::translate("Manager", "Enter Customer Name/ID here...", nullptr));
         customerPage_refreshButton->setText(QCoreApplication::translate("Manager", "\360\237\227\230", nullptr));
         customerPage_searchButton->setText(QCoreApplication::translate("Manager", "Search", nullptr));

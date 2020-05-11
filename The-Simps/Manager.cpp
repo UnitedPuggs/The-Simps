@@ -480,7 +480,7 @@ void Manager::generateReport() {
     while (total.next()) {
     grandTotal = total.value(0).toDouble();
     }
-    ui->grandTotalLine->setText(QString::number(grandTotal));
+    ui->grandTotalLin->setText(QString::number(grandTotal));
     ui->normalLine->setText(QString::number(normalCount));
     ui->executiveLine->setText(QString::number(execCount));
 }
@@ -498,7 +498,6 @@ void Manager::sales_search() {
     QSqlRecord record;
     QSqlQueryModel *model = new QSqlQueryModel();
     QString searchingFor = ui->sales_searchBar->text();
-
 
     query.prepare("SELECT SalesReport.Date, SalesReport.CustomerID, SalesReport.ItemName, SalesReport.Quantity, InventoryTable.ItemPrice * SalesReport.Quantity "
                   "AS SPENT FROM InventoryTable, SalesReport WHERE InventoryTable.ItemName = SalesReport.ItemName "
@@ -529,7 +528,7 @@ void Manager::sales_search() {
         while (total.next()) {
         grandTotal = total.value(0).toDouble();
         }
-        ui->grandTotalLine->setText(QString::number(grandTotal));
+        ui->grandTotalLin->setText(QString::number(grandTotal));
 
         for (int i = 0; i < model->rowCount(); ++i)
             ui->salesPage_tableView->resizeRowToContents(i);

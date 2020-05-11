@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../The-Simps/The-Simps/Manager.h"
+#include "../The-Simps/Manager.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Manager_t {
-    QByteArrayData data[21];
-    char stringdata0[477];
+    QByteArrayData data[26];
+    char stringdata0[586];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -45,14 +45,19 @@ QT_MOC_LITERAL(9, 147, 26), // "on_inventoryButton_clicked"
 QT_MOC_LITERAL(10, 174, 27), // "on_membershipButton_clicked"
 QT_MOC_LITERAL(11, 202, 24), // "on_rebatesButton_clicked"
 QT_MOC_LITERAL(12, 227, 34), // "on_salesPage_previewButton_cl..."
-QT_MOC_LITERAL(13, 262, 33), // "on_customerPage_sortBox_activ..."
-QT_MOC_LITERAL(14, 296, 5), // "index"
-QT_MOC_LITERAL(15, 302, 31), // "on_rebatePage_sortBox_activated"
-QT_MOC_LITERAL(16, 334, 36), // "on_customerPage_searchButton_..."
-QT_MOC_LITERAL(17, 371, 13), // "refreshSearch"
-QT_MOC_LITERAL(18, 385, 38), // "on_membershipPage_searchButto..."
-QT_MOC_LITERAL(19, 424, 37), // "on_inventoryPage_searchButton..."
-QT_MOC_LITERAL(20, 462, 14) // "generateReport"
+QT_MOC_LITERAL(13, 262, 12), // "sales_search"
+QT_MOC_LITERAL(14, 275, 33), // "on_customerPage_sortBox_activ..."
+QT_MOC_LITERAL(15, 309, 5), // "index"
+QT_MOC_LITERAL(16, 315, 31), // "on_rebatePage_sortBox_activated"
+QT_MOC_LITERAL(17, 347, 34), // "on_inventoryPage_sortBox_acti..."
+QT_MOC_LITERAL(18, 382, 36), // "on_customerPage_searchButton_..."
+QT_MOC_LITERAL(19, 419, 13), // "refreshSearch"
+QT_MOC_LITERAL(20, 433, 19), // "refreshMonthsSearch"
+QT_MOC_LITERAL(21, 453, 21), // "refreshCustomerSearch"
+QT_MOC_LITERAL(22, 475, 18), // "refreshSalesSearch"
+QT_MOC_LITERAL(23, 494, 38), // "on_membershipPage_searchButto..."
+QT_MOC_LITERAL(24, 533, 37), // "on_inventoryPage_searchButton..."
+QT_MOC_LITERAL(25, 571, 14) // "generateReport"
 
     },
     "Manager\0setupSalesPage\0\0setupCustomerPage\0"
@@ -63,10 +68,13 @@ QT_MOC_LITERAL(20, 462, 14) // "generateReport"
     "on_membershipButton_clicked\0"
     "on_rebatesButton_clicked\0"
     "on_salesPage_previewButton_clicked\0"
-    "on_customerPage_sortBox_activated\0"
+    "sales_search\0on_customerPage_sortBox_activated\0"
     "index\0on_rebatePage_sortBox_activated\0"
+    "on_inventoryPage_sortBox_activated\0"
     "on_customerPage_searchButton_clicked\0"
-    "refreshSearch\0on_membershipPage_searchButton_clicked\0"
+    "refreshSearch\0refreshMonthsSearch\0"
+    "refreshCustomerSearch\0refreshSalesSearch\0"
+    "on_membershipPage_searchButton_clicked\0"
     "on_inventoryPage_searchButton_clicked\0"
     "generateReport"
 };
@@ -78,7 +86,7 @@ static const uint qt_meta_data_Manager[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      18,   14, // methods
+      23,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -86,24 +94,29 @@ static const uint qt_meta_data_Manager[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,  104,    2, 0x08 /* Private */,
-       3,    0,  105,    2, 0x08 /* Private */,
-       4,    0,  106,    2, 0x08 /* Private */,
-       5,    0,  107,    2, 0x08 /* Private */,
-       6,    0,  108,    2, 0x08 /* Private */,
-       7,    0,  109,    2, 0x08 /* Private */,
-       8,    0,  110,    2, 0x08 /* Private */,
-       9,    0,  111,    2, 0x08 /* Private */,
-      10,    0,  112,    2, 0x08 /* Private */,
-      11,    0,  113,    2, 0x08 /* Private */,
-      12,    0,  114,    2, 0x08 /* Private */,
-      13,    1,  115,    2, 0x08 /* Private */,
-      15,    1,  118,    2, 0x08 /* Private */,
-      16,    0,  121,    2, 0x08 /* Private */,
-      17,    0,  122,    2, 0x08 /* Private */,
-      18,    0,  123,    2, 0x08 /* Private */,
-      19,    0,  124,    2, 0x08 /* Private */,
-      20,    0,  125,    2, 0x0a /* Public */,
+       1,    0,  129,    2, 0x08 /* Private */,
+       3,    0,  130,    2, 0x08 /* Private */,
+       4,    0,  131,    2, 0x08 /* Private */,
+       5,    0,  132,    2, 0x08 /* Private */,
+       6,    0,  133,    2, 0x08 /* Private */,
+       7,    0,  134,    2, 0x08 /* Private */,
+       8,    0,  135,    2, 0x08 /* Private */,
+       9,    0,  136,    2, 0x08 /* Private */,
+      10,    0,  137,    2, 0x08 /* Private */,
+      11,    0,  138,    2, 0x08 /* Private */,
+      12,    0,  139,    2, 0x08 /* Private */,
+      13,    0,  140,    2, 0x08 /* Private */,
+      14,    1,  141,    2, 0x08 /* Private */,
+      16,    1,  144,    2, 0x08 /* Private */,
+      17,    1,  147,    2, 0x08 /* Private */,
+      18,    0,  150,    2, 0x08 /* Private */,
+      19,    0,  151,    2, 0x08 /* Private */,
+      20,    0,  152,    2, 0x08 /* Private */,
+      21,    0,  153,    2, 0x08 /* Private */,
+      22,    0,  154,    2, 0x08 /* Private */,
+      23,    0,  155,    2, 0x08 /* Private */,
+      24,    0,  156,    2, 0x08 /* Private */,
+      25,    0,  157,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -117,8 +130,13 @@ static const uint qt_meta_data_Manager[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   14,
-    QMetaType::Void, QMetaType::Int,   14,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   15,
+    QMetaType::Void, QMetaType::Int,   15,
+    QMetaType::Void, QMetaType::Int,   15,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -145,13 +163,18 @@ void Manager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 8: _t->on_membershipButton_clicked(); break;
         case 9: _t->on_rebatesButton_clicked(); break;
         case 10: _t->on_salesPage_previewButton_clicked(); break;
-        case 11: _t->on_customerPage_sortBox_activated((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 12: _t->on_rebatePage_sortBox_activated((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 13: _t->on_customerPage_searchButton_clicked(); break;
-        case 14: _t->refreshSearch(); break;
-        case 15: _t->on_membershipPage_searchButton_clicked(); break;
-        case 16: _t->on_inventoryPage_searchButton_clicked(); break;
-        case 17: _t->generateReport(); break;
+        case 11: _t->sales_search(); break;
+        case 12: _t->on_customerPage_sortBox_activated((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 13: _t->on_rebatePage_sortBox_activated((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: _t->on_inventoryPage_sortBox_activated((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 15: _t->on_customerPage_searchButton_clicked(); break;
+        case 16: _t->refreshSearch(); break;
+        case 17: _t->refreshMonthsSearch(); break;
+        case 18: _t->refreshCustomerSearch(); break;
+        case 19: _t->refreshSalesSearch(); break;
+        case 20: _t->on_membershipPage_searchButton_clicked(); break;
+        case 21: _t->on_inventoryPage_searchButton_clicked(); break;
+        case 22: _t->generateReport(); break;
         default: ;
         }
     }
@@ -186,13 +209,13 @@ int Manager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 18)
+        if (_id < 23)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 18;
+        _id -= 23;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 18)
+        if (_id < 23)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 18;
+        _id -= 23;
     }
     return _id;
 }

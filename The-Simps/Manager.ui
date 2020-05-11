@@ -190,7 +190,7 @@
       <string>Total: $</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="grandTotalLine">
+    <widget class="QLineEdit" name="grandTotalLin">
      <property name="geometry">
       <rect>
        <x>640</x>

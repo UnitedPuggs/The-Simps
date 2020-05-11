@@ -1,5 +1,4 @@
 #include "sqldatabase.h"
-#include <string>
 sqlDatabase::sqlDatabase()
 {
     database = QSqlDatabase::addDatabase("QSQLITE");
@@ -23,25 +22,23 @@ void sqlDatabase::createDatabase()
                "CustomerID     INTEGER NOT NULL PRIMARY KEY,"
                "CustomerType   VARCHAR(4),"
                "ExpirationDate VARCHAR(15),"
-               "QtyBought      INTEGER DEFAULT 0,"
-               "TotalSpent     DECIMAL(10,2) DEFAULT 0,"
-               "TotalRebate    DECIMAL(10,2) DEFAULT 0,"
-               "AnnualFee      DECIMAL(10,2) DEFAULT 0);");
+               "TotalSpent     DECIMAL(10,2),"
+               "TotalRebate    DECIMAL(10,2),"
+               "PaidAnnualFee  VARCHAR(4));");
 
     query.exec("CREATE TABLE  SalesTable("
-               "PurchaseDate  TEXT,"
+               "PurchaseDate  VARCHAR(15),"
                "CustomID      INTEGER NOT NULL,"
                "ItemName      VARCHAR(50),"
-               "ItemPrice     DECIMAL(10,2) DEFAULT 0,"
-               "Quantity      INTEGER DEFAULT 0 NOT NULL);");
+               "ItemPrice     DECIMAL(10,2),"
+               "Quantity      INTEGER NOT NULL);");
 
     query.exec("CREATE TABLE  InventoryTable("
-               "ItemName      VARCHAR(50),"
+               "ItemName      VARCHAR(50) UNIQUE,"
                "ItemPrice     DECIMAL(10,2),"
-               "Quantity      INTEGER DEFAULT 0 NOT NULL,"
-               "InStock       INTEGER DEFAULT 0 NOT NULL,"
+               "Quantity      INTEGER NOT NULL,"
+               "InStock       INTEGER NOT NULL,"
                "Revenue       Decimal(10,2));");
-    query.exec("DELETE FROM SalesReport");
 }
 
 //Reads the warehouse shoppers .txt file (Make sure to change the file path to make it work for you)
@@ -75,6 +72,7 @@ void sqlDatabase::readFileCustomer()
 //Reads the Sales .txt file (Make sure to change the file path to make it work for you)
 void sqlDatabase::readFileSales()
 {
+
     std::string day = "day";
     std::string txt = ".txt";
     for (int i = 1; i <= 7; ++i) {
@@ -98,13 +96,23 @@ void sqlDatabase::readFileSales()
                 salesData.quantity      = inFile.readLine();
                 // Don't uncomment unless your table is empty
                 addSalesIntoTable(salesData);
+
+                qDebug() << "purchase date" << salesData.purchaseDate;
+                qDebug() << "customerID   " << salesData.customerID;
+                qDebug() << "itemName     " << salesData.itemName;
+                qDebug() << "itemPrice    " << salesData.itemPrice;
+                qDebug() << "quantity     " << salesData.quantity << endl;
+
+
             }
             file.close();
+            qDebug() << "day file: " << qstrDay << endl << endl;
         }
 
         else
             qDebug() << "Cannot open file that reads from the Sales list";
     }
+
 }
 QSqlDatabase sqlDatabase::GetDatabase() const
 {
@@ -152,6 +160,9 @@ void sqlDatabase::addSalesIntoTable(salesTableInfo& salesData)
         qDebug() << "Failed: " << query.lastError();
 
     checkInventory();
+
+    if(!query.exec())
+        qDebug() << "Failed: " << query.lastError();
 }
 
 void sqlDatabase::handleInventory()
@@ -199,7 +210,7 @@ void sqlDatabase::checkInventory(){
        else{
             updateDB(newStockForDb,newQuantForDb,dec,totalRevenue);
            }
-       }    
+       }
     else{
         inventoryData.itemName = salesData.itemName;
         inventoryData.itemPrice = salesData.itemPrice;

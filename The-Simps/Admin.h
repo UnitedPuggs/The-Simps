@@ -32,6 +32,10 @@ private slots:
 
     void on_inventoryPage_deleteButton_clicked();
 
+    void on_customerPage_editButton_clicked();
+
+    void on_inventoryPage_editButton_clicked();
+
 private:
     Ui::Admin *ui;
 };
