@@ -36,7 +36,7 @@ void sqlDatabase::createDatabase()
                "Quantity      INTEGER NOT NULL);");
 
     query.exec("CREATE TABLE  InventoryTable("
-               "ItemName      VARCHAR(50),"
+               "ItemName      VARCHAR(50) UNIQUE,"
                "ItemPrice     DECIMAL(10,2),"
                "Quantity      INTEGER NOT NULL,"
                "InStock       INTEGER NOT NULL,"
