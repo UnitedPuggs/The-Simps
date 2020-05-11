@@ -188,20 +188,13 @@ void sqlDatabase::checkInventory(){
         double itemPrice = query.value(1).toDouble();
         int quantFromDB = query.value(2).toInt();
         double totalRevenue = query.value(4).toDouble();  
-        double inside = query.value(5).toDouble();
-
-        double tax = totalRevenue * 7.75;
+        double tax = totalRevenue * .0775;
         double newAfterTax = tax + totalRevenue;
         int quantToInput = salesData.quantity.toInt();
         int newQuantForDb =  quantFromDB + quantToInput;
         int newStockForDb = 500 - newQuantForDb;
         totalRevenue = newQuantForDb * itemPrice;
         double dec = query.value(1).toString().toDouble();
-
-        qDebug() << totalRevenue;
-        qDebug() << "Quant: " << salesData.quantity.toInt() << "itemPrice: " << itemPrice;
-        qDebug() << "Tax: " << tax << "TotalREv: " << newAfterTax;
-        qDebug() << inside;
 
        if(newStockForDb <= 0 || newStockForDb < 0){
             updateDB(0,quantFromDB,dec,query.value(4).toDouble(),query.value(5).toDouble());
@@ -219,9 +212,6 @@ void sqlDatabase::checkInventory(){
         inventoryData.inStock = m.number(newStock);
         double totalRev = salesData.quantity.toInt() * inventoryData.itemPrice.toDouble();
         double tax = totalRev * 0.0775;
-        qDebug() << inventoryData.itemName;
-        qDebug() << "Quant: " << salesData.quantity.toInt() << "itemPrice: " << inventoryData.itemPrice.toDouble();
-        qDebug() << "Tax: " << tax << "TotalREv: " << totalRev;
         inventoryData.afterTax = tax + totalRev;
         inventoryData.revenue = totalRev;
         handleInventory();
