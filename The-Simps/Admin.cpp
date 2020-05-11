@@ -112,7 +112,11 @@ void Admin::on_inventoryPage_addButton_clicked()
     {
         qDebug() << "Failed: " << query.lastError();
     }
-
+    ui->ItemNameLineEdit->setText("");
+    ui->ItemPriceLineEdit->setText("");
+    ui->QuantityLineEdit->setText("");
+    ui->InStockLineEdit->setText("");
+    ui->RevenueLineEdit->setText("");
     QSqlQueryModel *model = new QSqlQueryModel();
 
     query.prepare("SELECT * FROM InventoryTable");
@@ -174,7 +178,10 @@ void Admin::on_customerPage_addButton_clicked()
     {
         qDebug() << "Failed: " << query.lastError();
     }
-
+    ui->NameLineEdit->setText("");
+    ui->IDLineEdit->setText("");
+    ui->MemberTypeLineEdit->setText("");
+    ui->ExpirationDateLineEdit->setText("");
     QSqlQueryModel *model = new QSqlQueryModel();
 
     query.prepare("SELECT * FROM CustomerTable");
@@ -187,6 +194,8 @@ void Admin::on_customerPage_addButton_clicked()
     ui->customerPage_tableView->setColumnWidth(2, 100);
     ui->customerPage_tableView->setColumnWidth(3, 110);
 
+    query.exec("UPDATE CustomerTable SET AnnualFee = \"$65\" WHERE CustomerType LIKE '%Regular%'");
+    query.exec("UPDATE CustomerTable SET AnnualFee = \"$120\" WHERE CustomerType LIKE '%Executive%'");
     for (int i = 0; i < model->rowCount(); ++i)
         ui->customerPage_tableView->resizeRowToContents(i);
 }

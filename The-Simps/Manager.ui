@@ -145,6 +145,64 @@
       <bool>true</bool>
      </property>
     </widget>
+    <widget class="QLineEdit" name="sales_searchBar">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>10</y>
+       <width>251</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Enter Customer Name/ID here...</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="sales_searchButton">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>10</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Search</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="totalLabel">
+     <property name="geometry">
+      <rect>
+       <x>600</x>
+       <y>540</y>
+       <width>41</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Total: $</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="grandTotalLine">
+     <property name="geometry">
+      <rect>
+       <x>640</x>
+       <y>542</y>
+       <width>113</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="customerPage">
     <property name="font">
@@ -570,9 +628,77 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>membershipPage_searchBar</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>Manager</receiver>
+   <slot>refreshMonthsSearch()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>354</x>
+     <y>36</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>74</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>customerPage_searchBar</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>Manager</receiver>
+   <slot>refreshCustomerSearch()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>251</x>
+     <y>29</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>69</x>
+     <y>320</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sales_searchBar</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>Manager</receiver>
+   <slot>refreshSalesSearch()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>17</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>62</x>
+     <y>288</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sales_searchButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Manager</receiver>
+   <slot>sales_search()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>457</x>
+     <y>28</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>50</x>
+     <y>449</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>refreshSearch()</slot>
   <slot>generateReport()</slot>
+  <slot>refreshMonthsSearch()</slot>
+  <slot>refreshCustomerSearch()</slot>
+  <slot>refreshSalesSearch()</slot>
+  <slot>sales_search()</slot>
  </slots>
 </ui>

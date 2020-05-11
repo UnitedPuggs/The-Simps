@@ -25,7 +25,7 @@ void sqlDatabase::createDatabase()
                "ExpirationDate VARCHAR(15),"
                "TotalSpent     DECIMAL(10,2),"
                "TotalRebate    DECIMAL(10,2),"
-               "PaidAnnualFee  VARCHAR(4));");
+               "AnnualFee  VARCHAR(4));");
 
     query.exec("CREATE TABLE  SalesTable("
                "PurchaseDate  TEXT,"

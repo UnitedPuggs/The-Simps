@@ -28,13 +28,18 @@ private slots:
     void on_rebatesButton_clicked();
 
     void on_salesPage_previewButton_clicked();
+    void sales_search();
 
     void on_customerPage_sortBox_activated(int index);
 
     void on_rebatePage_sortBox_activated(int index);
 
     void on_customerPage_searchButton_clicked();
+
     void refreshSearch();
+    void refreshMonthsSearch();
+    void refreshCustomerSearch();
+    void refreshSalesSearch();
 
     void on_membershipPage_searchButton_clicked();
     void on_inventoryPage_searchButton_clicked();
