@@ -1,5 +1,9 @@
 #include "sqldatabase.h"
 
+/*!
+ * \brief Constructor for sqlDatabase
+ * \param parent
+ */
 sqlDatabase::sqlDatabase()
 {
     database = QSqlDatabase::addDatabase("QSQLITE");
@@ -9,12 +13,16 @@ sqlDatabase::sqlDatabase()
     database.setDatabaseName(DB_PATH);
     database.open();
 }
-
+/*!
+ * \brief Destructor for sqlDatabase
+ */
 sqlDatabase::~sqlDatabase()
 {
 
 }
-
+/*!
+ * \brief Creates the Database
+ */
 void sqlDatabase::createDatabase()
 {
     QSqlQuery query;
@@ -44,7 +52,9 @@ void sqlDatabase::createDatabase()
                "Revenue       Decimal(10,2));");
 }
 
-//Reads the warehouse shoppers .txt file (Make sure to change the file path to make it work for you)
+/*!
+ * \brief Reads the Shopper.txt file and inserts them into the CustomerTable
+ */
 void sqlDatabase::readFileCustomer()
 {
     QFile file(":/Shoppers/warehouse shoppers.txt");
@@ -72,7 +82,9 @@ void sqlDatabase::readFileCustomer()
         qDebug() << "Cannot open file thats used to Read File from Customer list";
 }
 
-//Reads the Sales .txt file (Make sure to change the file path to make it work for you)
+/*!
+ * \brief Reads the days.txt files and inserts them into the Sales table
+ */
 void sqlDatabase::readFileSales()
 {
 
@@ -117,13 +129,17 @@ void sqlDatabase::readFileSales()
     }
 
 }
-
+/*!
+ * \brief Returns the Database
+ */
 QSqlDatabase sqlDatabase::GetDatabase() const
 {
     return database;
 }
 
-//Inserts warehouse info into the customerTable
+/*!
+ * \brief Inserts the customers into the Customer Table
+ */
 void sqlDatabase::addCustomerIntoTable(customerTableInfo& customerData)
 {
     QSqlQuery query;
@@ -143,8 +159,10 @@ void sqlDatabase::addCustomerIntoTable(customerTableInfo& customerData)
     if(!query.exec())
         qDebug() << "Failed: " << query.lastError();
 }
+/*!
+ * \brief Inserts the sales info into the SalesTable
+ */
 
-//Inserts Sales info into the salesTable
 void sqlDatabase::addSalesIntoTable(salesTableInfo& salesData)
 {
 
@@ -165,6 +183,9 @@ void sqlDatabase::addSalesIntoTable(salesTableInfo& salesData)
     checkInventory();
 }
 
+/*!
+ * \brief Inserts the Inventory into the InvenotryTable
+ */
 void sqlDatabase::handleInventory()
 {
     QSqlQuery query;
@@ -181,7 +202,9 @@ void sqlDatabase::handleInventory()
         qDebug() << "Failed: " << query.lastError();
     }
 }
-
+/*!
+ * \brief Checks the InventoryTable and adds the Quantity if there is an existing item
+ */
 void sqlDatabase::checkInventory(){
 
     QSqlQuery query;
@@ -224,7 +247,9 @@ void sqlDatabase::checkInventory(){
         handleInventory();
         }
 }
-
+/*!
+ * \brief Updates the Inventory Table with the new or current Items
+ */
 void sqlDatabase::updateDB(int stock,int quant,double dec,double totalRevenue){
     QSqlQuery query;
     query.prepare("UPDATE InventoryTable "

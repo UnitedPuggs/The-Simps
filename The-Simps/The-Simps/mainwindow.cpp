@@ -1,6 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+/*!
+ * \brief Constructor for MainWindow
+ */
 mainWindow::mainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::mainWindow)
@@ -9,18 +12,16 @@ mainWindow::mainWindow(QWidget *parent) :
     this->setFixedSize(QSize(640, 480));
 }
 
-
-
-
+/*!
+ * \brief Destructor for MainWindow
+ */
 mainWindow::~mainWindow()
 {
     delete ui;
 }
-
-
-
-
-
+/*!
+ * \brief gets user input for Username and Password
+ */
 void mainWindow::on_pushButton_clicked()
 {
     QString username = ui->UsernameLineEdit->text();
