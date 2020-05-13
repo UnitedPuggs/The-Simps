@@ -162,5 +162,22 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>PasswordLineEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>pushButton</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>382</x>
+     <y>236</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>343</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

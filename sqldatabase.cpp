@@ -23,16 +23,25 @@ void sqlDatabase::createDatabase()
                "CustomerID     INTEGER NOT NULL PRIMARY KEY,"
                "CustomerType   VARCHAR(4),"
                "ExpirationDate VARCHAR(15),"
-               "TotalSpent     DECIMAL(10,2),"
-               "TotalRebate    DECIMAL(10,2),"
-               "PaidAnnualFee  VARCHAR(4));");
+               "QtyBought      INTEGER DEFAULT 0,"
+               "TotalSpent     DECIMAL(10,2) DEFAULT 0,"
+               "TotalRebate    DECIMAL(10,2) DEFAULT 0,"
+               "AnnualFee      DECIMAL(10,2) DEFAULT 0,"
+               "ShouldUpgrade  VARCHAR(3));");
 
     query.exec("CREATE TABLE  SalesTable("
-               "PurchaseDate  VARCHAR(15),"
+               "PurchaseDate  TEXT,"
                "CustomID      INTEGER NOT NULL,"
                "ItemName      VARCHAR(50),"
+               "ItemPrice     DECIMAL(10,2) DEFAULT 0,"
+               "Quantity      INTEGER DEFAULT 0 NOT NULL);");
+
+    query.exec("CREATE TABLE  InventoryTable("
+               "ItemName      VARCHAR(50),"
                "ItemPrice     DECIMAL(10,2),"
-               "Quantity      INTEGER NOT NULL);");
+               "Quantity      INTEGER DEFAULT 0 NOT NULL,"
+               "InStock       INTEGER DEFAULT 0 NOT NULL,"
+               "Revenue       Decimal(10,2));");
 }
 
 //Reads the warehouse shoppers .txt file (Make sure to change the file path to make it work for you)
@@ -66,28 +75,52 @@ void sqlDatabase::readFileCustomer()
 //Reads the Sales .txt file (Make sure to change the file path to make it work for you)
 void sqlDatabase::readFileSales()
 {
-    QFile file(":/Days/day1.txt");
-    file.open(QIODevice::ReadOnly);
-    QTextStream inFile(&file);
 
-    if(file.isOpen())
-    {
-        qDebug() << "Opened File";
-        while(!inFile.atEnd())
+    std::string day = "day";
+    std::string txt = ".txt";
+    for (int i = 1; i <= 7; ++i) {
+        if (day[3])
+            day = "day";
+        day = day + std::to_string(i) + txt;
+        QString qstrDay = ":/Days/" + QString::fromStdString(day);
+        QFile file(qstrDay);
+        file.open(QIODevice::ReadOnly);
+        QTextStream inFile(&file);
+
+        if(file.isOpen())
         {
-            salesData.purchaseDate  = inFile.readLine();
-            salesData.customerID    = inFile.readLine();
-            salesData.itemName      = inFile.readLine();
-            salesData.itemPrice     = inFile.readLine();
-            salesData.quantity      = inFile.readLine();
-            // Don't uncomment unless your table is empty
-            addSalesIntoTable(salesData);
-        }   file.close();
+            qDebug() << "Opened File";
+            while(!inFile.atEnd())
+            {
+                salesData.purchaseDate  = inFile.readLine();
+                salesData.customerID    = inFile.readLine();
+                salesData.itemName      = inFile.readLine();
+                salesData.itemPrice     = inFile.readLine();
+                salesData.quantity      = inFile.readLine();
+                // Don't uncomment unless your table is empty
+                addSalesIntoTable(salesData);
+
+                qDebug() << "purchase date" << salesData.purchaseDate;
+                qDebug() << "customerID   " << salesData.customerID;
+                qDebug() << "itemName     " << salesData.itemName;
+                qDebug() << "itemPrice    " << salesData.itemPrice;
+                qDebug() << "quantity     " << salesData.quantity << endl;
+
+
+            }
+            file.close();
+            qDebug() << "day file: " << qstrDay << endl << endl;
+        }
+
+        else
+            qDebug() << "Cannot open file that reads from the Sales list";
     }
 
-    else
-        qDebug() << "Cannot open file that reads from the Sales list";
+}
 
+QSqlDatabase sqlDatabase::GetDatabase() const
+{
+    return database;
 }
 
 //Inserts warehouse info into the customerTable
@@ -128,11 +161,91 @@ void sqlDatabase::addSalesIntoTable(salesTableInfo& salesData)
 
     if(!query.exec())
         qDebug() << "Failed: " << query.lastError();
+
+    checkInventory();
 }
 
-QSqlDatabase sqlDatabase::GetDatabase() const
+void sqlDatabase::handleInventory()
 {
-    return database;
+    QSqlQuery query;
+
+    query.prepare("INSERT INTO InventoryTable(ItemName, ItemPrice, Quantity, InStock,Revenue)"
+                  "VALUES(:name, :price, :quant, :stock,:rev)");
+    query.bindValue(":name", inventoryData.itemName);
+    query.bindValue(":price", inventoryData.itemPrice);
+    query.bindValue(":quant", inventoryData.quantityPurchased);
+    query.bindValue(":stock", inventoryData.inStock);
+    query.bindValue(":rev", inventoryData.revenue);
+
+    if(!query.exec()){
+        qDebug() << "Failed: " << query.lastError();
+    }
 }
 
+void sqlDatabase::checkInventory(){
 
+    QSqlQuery query;
+    query.prepare("SELECT * FROM InventoryTable"
+                  " WHERE ItemName       LIKE '%" + salesData.itemName + "%'");
+
+    query.bindValue(":searchingFor", salesData.itemName);
+
+    if(!query.exec()) {
+        qDebug() << query.lastError();
+    }
+
+    if (query.next()) {
+
+        double itemPrice = query.value(1).toDouble();
+        int quantFromDB = query.value(2).toInt();
+        double totalRevenue = query.value(4).toDouble();
+        int quantToInput = salesData.quantity.toInt();
+        int newQuantForDb =  quantFromDB + quantToInput;
+        int newStockForDb = 500 - newQuantForDb;
+        totalRevenue = newQuantForDb * itemPrice;
+        double dec = query.value(1).toString().toDouble();
+
+       if(newStockForDb <= 0 || newStockForDb < 0){
+            updateDB(0,quantFromDB,dec,query.value(4).toDouble());
+       }
+       else{
+            updateDB(newStockForDb,newQuantForDb,dec,totalRevenue);
+           }
+       }
+    else{
+        inventoryData.itemName = salesData.itemName;
+        inventoryData.itemPrice = salesData.itemPrice;
+        inventoryData.quantityPurchased = salesData.quantity;
+        int newStock = 500 - salesData.quantity.toInt();
+        QString m;
+        inventoryData.inStock = m.number(newStock);
+        double totalRev = salesData.quantity.toInt() * inventoryData.itemPrice.toDouble();
+        inventoryData.revenue = totalRev;
+        handleInventory();
+        }
+}
+
+void sqlDatabase::updateDB(int stock,int quant,double dec,double totalRevenue){
+    QSqlQuery query;
+    query.prepare("UPDATE InventoryTable "
+                  "SET    ItemName = :name, "
+                  "       ItemPrice = :price, "
+                  "       Quantity = :quant, "
+                  "       InStock = :stock, "
+                  "       Revenue = :rev "
+                  "WHERE  ItemName = :c;");
+
+       QString price = price.number(dec,'f',2);
+       QString rev = rev.number(totalRevenue,'f',2);
+       qDebug() << price << " " << rev;
+
+       query.bindValue(":name", salesData.itemName);
+       query.bindValue(":price", price);
+       query.bindValue(":quant", quant);
+       query.bindValue(":stock", stock);
+       query.bindValue(":rev", rev);
+       query.bindValue(":c",salesData.itemName);
+
+       if(!query.exec())
+            qDebug() << query.lastError();
+}

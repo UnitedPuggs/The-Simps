@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1048</width>
-    <height>865</height>
+    <width>919</width>
+    <height>387</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -26,7 +26,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>280</y>
+     <y>50</y>
      <width>121</width>
      <height>31</height>
     </rect>
@@ -44,7 +44,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>320</y>
+     <y>90</y>
      <width>121</width>
      <height>31</height>
     </rect>
@@ -62,38 +62,22 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>230</y>
-     <width>721</width>
-     <height>601</height>
+     <y>0</y>
+     <width>951</width>
+     <height>831</height>
     </rect>
    </property>
+   <property name="currentIndex">
+    <number>1</number>
+   </property>
    <widget class="QWidget" name="customerPage">
-    <widget class="QToolButton" name="customerPage_refreshButton">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>10</y>
-       <width>31</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>9</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>🗘</string>
-     </property>
-    </widget>
     <widget class="QTableView" name="customerPage_tableView">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>50</y>
-       <width>711</width>
-       <height>541</height>
+       <y>10</y>
+       <width>562</width>
+       <height>361</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -106,14 +90,157 @@
       <enum>QFrame::Plain</enum>
      </property>
     </widget>
+    <widget class="QPushButton" name="customerPage_addButton">
+     <property name="geometry">
+      <rect>
+       <x>690</x>
+       <y>10</y>
+       <width>61</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Add</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="NameLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
+       <y>10</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS UI Gothic</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="placeholderText">
+      <string>Name...</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="MemberTypeLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
+       <y>70</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS UI Gothic</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="placeholderText">
+      <string>Member type...</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="ExpirationDateLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
+       <y>100</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS UI Gothic</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="placeholderText">
+      <string>Expiry Date...</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="customerPage_deleteButton">
+     <property name="geometry">
+      <rect>
+       <x>690</x>
+       <y>70</y>
+       <width>61</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="IDLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
+       <y>40</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS UI Gothic</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="placeholderText">
+      <string>ID number...</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="companyLabel_2">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>220</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Lucida Sans</family>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>💪 Bulk Club Inc.💪</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="inventoryPage">
-    <widget class="QToolButton" name="inventoryPage_refreshButton">
+    <widget class="QTableView" name="InventoryTableView">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>10</y>
-       <width>31</width>
+       <y>50</y>
+       <width>561</width>
+       <height>321</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="inventoryPage_addButton">
+     <property name="geometry">
+      <rect>
+       <x>710</x>
+       <y>50</y>
+       <width>51</width>
        <height>31</height>
       </rect>
      </property>
@@ -124,15 +251,91 @@
       </font>
      </property>
      <property name="text">
-      <string>🗘</string>
+      <string>Add</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="inventoryPage_editButton">
+     <property name="geometry">
+      <rect>
+       <x>710</x>
+       <y>90</y>
+       <width>51</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Edit</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="ItemNameLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
+       <y>50</y>
+       <width>131</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS UI Gothic</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="placeholderText">
+      <string>Item name...</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="QuantityLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>640</x>
+       <y>80</y>
+       <width>61</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS UI Gothic</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="placeholderText">
+      <string>Qty...</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="InStockLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
+       <y>110</y>
+       <width>131</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS UI Gothic</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="placeholderText">
+      <string>Total Stock...</string>
      </property>
     </widget>
     <widget class="QPushButton" name="inventoryPage_deleteButton">
      <property name="geometry">
       <rect>
-       <x>640</x>
-       <y>10</y>
-       <width>71</width>
+       <x>710</x>
+       <y>130</y>
+       <width>51</width>
        <height>31</height>
       </rect>
      </property>
@@ -146,22 +349,72 @@
       <string>Delete</string>
      </property>
     </widget>
-    <widget class="QTableWidget" name="inventoryPage_tableWidget">
+    <widget class="QLineEdit" name="ItemPriceLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
+       <y>80</y>
+       <width>61</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS UI Gothic</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="placeholderText">
+      <string>Price...</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="RevenueLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
+       <y>140</y>
+       <width>131</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS UI Gothic</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="placeholderText">
+      <string>Revenue...</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="companyLabel_3">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>250</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Lucida Sans</family>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>💪 Bulk Club Inc.💪</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="inventoryPage_searchBar">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>50</y>
-       <width>711</width>
-       <height>541</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="inventoryPage_addButton">
-     <property name="geometry">
-      <rect>
-       <x>560</x>
        <y>10</y>
-       <width>71</width>
+       <width>281</width>
        <height>31</height>
       </rect>
      </property>
@@ -171,45 +424,16 @@
        <pointsize>9</pointsize>
       </font>
      </property>
-     <property name="text">
-      <string>Add New</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="inventoryPage_editButton">
-     <property name="geometry">
-      <rect>
-       <x>480</x>
-       <y>10</y>
-       <width>71</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>9</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Edit Info</string>
+     <property name="placeholderText">
+      <string>Enter Item here...</string>
      </property>
     </widget>
    </widget>
    <widget class="QWidget" name="membershipPage">
-    <widget class="QTableWidget" name="membershipPage_tableWidget">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>50</y>
-       <width>711</width>
-       <height>541</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QPushButton" name="membershipPage_convertButton">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>10</x>
        <y>10</y>
        <width>161</width>
        <height>31</height>
@@ -225,12 +449,137 @@
       <string>Convert Memberships</string>
      </property>
     </widget>
-    <widget class="QToolButton" name="membershipPage_refreshButton">
+    <widget class="QTableView" name="MembershipTableView">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>50</y>
+       <width>561</width>
+       <height>321</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="companyLabel_4">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>190</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Lucida Sans</family>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>💪 Bulk Club Inc.💪</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="purchase">
+    <widget class="QLineEdit" name="idLine">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>50</y>
+       <width>161</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Customer ID...</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="nameLine">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>80</y>
+       <width>161</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Item name...</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="qtyLine">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>140</y>
+       <width>161</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Qty wanted...</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="priceLine">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>110</y>
+       <width>161</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Price...</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="confirmButton">
+     <property name="geometry">
+      <rect>
+       <x>620</x>
+       <y>200</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Make Purchase</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="dateLine">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>170</y>
+       <width>161</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Date of purchase...</string>
+     </property>
+    </widget>
+    <widget class="QTableView" name="testPurchase_inventoryTableView">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>50</y>
+       <width>561</width>
+       <height>321</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="testPurchase_searchBar">
      <property name="geometry">
       <rect>
        <x>0</x>
        <y>10</y>
-       <width>31</width>
+       <width>281</width>
        <height>31</height>
       </rect>
      </property>
@@ -240,8 +589,8 @@
        <pointsize>9</pointsize>
       </font>
      </property>
-     <property name="text">
-      <string>🗘</string>
+     <property name="placeholderText">
+      <string>Enter Item here...</string>
      </property>
     </widget>
    </widget>
@@ -250,7 +599,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>240</y>
+     <y>10</y>
      <width>131</width>
      <height>31</height>
     </rect>
@@ -269,7 +618,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>360</y>
+     <y>130</y>
      <width>121</width>
      <height>31</height>
     </rect>
@@ -283,274 +632,85 @@
     <string>Memberships</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="customerPage_editButton">
+  <widget class="QPushButton" name="m">
    <property name="geometry">
     <rect>
-     <x>760</x>
-     <y>30</y>
-     <width>181</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Arial</family>
-     <pointsize>9</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Edit Info</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="NameLineEdit">
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>30</y>
-     <width>421</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>MS UI Gothic</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>30</y>
-     <width>81</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>MS UI Gothic</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Name:</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="IDLineEdit">
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>70</y>
-     <width>421</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>MS UI Gothic</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="MemberTypeLineEdit">
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>110</y>
-     <width>131</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>MS UI Gothic</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="ExpirationDateLineEdit">
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>150</y>
-     <width>131</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>MS UI Gothic</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="TotalSpentLineEdit">
-   <property name="geometry">
-    <rect>
-     <x>540</x>
-     <y>110</y>
-     <width>131</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>MS UI Gothic</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="RebateLineEdit">
-   <property name="geometry">
-    <rect>
-     <x>540</x>
-     <y>150</y>
-     <width>131</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>MS UI Gothic</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>70</y>
+     <x>20</x>
+     <y>170</y>
      <width>121</width>
      <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>MS UI Gothic</family>
-     <pointsize>12</pointsize>
+     <family>Lucida Sans</family>
     </font>
    </property>
    <property name="text">
-    <string>ID Number:</string>
+    <string>Test Purchase</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QLabel" name="copyrightLabel">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>110</y>
-     <width>141</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>MS UI Gothic</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Member Type:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>150</y>
-     <width>171</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>MS UI Gothic</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Experation Date:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_5">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>110</y>
-     <width>141</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>MS UI Gothic</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Total Spent:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_6">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>150</y>
-     <width>141</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>MS UI Gothic</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Rebate:</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="customerPage_addButton">
-   <property name="geometry">
-    <rect>
-     <x>760</x>
-     <y>90</y>
-     <width>181</width>
-     <height>41</height>
+     <x>10</x>
+     <y>360</y>
+     <width>131</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Arial</family>
-     <pointsize>9</pointsize>
+     <pointsize>7</pointsize>
     </font>
    </property>
    <property name="text">
-    <string>Add Customer</string>
+    <string>© COPYRIGHT 2020 Bulk Club Inc. All Rights Reserved.</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="customerPage_deleteButton">
+  <widget class="QLabel" name="developerLabel">
    <property name="geometry">
     <rect>
-     <x>760</x>
-     <y>150</y>
-     <width>181</width>
-     <height>41</height>
+     <x>30</x>
+     <y>340</y>
+     <width>101</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Arial</family>
-     <pointsize>9</pointsize>
+     <family>Lucida Sans Unicode</family>
+     <pointsize>6</pointsize>
     </font>
    </property>
    <property name="text">
-    <string>Delete Customer</string>
+    <string>Developed by The Simps.</string>
    </property>
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>confirmButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Admin</receiver>
+   <slot>test_purchase()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>770</x>
+     <y>230</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>70</x>
+     <y>386</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>determineUpgradeOrDowngrade()</slot>
+  <slot>test_purchase()</slot>
+  <slot>test_page()</slot>
+ </slots>
 </ui>

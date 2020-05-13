@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>908</width>
+    <width>920</width>
     <height>599</height>
    </rect>
   </property>
@@ -76,8 +76,112 @@
        <x>0</x>
        <y>50</y>
        <width>761</width>
-       <height>541</height>
+       <height>491</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="sales_refresh">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>20</y>
+       <width>26</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>🗘</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="executiveLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>540</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Executive Shoppers:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="normalLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>560</y>
+       <width>91</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Normal Shoppers:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="executiveLine">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>542</y>
+       <width>30</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="normalLine">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>560</y>
+       <width>30</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="sales_searchBar">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>10</y>
+       <width>251</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Enter Customer Name/ID here...</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="totalLabel">
+     <property name="geometry">
+      <rect>
+       <x>600</x>
+       <y>540</y>
+       <width>41</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Total: $</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="grandTotalLin">
+     <property name="geometry">
+      <rect>
+       <x>640</x>
+       <y>542</y>
+       <width>113</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
@@ -130,25 +234,6 @@
       <string>🗘</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="customerPage_searchButton">
-     <property name="geometry">
-      <rect>
-       <x>300</x>
-       <y>10</y>
-       <width>71</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>9</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Search</string>
-     </property>
-    </widget>
     <widget class="QTableView" name="customerPage_tableView">
      <property name="geometry">
       <rect>
@@ -199,25 +284,6 @@
       <string>Enter in a month e.g. November...</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="membershipPage_searchButton">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>10</y>
-       <width>71</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>9</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Search</string>
-     </property>
-    </widget>
     <widget class="QTableView" name="membershipPage_tableView">
      <property name="geometry">
       <rect>
@@ -266,25 +332,6 @@
      </property>
      <property name="placeholderText">
       <string>Enter Item here...</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="inventoryPage_searchButton">
-     <property name="geometry">
-      <rect>
-       <x>330</x>
-       <y>10</y>
-       <width>71</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>9</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Search</string>
      </property>
     </widget>
     <widget class="QComboBox" name="inventoryPage_sortBox">
@@ -454,7 +501,150 @@
     <string>View Rebates</string>
    </property>
   </widget>
+  <widget class="QLabel" name="copyrightLabel">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>570</y>
+     <width>121</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>7</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>© COPYRIGHT 2020 Bulk Club Inc. All Rights Reserved.</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="developerLabel">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>550</y>
+     <width>101</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Lucida Sans Unicode</family>
+     <pointsize>6</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Developed by The Simps.</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>inventoryPage_searchBar</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>Manager</receiver>
+   <slot>refreshSearch()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>318</x>
+     <y>22</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>98</x>
+     <y>264</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>salesPage_tableView</sender>
+   <signal>viewportEntered()</signal>
+   <receiver>Manager</receiver>
+   <slot>generateReport()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>251</x>
+     <y>334</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>60</x>
+     <y>361</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sales_refresh</sender>
+   <signal>clicked()</signal>
+   <receiver>Manager</receiver>
+   <slot>generateReport()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>153</x>
+     <y>24</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>55</x>
+     <y>333</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>membershipPage_searchBar</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>Manager</receiver>
+   <slot>refreshMonthsSearch()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>354</x>
+     <y>36</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>74</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>customerPage_searchBar</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>Manager</receiver>
+   <slot>refreshCustomerSearch()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>251</x>
+     <y>29</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>69</x>
+     <y>320</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sales_searchBar</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>Manager</receiver>
+   <slot>refreshSalesSearch()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>17</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>62</x>
+     <y>288</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>refreshSearch()</slot>
+  <slot>generateReport()</slot>
+  <slot>refreshMonthsSearch()</slot>
+  <slot>refreshCustomerSearch()</slot>
+  <slot>refreshSalesSearch()</slot>
+  <slot>sales_search()</slot>
+ </slots>
 </ui>

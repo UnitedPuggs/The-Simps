@@ -9,10 +9,17 @@ mainWindow::mainWindow(QWidget *parent) :
     this->setFixedSize(QSize(640, 480));
 }
 
+
+
+
 mainWindow::~mainWindow()
 {
     delete ui;
 }
+
+
+
+
 
 void mainWindow::on_pushButton_clicked()
 {
@@ -24,6 +31,8 @@ void mainWindow::on_pushButton_clicked()
         admin = new Admin(this);
         admin->setWindowTitle("Administrator Page");
         admin->show();
+        ui->UsernameLineEdit->setText("");
+        ui->PasswordLineEdit->setText("");
     }
 
     else if(username == "manager" && password == "manager")
@@ -31,6 +40,8 @@ void mainWindow::on_pushButton_clicked()
         manager = new Manager(this);
         manager->setWindowTitle("Store Manager Page");
         manager->show();
+        ui->UsernameLineEdit->setText("");
+        ui->PasswordLineEdit->setText("");
     }
     else
     {
