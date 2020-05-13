@@ -38,7 +38,6 @@ public:
     QLineEdit *executiveLine;
     QLineEdit *normalLine;
     QLineEdit *sales_searchBar;
-    QPushButton *sales_searchButton;
     QLabel *totalLabel;
     QLineEdit *grandTotalLin;
     QWidget *customerPage;
@@ -120,10 +119,6 @@ public:
         sales_searchBar = new QLineEdit(salesPage);
         sales_searchBar->setObjectName(QString::fromUtf8("sales_searchBar"));
         sales_searchBar->setGeometry(QRect(30, 10, 251, 31));
-        sales_searchButton = new QPushButton(salesPage);
-        sales_searchButton->setObjectName(QString::fromUtf8("sales_searchButton"));
-        sales_searchButton->setGeometry(QRect(290, 10, 71, 31));
-        sales_searchButton->setFont(font1);
         totalLabel = new QLabel(salesPage);
         totalLabel->setObjectName(QString::fromUtf8("totalLabel"));
         totalLabel->setGeometry(QRect(600, 540, 41, 16));
@@ -239,7 +234,6 @@ public:
         QObject::connect(membershipPage_searchBar, SIGNAL(textChanged(QString)), Manager, SLOT(refreshMonthsSearch()));
         QObject::connect(customerPage_searchBar, SIGNAL(textChanged(QString)), Manager, SLOT(refreshCustomerSearch()));
         QObject::connect(sales_searchBar, SIGNAL(textChanged(QString)), Manager, SLOT(refreshSalesSearch()));
-        QObject::connect(sales_searchButton, SIGNAL(clicked()), Manager, SLOT(sales_search()));
 
         QMetaObject::connectSlotsByName(Manager);
     } // setupUi
@@ -253,7 +247,6 @@ public:
         executiveLabel->setText(QCoreApplication::translate("Manager", "Executive Shoppers:", nullptr));
         normalLabel->setText(QCoreApplication::translate("Manager", "Normal Shoppers:", nullptr));
         sales_searchBar->setPlaceholderText(QCoreApplication::translate("Manager", "Enter Customer Name/ID here...", nullptr));
-        sales_searchButton->setText(QCoreApplication::translate("Manager", "Search", nullptr));
         totalLabel->setText(QCoreApplication::translate("Manager", "Total: $", nullptr));
         customerPage_searchBar->setPlaceholderText(QCoreApplication::translate("Manager", "Enter Customer Name/ID here...", nullptr));
         customerPage_refreshButton->setText(QCoreApplication::translate("Manager", "\360\237\227\230", nullptr));
