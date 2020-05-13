@@ -365,6 +365,10 @@ void Admin::on_inventoryPage_editButton_clicked()
 
 
 
+/*!
+ * \brief Determines if a Regular customer should upgrade their membership to Executive,
+ *        and if a Executive member should downgrade their membership to Regular status
+ */
 void Admin::determineUpgradeOrDowngrade()
 {
     Admin admin;
