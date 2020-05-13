@@ -5,7 +5,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = LoginApp
 TEMPLATE = app
 
-CONFIG += c++11 console
+CONFIG += c++11
 CONFIG -= app_bundle
 
 DEFINES += QT_DEPRECATED_WARNINGS

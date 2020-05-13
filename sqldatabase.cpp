@@ -1,4 +1,5 @@
 #include "sqldatabase.h"
+
 sqlDatabase::sqlDatabase()
 {
     database = QSqlDatabase::addDatabase("QSQLITE");
@@ -17,29 +18,29 @@ sqlDatabase::~sqlDatabase()
 void sqlDatabase::createDatabase()
 {
     QSqlQuery query;
-
-
     query.exec("CREATE TABLE   CustomerTable("
                "Name           VARCHAR(50),"
                "CustomerID     INTEGER NOT NULL PRIMARY KEY,"
                "CustomerType   VARCHAR(4),"
                "ExpirationDate VARCHAR(15),"
-               "TotalSpent     DECIMAL(10,2),"
-               "TotalRebate    DECIMAL(10,2),"
-               "PaidAnnualFee  VARCHAR(4));");
+               "QtyBought      INTEGER DEFAULT 0,"
+               "TotalSpent     DECIMAL(10,2) DEFAULT 0,"
+               "TotalRebate    DECIMAL(10,2) DEFAULT 0,"
+               "AnnualFee      DECIMAL(10,2) DEFAULT 0,"
+               "ShouldUpgrade  VARCHAR(3));");
 
     query.exec("CREATE TABLE  SalesTable("
-               "PurchaseDate  VARCHAR(15),"
+               "PurchaseDate  TEXT,"
                "CustomID      INTEGER NOT NULL,"
                "ItemName      VARCHAR(50),"
-               "ItemPrice     DECIMAL(10,2),"
-               "Quantity      INTEGER NOT NULL);");
+               "ItemPrice     DECIMAL(10,2) DEFAULT 0,"
+               "Quantity      INTEGER DEFAULT 0 NOT NULL);");
 
     query.exec("CREATE TABLE  InventoryTable("
-               "ItemName      VARCHAR(50) UNIQUE,"
+               "ItemName      VARCHAR(50),"
                "ItemPrice     DECIMAL(10,2),"
-               "Quantity      INTEGER NOT NULL,"
-               "InStock       INTEGER NOT NULL,"
+               "Quantity      INTEGER DEFAULT 0 NOT NULL,"
+               "InStock       INTEGER DEFAULT 0 NOT NULL,"
                "Revenue       Decimal(10,2));");
 }
 
@@ -99,8 +100,16 @@ void sqlDatabase::readFileSales()
                 // Don't uncomment unless your table is empty
                 addSalesIntoTable(salesData);
 
+                qDebug() << "purchase date" << salesData.purchaseDate;
+                qDebug() << "customerID   " << salesData.customerID;
+                qDebug() << "itemName     " << salesData.itemName;
+                qDebug() << "itemPrice    " << salesData.itemPrice;
+                qDebug() << "quantity     " << salesData.quantity << endl;
+
+
             }
             file.close();
+            qDebug() << "day file: " << qstrDay << endl << endl;
         }
 
         else
@@ -108,11 +117,11 @@ void sqlDatabase::readFileSales()
     }
 
 }
+
 QSqlDatabase sqlDatabase::GetDatabase() const
 {
     return database;
 }
-
 
 //Inserts warehouse info into the customerTable
 void sqlDatabase::addCustomerIntoTable(customerTableInfo& customerData)
@@ -154,9 +163,6 @@ void sqlDatabase::addSalesIntoTable(salesTableInfo& salesData)
         qDebug() << "Failed: " << query.lastError();
 
     checkInventory();
-
-    if(!query.exec())
-        qDebug() << "Failed: " << query.lastError();
 }
 
 void sqlDatabase::handleInventory()
@@ -175,6 +181,7 @@ void sqlDatabase::handleInventory()
         qDebug() << "Failed: " << query.lastError();
     }
 }
+
 void sqlDatabase::checkInventory(){
 
     QSqlQuery query;
@@ -204,7 +211,7 @@ void sqlDatabase::checkInventory(){
        else{
             updateDB(newStockForDb,newQuantForDb,dec,totalRevenue);
            }
-       }    
+       }
     else{
         inventoryData.itemName = salesData.itemName;
         inventoryData.itemPrice = salesData.itemPrice;
@@ -216,20 +223,21 @@ void sqlDatabase::checkInventory(){
         inventoryData.revenue = totalRev;
         handleInventory();
         }
-
 }
+
 void sqlDatabase::updateDB(int stock,int quant,double dec,double totalRevenue){
     QSqlQuery query;
     query.prepare("UPDATE InventoryTable "
-                     "SET ItemName = :name, "
-                     "    ItemPrice = :price, "
-                     "    Quantity = :quant, "
-                     "    InStock = :stock, "
-                     "    Revenue = :rev "
-                     "WHERE ItemName = :c;");
+                  "SET    ItemName = :name, "
+                  "       ItemPrice = :price, "
+                  "       Quantity = :quant, "
+                  "       InStock = :stock, "
+                  "       Revenue = :rev "
+                  "WHERE  ItemName = :c;");
 
        QString price = price.number(dec,'f',2);
        QString rev = rev.number(totalRevenue,'f',2);
+       qDebug() << price << " " << rev;
 
        query.bindValue(":name", salesData.itemName);
        query.bindValue(":price", price);
@@ -241,5 +249,3 @@ void sqlDatabase::updateDB(int stock,int quant,double dec,double totalRevenue){
        if(!query.exec())
             qDebug() << query.lastError();
 }
-
-
