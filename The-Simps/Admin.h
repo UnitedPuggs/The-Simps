@@ -37,8 +37,15 @@ private slots:
     void on_inventoryPage_editButton_clicked();
 
     void determineUpgradeOrDowngrade();
+    void test_purchase();
+
+    void on_m_clicked();
+
+    void on_InventoryTableView_clicked(const QModelIndex &index);
+
 private:
     Ui::Admin *ui;
+    std::vector<int> ids;
 };
 
 #endif // ADMIN_H

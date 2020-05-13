@@ -1,6 +1,7 @@
 #include "Admin.h"
 #include "ui_Admin.h"
 #include "sqldatabase.h"
+#include <QMessageBox>
 
 Admin::Admin(QWidget *parent) :
     QDialog(parent),
@@ -163,7 +164,7 @@ void Admin::on_customerPage_addButton_clicked()
     }
 
     //Prepare the database for query to add values to the table
-    query.prepare("INSERT OR IGNORE INTO CustomerTable(Name,CustomerID, CustomerType, ExpirationDate)"
+    query.prepare("INSERT OR IGNORE INTO CustomerTable(Name, CustomerID, CustomerType, ExpirationDate)"
                   "VALUES(:name, :id, :type, :expDate)");
 
     //bind values
@@ -356,4 +357,74 @@ void Admin::determineUpgradeOrDowngrade()
         ui->MembershipTableView->resizeRowToContents(i);
 
 
+}
+void Admin::test_purchase() {
+    QSqlQuery query, purchase;
+    int id = ui->idLine->text().toInt();
+    QString salesDate = ui->dateLine->text();
+    QString itemName = ui->nameLine->text();
+    double itemPrice = ui->priceLine->text().toDouble();
+    int qty = ui->qtyLine->text().toInt();
+    bool isValid = false;
+    query.prepare("SELECT CustomerID FROM CustomerTable");
+    if (!query.exec())
+        qDebug() << query.exec();
+
+    while(query.next()) {
+        ids.push_back(query.value(0).toInt());
+    }
+    for (unsigned int i = 0; i < ids.size(); ++i) {
+        if (id == ids[i]) {
+            isValid = true;
+            break;
+        }
+    }
+    if(isValid) {
+        purchase.prepare("INSERT INTO SalesTable(PurchaseDate, CustomID, ItemName, ItemPrice, Quantity) "
+                      "VALUES(:date, :id, :name, :price, :qty)");
+        purchase.bindValue(":date", salesDate);
+        purchase.bindValue(":id", id);
+        purchase.bindValue(":name", itemName);
+        purchase.bindValue(":price", itemPrice);
+        purchase.bindValue(":qty", qty);
+
+        if (!purchase.exec())
+            qDebug() << purchase.lastError();
+        QMessageBox::information(this, "Success!", "Test purchase completed!");
+        ui->idLine->setText("");
+        ui->dateLine->setText("");
+        ui->nameLine->setText("");
+        ui->priceLine->setText("");
+        ui->qtyLine->setText("");
+    } else {
+        QMessageBox::warning(this, "Failure!", "Sorry, that customer doesn't exist!");
+    }
+}
+
+void Admin::on_m_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+}
+
+void Admin::on_InventoryTableView_clicked(const QModelIndex &index)
+{
+    QSqlQuery query;
+    QString value = ui->InventoryTableView->model()->data(index).toString();
+
+    query.prepare("SELECT * FROM InventoryTable WHERE ItemName = '" + value + "';");
+
+    if(!query.exec())
+        qDebug() << query.lastError();
+
+    else
+    {
+        while(query.next())
+        {
+            ui->InStockLineEdit->setText(query.value(3).toString() );
+            ui->RevenueLineEdit->setText(query.value(4).toString() );
+            ui->ItemNameLineEdit->setText(query.value(0).toString() );
+            ui->QuantityLineEdit->setText(query.value(2).toString() );
+            ui->ItemPriceLineEdit->setText(query.value(1).toString() );
+        }
+    }
 }

@@ -66,8 +66,21 @@ public:
     QPushButton *membershipPage_convertButton;
     QToolButton *membershipPage_refreshButton;
     QTableView *MembershipTableView;
+    QWidget *purchase;
+    QLineEdit *idLine;
+    QLabel *customerLabel;
+    QLineEdit *nameLine;
+    QLabel *nameLabel;
+    QLineEdit *qtyLine;
+    QLabel *qtyLabel;
+    QLineEdit *priceLine;
+    QLabel *priceLabel;
+    QPushButton *confirmButton;
+    QLabel *dateLabel;
+    QLineEdit *dateLine;
     QLabel *companyLabel;
     QPushButton *membershipButton;
+    QPushButton *m;
 
     void setupUi(QDialog *Admin)
     {
@@ -92,7 +105,7 @@ public:
         inventoryButton->setFont(font);
         stackedWidget = new QStackedWidget(Admin);
         stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
-        stackedWidget->setGeometry(QRect(150, 10, 901, 821));
+        stackedWidget->setGeometry(QRect(150, 20, 911, 811));
         customerPage = new QWidget();
         customerPage->setObjectName(QString::fromUtf8("customerPage"));
         customerPage_refreshButton = new QToolButton(customerPage);
@@ -247,6 +260,42 @@ public:
         MembershipTableView->setObjectName(QString::fromUtf8("MembershipTableView"));
         MembershipTableView->setGeometry(QRect(0, 50, 711, 541));
         stackedWidget->addWidget(membershipPage);
+        purchase = new QWidget();
+        purchase->setObjectName(QString::fromUtf8("purchase"));
+        idLine = new QLineEdit(purchase);
+        idLine->setObjectName(QString::fromUtf8("idLine"));
+        idLine->setGeometry(QRect(120, 210, 113, 21));
+        customerLabel = new QLabel(purchase);
+        customerLabel->setObjectName(QString::fromUtf8("customerLabel"));
+        customerLabel->setGeometry(QRect(150, 190, 61, 16));
+        nameLine = new QLineEdit(purchase);
+        nameLine->setObjectName(QString::fromUtf8("nameLine"));
+        nameLine->setGeometry(QRect(120, 270, 113, 21));
+        nameLabel = new QLabel(purchase);
+        nameLabel->setObjectName(QString::fromUtf8("nameLabel"));
+        nameLabel->setGeometry(QRect(150, 250, 61, 16));
+        qtyLine = new QLineEdit(purchase);
+        qtyLine->setObjectName(QString::fromUtf8("qtyLine"));
+        qtyLine->setGeometry(QRect(120, 330, 113, 21));
+        qtyLabel = new QLabel(purchase);
+        qtyLabel->setObjectName(QString::fromUtf8("qtyLabel"));
+        qtyLabel->setGeometry(QRect(150, 310, 47, 13));
+        priceLine = new QLineEdit(purchase);
+        priceLine->setObjectName(QString::fromUtf8("priceLine"));
+        priceLine->setGeometry(QRect(120, 390, 113, 21));
+        priceLabel = new QLabel(purchase);
+        priceLabel->setObjectName(QString::fromUtf8("priceLabel"));
+        priceLabel->setGeometry(QRect(160, 370, 31, 16));
+        confirmButton = new QPushButton(purchase);
+        confirmButton->setObjectName(QString::fromUtf8("confirmButton"));
+        confirmButton->setGeometry(QRect(340, 300, 181, 71));
+        dateLabel = new QLabel(purchase);
+        dateLabel->setObjectName(QString::fromUtf8("dateLabel"));
+        dateLabel->setGeometry(QRect(160, 430, 47, 13));
+        dateLine = new QLineEdit(purchase);
+        dateLine->setObjectName(QString::fromUtf8("dateLine"));
+        dateLine->setGeometry(QRect(120, 450, 113, 21));
+        stackedWidget->addWidget(purchase);
         companyLabel = new QLabel(Admin);
         companyLabel->setObjectName(QString::fromUtf8("companyLabel"));
         companyLabel->setGeometry(QRect(20, 240, 131, 31));
@@ -258,11 +307,15 @@ public:
         membershipButton->setObjectName(QString::fromUtf8("membershipButton"));
         membershipButton->setGeometry(QRect(20, 360, 121, 31));
         membershipButton->setFont(font);
+        m = new QPushButton(Admin);
+        m->setObjectName(QString::fromUtf8("m"));
+        m->setGeometry(QRect(20, 400, 121, 31));
+        m->setFont(font);
 
         retranslateUi(Admin);
-        QObject::connect(membershipButton, SIGNAL(clicked()), Admin, SLOT(determineUpgradeOrDowngrade()));
+        QObject::connect(confirmButton, SIGNAL(clicked()), Admin, SLOT(test_purchase()));
 
-        stackedWidget->setCurrentIndex(2);
+        stackedWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(Admin);
@@ -293,8 +346,15 @@ public:
         label_10->setText(QCoreApplication::translate("Admin", "Revenue", nullptr));
         membershipPage_convertButton->setText(QCoreApplication::translate("Admin", "Convert Memberships", nullptr));
         membershipPage_refreshButton->setText(QCoreApplication::translate("Admin", "\360\237\227\230", nullptr));
+        customerLabel->setText(QCoreApplication::translate("Admin", "CustomerID", nullptr));
+        nameLabel->setText(QCoreApplication::translate("Admin", "Item Name", nullptr));
+        qtyLabel->setText(QCoreApplication::translate("Admin", "Quantity", nullptr));
+        priceLabel->setText(QCoreApplication::translate("Admin", "Price", nullptr));
+        confirmButton->setText(QCoreApplication::translate("Admin", "Make Purchase", nullptr));
+        dateLabel->setText(QCoreApplication::translate("Admin", "Date", nullptr));
         companyLabel->setText(QCoreApplication::translate("Admin", "\360\237\222\252 Bulk Club Inc.\360\237\222\252", nullptr));
         membershipButton->setText(QCoreApplication::translate("Admin", "Memberships", nullptr));
+        m->setText(QCoreApplication::translate("Admin", "Test Purchase", nullptr));
     } // retranslateUi
 
 };
