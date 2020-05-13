@@ -14,17 +14,17 @@ Admin::Admin(QWidget *parent) :
     ui->stackedWidget->setCurrentIndex(0);
     setupCustomerPage();
 
-    // Customer Page
+    /// Customer Page
     ui->IDLineEdit->setValidator(new QRegExpValidator(QRegExp("[1-9][0-9]{4}")));
     ui->ExpirationDateLineEdit->setValidator(new QRegExpValidator(QRegExp("[1-9][0-9]{3}\\-[0-1][0-9]{0,1}\\-[0-3][0-9]{0,1}")));
 
-    // Inventory Page
+    /// Inventory Page
     ui->ItemPriceLineEdit->setValidator(new QRegExpValidator(QRegExp("[1-9][0-9]{1,5}\\.[0-9]{1,2}")));
     ui->QuantityLineEdit->setValidator(new QRegExpValidator(QRegExp("[0-9]{3}")));
     ui->InStockLineEdit->setValidator(new QRegExpValidator(QRegExp("[0-9]{3}")));
     ui->RevenueLineEdit->setValidator(new QRegExpValidator(QRegExp("[1-9][0-9]{1,5}\\.[0-9]{1,2}")));
 
-    // Test Purchases Page
+    /// Test Purchases Page
     ui->idLine->setValidator(new QRegExpValidator(QRegExp("[1-9][0-9]{4}")));
     ui->priceLine->setValidator(new QRegExpValidator(QRegExp("[1-9][0-9]{1,5}\\.[0-9]{1,2}")));
     ui->qtyLine->setValidator(new QRegExpValidator(QRegExp("[1-9][0-9]{3}")));
@@ -38,6 +38,7 @@ Admin::~Admin()
     delete ui;
 }
 
+///Read customer information into correct tale model
 void Admin::setupCustomerPage()
 {
     QSqlQuery query;
@@ -45,7 +46,8 @@ void Admin::setupCustomerPage()
 
     query.prepare("SELECT Name, CustomerID, CustomerType, ExpirationDate FROM CustomerTable");
     query.exec();
-
+    
+    ///Set up the table
     model->setQuery(query);
     ui->customerPage_tableView->setModel(model);
     ui->customerPage_tableView->setColumnWidth(0, 210);
@@ -59,7 +61,6 @@ void Admin::setupCustomerPage()
 
 
 
-
 void Admin::setupInventoryPage()
 {
 
@@ -67,7 +68,7 @@ void Admin::setupInventoryPage()
 
 
 
-
+///Initialize the index for the customer button setting
 void Admin::on_customerButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
@@ -76,7 +77,14 @@ void Admin::on_customerButton_clicked()
 
 
 
-
+///Initialize a table with the values from the inventory list
+/*************************************************************
+ * void Admin::on_inventoryButton_clicked()
+ * ------------------------------------------------------------
+ *
+ * This function will read in the inventory data from the
+ * database and initilialize a table ith all the values.
+ *************************************************************/
 void Admin::on_inventoryButton_clicked()
 {
     QSqlQuery query;
@@ -89,6 +97,7 @@ void Admin::on_inventoryButton_clicked()
     if(!query.exec())
         qDebug() << query.lastError();
 
+    ///Set up table
     model->setQuery(query);
     ui->InventoryTableView->setModel(model);
     ui->InventoryTableView->setColumnWidth(0, 160);
@@ -97,6 +106,7 @@ void Admin::on_inventoryButton_clicked()
     ui->InventoryTableView->setColumnWidth(3, 80);
     ui->InventoryTableView->setColumnWidth(4, 80);
 
+    ///Read ino table
     for (int i = 0; i < model->rowCount(); ++i)
         ui->InventoryTableView->resizeRowToContents(i);
 
@@ -104,12 +114,22 @@ void Admin::on_inventoryButton_clicked()
     ui->stackedWidget->setCurrentIndex(1);
 }
 
+///Will return members who should upgrade or downgrade memberships
 void Admin::on_membershipButton_clicked()
 {
     determineUpgradeOrDowngrade();
     ui->stackedWidget->setCurrentIndex(2);
 }
 
+///Will add an item to the item list in the database with
+/// the values specified by the user
+/*************************************************************
+ * void Admin::on_inventoryPage_addButton_clicked()
+ * ------------------------------------------------------------
+ *
+ * Will add an item to the item list in the database with
+ * the values specified by the user
+ *************************************************************/
 void Admin::on_inventoryPage_addButton_clicked()
 {
     QSqlQuery query;
@@ -120,20 +140,21 @@ void Admin::on_inventoryPage_addButton_clicked()
     QString   inStock   = ui->InStockLineEdit->text();
     QString   revenue   = ui->RevenueLineEdit->text();
 
-    //If any fields are empty, send an error window to the user
+    ///If any fields are empty, send an error window to the user
+    /// Otherwise add item to the item list
     if(itemName.isEmpty() || price.isEmpty() || quantity.isEmpty() || inStock.isEmpty() || revenue.isEmpty())
         QMessageBox::information(this, "Warning", "Fill in all information before proceeding!");
 
     else
     {
-        //Prepare the database for query to add values to the table
+        ///Prepare the database for query to add values to the table
         query.prepare("INSERT OR REPLACE INTO InventoryTable(ItemName, ItemPrice, Quantity, InStock, Revenue) "
                       "VALUES(:itemName, :price, :quantity, :inStock, :revenue)");
 
         qDebug() << itemName << endl;
         qDebug() << "void Admin::on_inventoryPage_addButton_clicked()" << endl;
 
-        //bind values
+        ///bind values
         query.bindValue(":itemName", itemName);
         query.bindValue(":price"  ,  price);
         query.bindValue(":quantity", quantity);
@@ -141,7 +162,7 @@ void Admin::on_inventoryPage_addButton_clicked()
         query.bindValue(":revenue",  revenue);
 
 
-        //Error message to console if query fails
+        ///Error message to console if query fails
         if(!query.exec())
         {
             qDebug() << "Failed: " << query.lastError();
@@ -152,6 +173,7 @@ void Admin::on_inventoryPage_addButton_clicked()
         query.prepare("SELECT * FROM InventoryTable");
         query.exec();
 
+        ///RE-initialize the table to show added items
         model->setQuery(query);
         ui->InventoryTableView->setModel(model);
         ui->InventoryTableView->setColumnWidth(0, 210);
@@ -164,7 +186,9 @@ void Admin::on_inventoryPage_addButton_clicked()
 }
 
 
-/**************************************************************
+///Will add a customer to the customer list in the database with
+/// the values specified by the user
+/*************************************************************
  * void Admin::on_customerPage_addButton_clicked()
  * ------------------------------------------------------------
  *
@@ -186,24 +210,25 @@ void Admin::on_customerPage_addButton_clicked()
        QString type    = ui->MemberTypeLineEdit->text();
        QString expDate = ui->ExpirationDateLineEdit->text();
 
-       //If any fields are empty, send an error window to the user
+    ///If any fields are empty, send an error window to the user
+    /// Otherwie add a customer with specified values to customer list
        if(name == "" || id == "" || type == "" || expDate =="")
        {
            QMessageBox::information(this, "Warning", "Please fill in Name, ID, MemberType,"
                                                      " and Expiration date to ADD a customer.");
        }
 
-       //Prepare the database for query to add values to the table
+        ///Prepare the database for query to add values to the table
        query.prepare("INSERT OR REPLACE INTO CustomerTable(Name,CustomerID, CustomerType, ExpirationDate)"
                      "VALUES(:name, :id, :type, :expDate)");
 
-       //bind values
+       ///bind values
        query.bindValue(":name",    name);
        query.bindValue(":id"  ,    id);
        query.bindValue(":type",    type);
        query.bindValue(":expDate", expDate);
 
-       //Error message to console if query fails
+       ///Error message to console if query fails
        if(!query.exec())
        {
            qDebug() << "Failed: " << query.lastError();
@@ -228,8 +253,11 @@ void Admin::on_customerPage_addButton_clicked()
 
 
 
+///This function will read in the ID number inserted by the
+///user. It will delete all information pertaining to a customer
+///with that ID number.
 /**************************************************************
- * void Admin::on_customerPage_addButton_clicked()
+ * void Admin::on_customerPage_deleteButton_clicked()
  * ------------------------------------------------------------
  *
  * This function will read in the ID number inserted by the
@@ -242,8 +270,10 @@ void Admin::on_customerPage_deleteButton_clicked()
     QString   id      = ui -> IDLineEdit -> text();
     QSqlQuery query;
 
+    ///Prepare database
     query.prepare("DELETE FROM CustomerTable WHERE customerID = :customerID");
 
+    ///bind values
     query.bindValue(":customerID", id);
 
     if(!query.exec())
@@ -251,6 +281,7 @@ void Admin::on_customerPage_deleteButton_clicked()
         qDebug() << "Failed: " << query.lastError();
     }
 
+    ///Reinitialize the table to show updated values
     QSqlQueryModel *model = new QSqlQueryModel();
 
     query.prepare("SELECT * FROM CustomerTable");
@@ -271,11 +302,22 @@ void Admin::on_customerPage_deleteButton_clicked()
 
 
 
-
+///This function will read in the name of an item entered by a
+/// the user. It will delete all information connected to the item
+/// from the database.
+/**************************************************************
+ * void Admin::on_inventoryPage_deleteButton_clicked()
+ * ------------------------------------------------------------
+ *
+ * This function will read in the name of an item entered by a
+ *  the user. It will delete all information connected to the
+ *  item from the database
+ *************************************************************/
 void Admin::on_inventoryPage_deleteButton_clicked()
 {
     QSqlQueryModel *model = new QSqlQueryModel();
 
+    ///Read in values
     QString   itemName  = ui -> ItemNameLineEdit  -> text();
     QString   price     = ui -> ItemPriceLineEdit -> text();
     QString   quantity  = ui -> QuantityLineEdit  -> text();
@@ -283,20 +325,20 @@ void Admin::on_inventoryPage_deleteButton_clicked()
     QString   revenue   = ui -> RevenueLineEdit   -> text();
     QSqlQuery query;
 
-    //If any fields are empty, send an error window to the user
+    ///If any fields are empty, send an error window to the user
     if(itemName == "")
     {
         QMessageBox::information(this, "Warning", "Please fill in the Item Name to DELETE an item.");
     }
 
-    //Prepare the database for query to add values to the table
+    ///Prepare the database for query to add values to the table
     query.prepare("DELETE FROM InventoryTable WHERE ItemName = :itemName");
 
-    //bind values
+    ///bind values
     query.bindValue(":itemName", itemName);
 
 
-    //Error message to console if query fails
+    ///Error message to console if query fails
     if(!query.exec())
     {
         qDebug() << "Failed: " << query.lastError();
@@ -306,6 +348,7 @@ void Admin::on_inventoryPage_deleteButton_clicked()
     query.prepare("SELECT * FROM InventoryTable");
     query.exec();
 
+    ///Reinitialize table to show updated values
     model->setQuery(query);
     ui->InventoryTableView->setModel(model);
     ui->InventoryTableView->setColumnWidth(0, 210);
@@ -317,6 +360,17 @@ void Admin::on_inventoryPage_deleteButton_clicked()
         ui->InventoryTableView->resizeRowToContents(i);
 }
 
+///This function will read in the name of an item entered by the
+/// user. It will also read in information about the item entered
+/// and updat the data for that item based off the name
+/**************************************************************
+ * void Admin::on_inventoryPage_editButton_clicked()
+ * ------------------------------------------------------------
+ *
+ * This function will read in the name of an item entered by the
+ * user. It will also read in information about the item
+ * entered and updat the data for that item based off the name
+ *************************************************************/
 void Admin::on_inventoryPage_editButton_clicked()
 {
     QSqlQueryModel *model = new QSqlQueryModel();
@@ -328,6 +382,7 @@ void Admin::on_inventoryPage_editButton_clicked()
 
     QSqlQuery query;
 
+    ///Prepare the database
     query.prepare("UPDATE InventoryTable "
                   "SET ItemPrice  = :itemPrice, "
                   "    Quantity   = :quantity, "
@@ -335,6 +390,7 @@ void Admin::on_inventoryPage_editButton_clicked()
                   "    Revenue    = :revenue "
                   "WHERE ItemName = :itemName;");
 
+    ///bind Values
     query.bindValue(":itemName",  itemName);
     query.bindValue(":itemPrice", price);
     query.bindValue(":quantity",  quantity);
@@ -344,10 +400,10 @@ void Admin::on_inventoryPage_editButton_clicked()
     if(!query.exec())
         qDebug() << "Could not update item info." << query.lastError();
 
-
     query.prepare("SELECT * FROM InventoryTable");
     query.exec();
-
+    
+    ///Reinitialize table to show updated values
     model->setQuery(query);
     ui->InventoryTableView->setModel(model);
     ui->InventoryTableView->setColumnWidth(0, 210);
@@ -380,6 +436,7 @@ void Admin::determineUpgradeOrDowngrade()
     QSqlRecord record;
     QSqlQueryModel *model = new QSqlQueryModel();
 
+    ///Prepare database
     query.prepare("SELECT Name, CustomerID, CustomerType, ShouldUpgrade FROM CustomerTable");
     upgrade.prepare("UPDATE CustomerTable SET ShouldUpgrade = \"Yes\" WHERE TotalRebate > 120");
     downgrade.prepare("UPDATE CustomerTable SET ShouldUpgrade = \"No\" WHERE TotalRebate < 120");
@@ -389,6 +446,8 @@ void Admin::determineUpgradeOrDowngrade()
         qDebug() << upgrade.lastError();
     if (!downgrade.exec())
         qDebug() << downgrade.lastError();
+    
+    ///Initialize table
     model->setQuery(query);
     ui->MembershipTableView->setModel(model);
     ui->MembershipTableView->setColumnWidth(0, 210);
@@ -455,7 +514,7 @@ void Admin::test_purchase() {
 
 
 
-
+///Opens test purchase window
 void Admin::on_m_clicked()
 {
     QSqlQuery query;
@@ -468,6 +527,7 @@ void Admin::on_m_clicked()
     if(!query.exec())
         qDebug() << query.lastError();
 
+    ///Initiliaze the table
     model->setQuery(query);
     ui->testPurchase_inventoryTableView->setModel(model);
     ui->testPurchase_inventoryTableView->setColumnWidth(0, 160);
@@ -482,11 +542,15 @@ void Admin::on_m_clicked()
     ui->stackedWidget->setCurrentIndex(3);
 }
 
+///This will read in the data for an item from the
+/// inventory table into the line edits. Each line edit
+/// will contain the necessary data corresponding to the item.
 void Admin::on_InventoryTableView_clicked(const QModelIndex &index)
 {
     QSqlQuery query;
     QString value = ui->InventoryTableView->model()->data(index).toString();
 
+    ///Prepare the database
     query.prepare("SELECT * FROM InventoryTable WHERE ItemName = '" + value + "';");
 
     if(!query.exec())
@@ -505,11 +569,15 @@ void Admin::on_InventoryTableView_clicked(const QModelIndex &index)
     }
 }
 
+///This will gather the data from the customer table for
+/// a customer that was clicked on. Data about the customer
+/// will be shown in the corresponding line edits
 void Admin::on_customerPage_tableView_clicked(const QModelIndex &index)
 {
    QSqlQuery query;
    QString value = ui->customerPage_tableView->model()->data(index).toString();
 
+    ///Prepare the database
    query.prepare("SELECT * FROM CustomerTable WHERE Name = '" + value + "' OR CustomerID = '" + value + "' OR CustomerType = '" + value + "';");
 
    if(!query.exec())
@@ -527,6 +595,9 @@ void Admin::on_customerPage_tableView_clicked(const QModelIndex &index)
    }
 }
 
+///This will gather the data from the test purchases table for
+/// a purchase that was clicked on. Data about the item purchased
+/// will be shown in the corresponding line edits
 void Admin::on_testPurchase_inventoryTableView_clicked(const QModelIndex &index)
 {
     QSqlQuery query;
@@ -547,6 +618,7 @@ void Admin::on_testPurchase_inventoryTableView_clicked(const QModelIndex &index)
     }
 }
 
+///This will update the searchbar continuously as data is entered into it.
 void Admin::on_inventoryPage_searchBar_textChanged(const QString &arg1)
 {
     QSqlQuery query;
@@ -554,11 +626,12 @@ void Admin::on_inventoryPage_searchBar_textChanged(const QString &arg1)
     QSqlQueryModel *model = new QSqlQueryModel();
     QString searchingFor = arg1;
 
-
+    ///Prepare the database
     query.prepare("SELECT ItemName, ItemPrice, Quantity, InStock FROM InventoryTable"
                   " WHERE ItemName       LIKE '%" + searchingFor + "%'"
                   " OR    ItemPrice LIKE '%" + searchingFor + "%';");
 
+    ///bind values
     query.bindValue(":searchingFor", searchingFor);
 
     if(!query.exec()) {
@@ -566,6 +639,7 @@ void Admin::on_inventoryPage_searchBar_textChanged(const QString &arg1)
     }
 
     else {
+        ///Reinitialize table
         model->setQuery(query);
         ui->InventoryTableView->setModel(model);
         ui->InventoryTableView->setColumnWidth(0, 210);
@@ -580,6 +654,7 @@ void Admin::on_inventoryPage_searchBar_textChanged(const QString &arg1)
     }
 }
 
+///This will update the searchbar continuously as data is entered into it.
 void Admin::on_testPurchase_searchBar_textChanged(const QString &arg1)
 {
     QSqlQuery query;
@@ -587,11 +662,12 @@ void Admin::on_testPurchase_searchBar_textChanged(const QString &arg1)
     QSqlQueryModel *model = new QSqlQueryModel();
     QString searchingFor = arg1;
 
-
+    //prepare the database
     query.prepare("SELECT ItemName, ItemPrice, Quantity, InStock FROM InventoryTable"
                   " WHERE ItemName       LIKE '%" + searchingFor + "%'"
                   " OR    ItemPrice LIKE '%" + searchingFor + "%';");
 
+    ///bind values
     query.bindValue(":searchingFor", searchingFor);
 
     if(!query.exec()) {
@@ -599,6 +675,7 @@ void Admin::on_testPurchase_searchBar_textChanged(const QString &arg1)
     }
 
     else {
+        ///Reinitialize table
         model->setQuery(query);
         ui->testPurchase_inventoryTableView->setModel(model);
         ui->testPurchase_inventoryTableView->setColumnWidth(0, 210);
