@@ -2,7 +2,10 @@
 #include "SalesReport.h"
 #include "ui_Manager.h"
 #include <QTimer>
-
+/*!
+ * \brief Constructor for Manager
+ * \param parent
+ */
 Manager::Manager(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Manager)
@@ -19,7 +22,9 @@ Manager::Manager(QWidget *parent) :
 
 
 
-
+/*!
+ * \brief Destructor for manager objects.
+ */
 Manager::~Manager()
 {
     delete ui;
@@ -37,7 +42,9 @@ void Manager::setupSalesPage()
 
 
 
-
+/*!
+ * \brief Creates the sort boxes require for the customer page.
+ */
 void Manager::setupCustomerPage()
 {
     ui->customerPage_sortBox->clear();
@@ -49,7 +56,9 @@ void Manager::setupCustomerPage()
 
 
 
-
+/*!
+ * \brief Creates the sort box require for the inventory page.
+ */
 void Manager::setupInventoryPage()
 {
     ui->inventoryPage_sortBox->clear();
@@ -70,7 +79,9 @@ void Manager::setupMembershipPage()
 
 
 
-
+/*!
+ * \brief Creates the required items for the sortbox.
+ */
 void Manager::setupRebatesPage()
 {
     ui->rebatePage_sortBox->clear();
@@ -81,7 +92,9 @@ void Manager::setupRebatesPage()
 
 
 
-
+/*!
+ * \brief Moves the stackedWidget to the 'main' manager page.
+ */
 void Manager::on_salesButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
@@ -90,7 +103,9 @@ void Manager::on_salesButton_clicked()
 
 
 
-
+/*!
+ * \brief Sets up the customer table by selection most of the columns from CustomerTable
+ */
 void Manager::on_customerButton_clicked()
 {
     QSqlQuery query;
@@ -126,7 +141,9 @@ void Manager::on_customerButton_clicked()
 
 
 
-
+/*!
+ * \brief Selects several descriptive columns from CustomerTable to display onto our Tableview.
+ */
 void Manager::on_membershipButton_clicked()
 {
     QSqlQuery query;
@@ -156,7 +173,9 @@ void Manager::on_membershipButton_clicked()
 
 
 
-
+/*!
+ * \brief Sets up the display with a QSqlQueryModel based on the total selection of columns from InventoryTable
+ */
 void Manager::on_inventoryButton_clicked()
 {
     QSqlQuery query;
@@ -187,7 +206,9 @@ void Manager::on_inventoryButton_clicked()
 
 
 
-
+/*!
+ * \brief Sets up the rebate (Totalspent * 2%)
+ */
 void Manager::on_rebatesButton_clicked()
 {
     QSqlQuery query, rebate;
@@ -216,7 +237,9 @@ void Manager::on_rebatesButton_clicked()
 
 
 
-
+/*!
+ * \brief Creates a new SalesReport window whenever the correct button is activated.
+ */
 void Manager::on_salesPage_previewButton_clicked()
 {
     SalesReport *newSales = new SalesReport;
@@ -226,7 +249,11 @@ void Manager::on_salesPage_previewButton_clicked()
 
 
 
-
+/*!
+ * \brief Shows the quantity of items bought and the total amount of money spent
+ *        per customer by selecting from those columns from CustomerTable.
+ * \param index
+ */
 void Manager::on_customerPage_sortBox_activated(int index)
 {
     QSqlQuery query;
@@ -285,7 +312,11 @@ void Manager::on_customerPage_sortBox_activated(int index)
 
 
 
-
+/*!
+ * \brief Changes how the content from the table is displayed based off of what
+ *        the current index of the sort box is.
+ * \param index
+ */
 void Manager::on_rebatePage_sortBox_activated(int index)
 {
     QSqlQuery query;
@@ -325,7 +356,11 @@ void Manager::on_rebatePage_sortBox_activated(int index)
 
 
 
-
+/*!
+ * \brief Changes how the content from the table is displayed based off of what
+ *        the current index of the sort box is.
+ * \param index
+ */
 void Manager::on_inventoryPage_sortBox_activated(int index)
 {
 
@@ -376,7 +411,9 @@ void Manager::on_inventoryPage_sortBox_activated(int index)
 
 
 
-// Searching the Customer Page
+/*!
+ * \brief Matches the name or ID to CustomerTable in order to search for said customer.
+ */
 void Manager::on_customerPage_searchButton_clicked()
 {
     QSqlQuery query;
@@ -417,7 +454,10 @@ void Manager::on_customerPage_searchButton_clicked()
 
 
 
-// Searching the Membership Page
+/*!
+ * \brief Messy actual code, but it changes whatever number or text month
+ *        into something readable by SQL and returns matching expiration dates.
+ */
 void Manager::on_membershipPage_searchButton_clicked()
 {
     QSqlQuery query;
@@ -479,7 +519,9 @@ void Manager::on_membershipPage_searchButton_clicked()
 
 
 
-
+/*!
+ * \brief Uses SQL queries to select items that are relatively close to what the user searches for.
+ */
 void Manager::on_inventoryPage_searchButton_clicked()
 {
     QSqlQuery query;
@@ -520,7 +562,9 @@ void Manager::on_inventoryPage_searchButton_clicked()
 
 
 
-
+/*!
+ * \brief Calls inventory search when text is changed.
+ */
 void Manager::refreshSearch() {
     on_inventoryPage_searchButton_clicked();
 }
@@ -529,7 +573,10 @@ void Manager::refreshSearch() {
 
 
 
-
+/*!
+ * \brief Basically just parses the information from SalesReport into a QSqlQueryModel and does some quick maths for
+ *        amounts of each type member and how much was spent.
+ */
 void Manager::generateReport() {
     QSqlQuery query;
     QSqlRecord record;
@@ -575,7 +622,9 @@ void Manager::generateReport() {
 
 
 
-
+/*!
+ * \brief Calls the membership search function when text is changed.
+ */
 void Manager::refreshMonthsSearch() {
     on_membershipPage_searchButton_clicked();
 }
@@ -583,7 +632,9 @@ void Manager::refreshMonthsSearch() {
 
 
 
-
+/*!
+ * \brief Calls the function whenever textchanged is activated.
+ */
 void Manager::refreshCustomerSearch() {
     on_customerPage_searchButton_clicked();
 }
@@ -592,7 +643,10 @@ void Manager::refreshCustomerSearch() {
 
 
 
-
+/*!
+ * \brief Included a search bar that allows the user to search for a specific ID
+ *        and will calculate the total that they spent along with their specific sales report.
+ */
 void Manager::sales_search() {
     QSqlQuery query;
     QSqlRecord record;
@@ -656,7 +710,9 @@ void Manager::sales_search() {
 
 
 
-
+/*!
+ * \brief Calls the sales_search function whenever the textchanged signal is activated.
+ */
 void Manager::refreshSalesSearch() {
     sales_search();
 }
