@@ -406,7 +406,9 @@ void Admin::determineUpgradeOrDowngrade()
 
 
 
-
+/*!
+ * \brief Allows for the admin to create a dummy purchase in the system.
+ */
 void Admin::test_purchase() {
     QSqlQuery query, purchase;
     int id = ui->idLine->text().toInt();

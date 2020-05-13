@@ -5,6 +5,10 @@
 #include <QMessageBox>
 #include <string>
 
+/*!
+ * \brief Constructor for SalesReport
+ * \param parent
+ */
 SalesReport::SalesReport(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::SalesReport)
@@ -14,7 +18,9 @@ SalesReport::SalesReport(QWidget *parent) :
 
 
 
-
+/*!
+ * \brief Destructor for SalesReport
+ */
 SalesReport::~SalesReport() {
     delete ui;
 }
@@ -22,7 +28,10 @@ SalesReport::~SalesReport() {
 
 
 
-
+/*!
+ * \brief Creates a new table derived from SalesTable to create a dynamic table that
+ *        generates all the required info based on the dates used for report generation.
+ */
 void SalesReport::generateReport() {
     QSqlQuery query1;
     query1.exec("DELETE FROM SalesReport;");
