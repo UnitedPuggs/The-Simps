@@ -10,8 +10,8 @@ int main(int argc, char *argv[])
     mainWindow window;
     sqlDatabase temp;
     temp.createDatabase();
- //   temp.readFileCustomer();
- //   temp.readFileSales();
+    temp.readFileCustomer();
+    temp.readFileSales();
     window.show();
 
     return a.exec();
