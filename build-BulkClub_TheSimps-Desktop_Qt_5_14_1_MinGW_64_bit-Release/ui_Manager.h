@@ -45,17 +45,14 @@ public:
     QComboBox *customerPage_sortBox;
     QLineEdit *customerPage_searchBar;
     QToolButton *customerPage_refreshButton;
-    QPushButton *customerPage_searchButton;
     QTableView *customerPage_tableView;
     QWidget *membershipPage;
     QToolButton *membershipPage_refreshButton;
     QLineEdit *membershipPage_searchBar;
-    QPushButton *membershipPage_searchButton;
     QTableView *membershipPage_tableView;
     QWidget *inventoryPage;
     QToolButton *inventoryPage_refreshButton;
     QLineEdit *inventoryPage_searchBar;
-    QPushButton *inventoryPage_searchButton;
     QComboBox *inventoryPage_sortBox;
     QTableView *inventoryPage_tableView;
     QWidget *rebatePage;
@@ -67,6 +64,8 @@ public:
     QPushButton *membershipButton;
     QPushButton *customerButton;
     QPushButton *rebatesButton;
+    QLabel *copyrightLabel;
+    QLabel *developerLabel;
 
     void setupUi(QDialog *Manager)
     {
@@ -146,10 +145,6 @@ public:
         customerPage_refreshButton = new QToolButton(customerPage);
         customerPage_refreshButton->setObjectName(QString::fromUtf8("customerPage_refreshButton"));
         customerPage_refreshButton->setGeometry(QRect(0, 10, 31, 31));
-        customerPage_searchButton = new QPushButton(customerPage);
-        customerPage_searchButton->setObjectName(QString::fromUtf8("customerPage_searchButton"));
-        customerPage_searchButton->setGeometry(QRect(300, 10, 71, 31));
-        customerPage_searchButton->setFont(font1);
         customerPage_tableView = new QTableView(customerPage);
         customerPage_tableView->setObjectName(QString::fromUtf8("customerPage_tableView"));
         customerPage_tableView->setGeometry(QRect(0, 50, 761, 541));
@@ -164,10 +159,6 @@ public:
         membershipPage_searchBar->setObjectName(QString::fromUtf8("membershipPage_searchBar"));
         membershipPage_searchBar->setGeometry(QRect(40, 10, 301, 31));
         membershipPage_searchBar->setFont(font1);
-        membershipPage_searchButton = new QPushButton(membershipPage);
-        membershipPage_searchButton->setObjectName(QString::fromUtf8("membershipPage_searchButton"));
-        membershipPage_searchButton->setGeometry(QRect(350, 10, 71, 31));
-        membershipPage_searchButton->setFont(font1);
         membershipPage_tableView = new QTableView(membershipPage);
         membershipPage_tableView->setObjectName(QString::fromUtf8("membershipPage_tableView"));
         membershipPage_tableView->setGeometry(QRect(0, 50, 761, 541));
@@ -182,10 +173,6 @@ public:
         inventoryPage_searchBar->setObjectName(QString::fromUtf8("inventoryPage_searchBar"));
         inventoryPage_searchBar->setGeometry(QRect(40, 10, 281, 31));
         inventoryPage_searchBar->setFont(font1);
-        inventoryPage_searchButton = new QPushButton(inventoryPage);
-        inventoryPage_searchButton->setObjectName(QString::fromUtf8("inventoryPage_searchButton"));
-        inventoryPage_searchButton->setGeometry(QRect(330, 10, 71, 31));
-        inventoryPage_searchButton->setFont(font1);
         inventoryPage_sortBox = new QComboBox(inventoryPage);
         inventoryPage_sortBox->setObjectName(QString::fromUtf8("inventoryPage_sortBox"));
         inventoryPage_sortBox->setGeometry(QRect(620, 10, 141, 31));
@@ -230,6 +217,20 @@ public:
         rebatesButton->setObjectName(QString::fromUtf8("rebatesButton"));
         rebatesButton->setGeometry(QRect(10, 210, 121, 31));
         rebatesButton->setFont(font2);
+        copyrightLabel = new QLabel(Manager);
+        copyrightLabel->setObjectName(QString::fromUtf8("copyrightLabel"));
+        copyrightLabel->setGeometry(QRect(10, 570, 121, 20));
+        QFont font3;
+        font3.setFamily(QString::fromUtf8("Arial"));
+        font3.setPointSize(7);
+        copyrightLabel->setFont(font3);
+        developerLabel = new QLabel(Manager);
+        developerLabel->setObjectName(QString::fromUtf8("developerLabel"));
+        developerLabel->setGeometry(QRect(20, 550, 101, 21));
+        QFont font4;
+        font4.setFamily(QString::fromUtf8("Lucida Sans Unicode"));
+        font4.setPointSize(6);
+        developerLabel->setFont(font4);
 
         retranslateUi(Manager);
         QObject::connect(inventoryPage_searchBar, SIGNAL(textChanged(QString)), Manager, SLOT(refreshSearch()));
@@ -256,19 +257,18 @@ public:
         totalLabel->setText(QCoreApplication::translate("Manager", "Total: $", nullptr));
         customerPage_searchBar->setPlaceholderText(QCoreApplication::translate("Manager", "Enter Customer Name/ID here...", nullptr));
         customerPage_refreshButton->setText(QCoreApplication::translate("Manager", "\360\237\227\230", nullptr));
-        customerPage_searchButton->setText(QCoreApplication::translate("Manager", "Search", nullptr));
         membershipPage_refreshButton->setText(QCoreApplication::translate("Manager", "\360\237\227\230", nullptr));
         membershipPage_searchBar->setPlaceholderText(QCoreApplication::translate("Manager", "Enter in a month e.g. November...", nullptr));
-        membershipPage_searchButton->setText(QCoreApplication::translate("Manager", "Search", nullptr));
         inventoryPage_refreshButton->setText(QCoreApplication::translate("Manager", "\360\237\227\230", nullptr));
         inventoryPage_searchBar->setPlaceholderText(QCoreApplication::translate("Manager", "Enter Item here...", nullptr));
-        inventoryPage_searchButton->setText(QCoreApplication::translate("Manager", "Search", nullptr));
         rebatePage_refreshButton->setText(QCoreApplication::translate("Manager", "\360\237\227\230", nullptr));
         inventoryButton->setText(QCoreApplication::translate("Manager", "Inventory List", nullptr));
         salesButton->setText(QCoreApplication::translate("Manager", "Sales Info", nullptr));
         membershipButton->setText(QCoreApplication::translate("Manager", "Memberships", nullptr));
         customerButton->setText(QCoreApplication::translate("Manager", "Customer Details", nullptr));
         rebatesButton->setText(QCoreApplication::translate("Manager", "View Rebates", nullptr));
+        copyrightLabel->setText(QCoreApplication::translate("Manager", "\302\251 COPYRIGHT 2020 Bulk Club Inc. All Rights Reserved.", nullptr));
+        developerLabel->setText(QCoreApplication::translate("Manager", "Developed by The Simps.", nullptr));
     } // retranslateUi
 
 };
