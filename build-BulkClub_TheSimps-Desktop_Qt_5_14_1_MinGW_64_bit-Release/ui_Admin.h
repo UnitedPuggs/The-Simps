@@ -117,7 +117,7 @@ public:
         customerPage_refreshButton->setFont(font1);
         customerPage_tableView = new QTableView(customerPage);
         customerPage_tableView->setObjectName(QString::fromUtf8("customerPage_tableView"));
-        customerPage_tableView->setGeometry(QRect(10, 250, 701, 341));
+        customerPage_tableView->setGeometry(QRect(10, 250, 562, 341));
         QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Maximum);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -192,7 +192,7 @@ public:
         inventoryPage_refreshButton->setFont(font1);
         InventoryTableView = new QTableView(inventoryPage);
         InventoryTableView->setObjectName(QString::fromUtf8("InventoryTableView"));
-        InventoryTableView->setGeometry(QRect(0, 270, 721, 321));
+        InventoryTableView->setGeometry(QRect(0, 270, 671, 321));
         inventoryPage_addButton = new QPushButton(inventoryPage);
         inventoryPage_addButton->setObjectName(QString::fromUtf8("inventoryPage_addButton"));
         inventoryPage_addButton->setGeometry(QRect(700, 80, 181, 41));
@@ -258,7 +258,7 @@ public:
         membershipPage_refreshButton->setFont(font1);
         MembershipTableView = new QTableView(membershipPage);
         MembershipTableView->setObjectName(QString::fromUtf8("MembershipTableView"));
-        MembershipTableView->setGeometry(QRect(0, 50, 711, 541));
+        MembershipTableView->setGeometry(QRect(0, 50, 544, 541));
         stackedWidget->addWidget(membershipPage);
         purchase = new QWidget();
         purchase->setObjectName(QString::fromUtf8("purchase"));
@@ -315,7 +315,7 @@ public:
         retranslateUi(Admin);
         QObject::connect(confirmButton, SIGNAL(clicked()), Admin, SLOT(test_purchase()));
 
-        stackedWidget->setCurrentIndex(3);
+        stackedWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(Admin);

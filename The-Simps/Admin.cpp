@@ -3,6 +3,9 @@
 #include "sqldatabase.h"
 #include <QMessageBox>
 
+
+
+
 Admin::Admin(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Admin)
@@ -14,17 +17,21 @@ Admin::Admin(QWidget *parent) :
 
 
 
+
 Admin::~Admin()
 {
     delete ui;
 }
+
+
+
 
 void Admin::setupCustomerPage()
 {
     QSqlQuery query;
     QSqlQueryModel *model = new QSqlQueryModel();
 
-    query.prepare("SELECT * FROM CustomerTable");
+    query.prepare("SELECT Name, CustomerID, CustomerType, ExpirationDate FROM CustomerTable");
     query.exec();
 
     model->setQuery(query);
@@ -38,15 +45,25 @@ void Admin::setupCustomerPage()
         ui->customerPage_tableView->resizeRowToContents(i);
 }
 
+
+
+
 void Admin::setupInventoryPage()
 {
 
 }
 
+
+
+
 void Admin::on_customerButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
 }
+
+
+
+
 
 void Admin::on_inventoryButton_clicked()
 {
@@ -75,65 +92,74 @@ void Admin::on_inventoryButton_clicked()
     ui->stackedWidget->setCurrentIndex(1);
 }
 
+
+
+
+
 void Admin::on_membershipButton_clicked()
 {
     determineUpgradeOrDowngrade();
     ui->stackedWidget->setCurrentIndex(2);
 }
 
+
+
+
+
+
 void Admin::on_inventoryPage_addButton_clicked()
 {
-    Admin     admin;
-    QString   itemName  = ui -> ItemNameLineEdit  -> text();
-    QString   price     = ui -> ItemPriceLineEdit -> text();
-    QString   quantity  = ui -> QuantityLineEdit  -> text();
-    QString   inStock   = ui -> InStockLineEdit   -> text();
-    QString   revenue   = ui -> RevenueLineEdit   -> text();
     QSqlQuery query;
+    Admin     admin;
+    QString   itemName  = ui->ItemNameLineEdit->text();
+    QString   price     = ui->ItemPriceLineEdit->text();
+    QString   quantity  = ui->QuantityLineEdit->text();
+    QString   inStock   = ui->InStockLineEdit->text();
+    QString   revenue   = ui->RevenueLineEdit->text();
 
     //If any fields are empty, send an error window to the user
-    if(itemName == "" || price == "" || quantity == "" || inStock == "" || revenue == "")
+    if(itemName.isEmpty() || price.isEmpty() || quantity.isEmpty() || inStock.isEmpty() || revenue.isEmpty())
+        QMessageBox::information(this, "Warning", "Fill in all information before proceeding!");
+
+    else
     {
-        QMessageBox::information(this, "Warning", "Please fill in Item Name and Price to ADD an item.");
-    }
+        //Prepare the database for query to add values to the table
+        query.prepare("INSERT OR REPLACE INTO InventoryTable(ItemName, ItemPrice, Quantity, InStock, Revenue) "
+                      "VALUES(:itemName, :price, :quantity, :inStock, :revenue)");
 
-    //Prepare the database for query to add values to the table
-    query.prepare("INSERT OR IGNORE INTO InventoryTable(ItemName, ItemPrice, Quantity, InStock, Revenue)"
-                  "VALUES(:itemName, :price, :quantity, :inStock, :revenue)");
+        qDebug() << itemName << endl;
+        qDebug() << "void Admin::on_inventoryPage_addButton_clicked()" << endl;
 
-    qDebug() << itemName << endl;
-    qDebug() << "void Admin::on_inventoryPage_addButton_clicked()" << endl;
-
-    //bind values
-    query.bindValue(":itemName", itemName);
-    query.bindValue(":price"  ,  price);
-    query.bindValue(":quantity", quantity);
-    query.bindValue(":inStock",  inStock);
-    query.bindValue(":revenue",  revenue);
+        //bind values
+        query.bindValue(":itemName", itemName);
+        query.bindValue(":price"  ,  price);
+        query.bindValue(":quantity", quantity);
+        query.bindValue(":inStock",  inStock);
+        query.bindValue(":revenue",  revenue);
 
 
-    //Error message to console if query fails
-    if(!query.exec())
-    {
-        qDebug() << "Failed: " << query.lastError();
-    }
+        //Error message to console if query fails
+        if(!query.exec())
+        {
+            qDebug() << "Failed: " << query.lastError();
+        }
 
-    QSqlQueryModel *model = new QSqlQueryModel();
+        QSqlQueryModel *model = new QSqlQueryModel();
 
-    query.prepare("SELECT * FROM InventoryTable");
-    query.exec();
+        query.prepare("SELECT * FROM InventoryTable");
+        query.exec();
 
-    model->setQuery(query);
-    ui->InventoryTableView->setModel(model);
-    ui->InventoryTableView->setColumnWidth(0, 210);
-    ui->InventoryTableView->setColumnWidth(1, 100);
-    ui->InventoryTableView->setColumnWidth(2, 100);
-    ui->InventoryTableView->setColumnWidth(3, 110);
-
+        model->setQuery(query);
+        ui->InventoryTableView->setModel(model);
+        ui->InventoryTableView->setColumnWidth(0, 210);
+        ui->InventoryTableView->setColumnWidth(1, 100);
+        ui->InventoryTableView->setColumnWidth(2, 100);
+        ui->InventoryTableView->setColumnWidth(3, 110);
     for (int i = 0; i < model->rowCount(); ++i)
         ui->InventoryTableView->resizeRowToContents(i);
-
+    }
 }
+
 
 /**************************************************************
  * void Admin::on_customerPage_addButton_clicked()
@@ -150,51 +176,60 @@ void Admin::on_inventoryPage_addButton_clicked()
 void Admin::on_customerPage_addButton_clicked()
 {
     Admin     admin;
-    QString   name    = ui -> NameLineEdit           -> text();
-    QString   id      = ui -> IDLineEdit             -> text();
-    QString   type    = ui -> MemberTypeLineEdit     -> text();
-    QString   expDate = ui -> ExpirationDateLineEdit -> text();
-    QSqlQuery query;
+       QSqlQuery query;
 
-    //If any fields are empty, send an error window to the user
-    if(name == "" || id == "" || type == "" || expDate =="")
-    {
-        QMessageBox::information(this, "Warning", "Please fill in Name, ID, MemberType,"
-                                                  " and Expiration date to ADD a customer.");
-    }
+       QString id      = ui->IDLineEdit->text();
+       QString name    = ui->NameLineEdit->text();
+       QString tr      = ui->RebateLineEdit->text();
+       QString ts      = ui->TotalSpentLineEdit->text();
+       QString type    = ui->MemberTypeLineEdit->text();
+       QString expDate = ui->ExpirationDateLineEdit->text();
 
-    //Prepare the database for query to add values to the table
-    query.prepare("INSERT OR IGNORE INTO CustomerTable(Name, CustomerID, CustomerType, ExpirationDate)"
-                  "VALUES(:name, :id, :type, :expDate)");
+       //If any fields are empty, send an error window to the user
+       if(name == "" || id == "" || type == "" || expDate =="")
+       {
+           QMessageBox::information(this, "Warning", "Please fill in Name, ID, MemberType,"
+                                                     " and Expiration date to ADD a customer.");
+       }
 
-    //bind values
-    query.bindValue(":name",    name);
-    query.bindValue(":id"  ,    id);
-    query.bindValue(":type",    type);
-    query.bindValue(":expDate", expDate);
+       //Prepare the database for query to add values to the table
+       query.prepare("INSERT OR REPLACE INTO CustomerTable(Name,CustomerID, CustomerType, ExpirationDate, TotalSpent, TotalRebate)"
+                     "VALUES(:name, :id, :type, :expDate, :ts, :tr)");
+
+       //bind values
+       query.bindValue(":name",    name);
+       query.bindValue(":id"  ,    id);
+       query.bindValue(":type",    type);
+       query.bindValue(":expDate", expDate);
+       query.bindValue(":ts", ts);
+       query.bindValue(":tr", tr);
 
 
-    //Error message to console if query fails
-    if(!query.exec())
-    {
-        qDebug() << "Failed: " << query.lastError();
-    }
 
-    QSqlQueryModel *model = new QSqlQueryModel();
+       //Error message to console if query fails
+       if(!query.exec())
+       {
+           qDebug() << "Failed: " << query.lastError();
+       }
 
-    query.prepare("SELECT * FROM CustomerTable");
-    query.exec();
+       QSqlQueryModel *model = new QSqlQueryModel();
 
-    model->setQuery(query);
-    ui->customerPage_tableView->setModel(model);
-    ui->customerPage_tableView->setColumnWidth(0, 210);
-    ui->customerPage_tableView->setColumnWidth(1, 100);
-    ui->customerPage_tableView->setColumnWidth(2, 100);
-    ui->customerPage_tableView->setColumnWidth(3, 110);
+       query.prepare("SELECT * FROM CustomerTable");
+       query.exec();
 
-    for (int i = 0; i < model->rowCount(); ++i)
-        ui->customerPage_tableView->resizeRowToContents(i);
+       model->setQuery(query);
+       ui->customerPage_tableView->setModel(model);
+       ui->customerPage_tableView->setColumnWidth(0, 210);
+       ui->customerPage_tableView->setColumnWidth(1, 100);
+       ui->customerPage_tableView->setColumnWidth(2, 100);
+       ui->customerPage_tableView->setColumnWidth(3, 110);
+
+       for (int i = 0; i < model->rowCount(); ++i)
+           ui->customerPage_tableView->resizeRowToContents(i);
 }
+
+
+
 
 /**************************************************************
  * void Admin::on_customerPage_addButton_clicked()
@@ -234,6 +269,11 @@ void Admin::on_customerPage_deleteButton_clicked()
     for (int i = 0; i < model->rowCount(); ++i)
         ui->customerPage_tableView->resizeRowToContents(i);
 }
+
+
+
+
+
 
 void Admin::on_inventoryPage_deleteButton_clicked()
 {
@@ -282,6 +322,11 @@ void Admin::on_inventoryPage_deleteButton_clicked()
 
 }
 
+
+
+
+
+
 void Admin::on_inventoryPage_editButton_clicked()
 {
     QSqlQueryModel *model = new QSqlQueryModel();
@@ -325,6 +370,11 @@ void Admin::on_inventoryPage_editButton_clicked()
 
 }
 
+
+
+
+
+
 void Admin::determineUpgradeOrDowngrade()
 {
     Admin admin;
@@ -358,6 +408,11 @@ void Admin::determineUpgradeOrDowngrade()
 
 
 }
+
+
+
+
+
 void Admin::test_purchase() {
     QSqlQuery query, purchase;
     int id = ui->idLine->text().toInt();
@@ -401,10 +456,18 @@ void Admin::test_purchase() {
     }
 }
 
+
+
+
+
 void Admin::on_m_clicked()
 {
     ui->stackedWidget->setCurrentIndex(3);
 }
+
+
+
+
 
 void Admin::on_InventoryTableView_clicked(const QModelIndex &index)
 {
@@ -427,4 +490,32 @@ void Admin::on_InventoryTableView_clicked(const QModelIndex &index)
             ui->ItemPriceLineEdit->setText(query.value(1).toString() );
         }
     }
+}
+
+
+
+
+
+void Admin::on_customerPage_tableView_clicked(const QModelIndex &index)
+{
+   QSqlQuery query;
+   QString value = ui->customerPage_tableView->model()->data(index).toString();
+
+   query.prepare("SELECT * FROM CustomerTable WHERE Name = '" + value + "' OR CustomerID = '" + value + "' OR CustomerType = '" + value + "';");
+
+   if(!query.exec())
+       qDebug() << query.lastError();
+
+   else
+   {
+       while(query.next())
+       {
+           ui->IDLineEdit->setText(query.value(1).toString() );
+           ui->NameLineEdit->setText(query.value(0).toString() );
+           ui->RebateLineEdit->setText(query.value(6).toString() );
+           ui->MemberTypeLineEdit->setText(query.value(2).toString() );
+           ui->TotalSpentLineEdit->setText(query.value(5).toString() );
+           ui->ExpirationDateLineEdit->setText(query.value(3).toString() );
+       }
+   }
 }

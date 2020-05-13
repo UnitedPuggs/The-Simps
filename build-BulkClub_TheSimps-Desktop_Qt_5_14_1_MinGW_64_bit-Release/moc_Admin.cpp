@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Admin_t {
     QByteArrayData data[19];
-    char stringdata0[443];
+    char stringdata0[442];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -43,14 +43,14 @@ QT_MOC_LITERAL(7, 125, 34), // "on_inventoryPage_addButton_cl..."
 QT_MOC_LITERAL(8, 160, 33), // "on_customerPage_addButton_cli..."
 QT_MOC_LITERAL(9, 194, 36), // "on_customerPage_deleteButton_..."
 QT_MOC_LITERAL(10, 231, 37), // "on_inventoryPage_deleteButton..."
-QT_MOC_LITERAL(11, 269, 34), // "on_customerPage_editButton_cl..."
-QT_MOC_LITERAL(12, 304, 35), // "on_inventoryPage_editButton_c..."
-QT_MOC_LITERAL(13, 340, 27), // "determineUpgradeOrDowngrade"
-QT_MOC_LITERAL(14, 368, 13), // "test_purchase"
-QT_MOC_LITERAL(15, 382, 12), // "on_m_clicked"
-QT_MOC_LITERAL(16, 395, 29), // "on_InventoryTableView_clicked"
-QT_MOC_LITERAL(17, 425, 11), // "QModelIndex"
-QT_MOC_LITERAL(18, 437, 5) // "index"
+QT_MOC_LITERAL(11, 269, 35), // "on_inventoryPage_editButton_c..."
+QT_MOC_LITERAL(12, 305, 27), // "determineUpgradeOrDowngrade"
+QT_MOC_LITERAL(13, 333, 13), // "test_purchase"
+QT_MOC_LITERAL(14, 347, 12), // "on_m_clicked"
+QT_MOC_LITERAL(15, 360, 29), // "on_InventoryTableView_clicked"
+QT_MOC_LITERAL(16, 390, 11), // "QModelIndex"
+QT_MOC_LITERAL(17, 402, 5), // "index"
+QT_MOC_LITERAL(18, 408, 33) // "on_customerPage_tableView_cli..."
 
     },
     "Admin\0on_customerButton_clicked\0\0"
@@ -61,11 +61,10 @@ QT_MOC_LITERAL(18, 437, 5) // "index"
     "on_customerPage_addButton_clicked\0"
     "on_customerPage_deleteButton_clicked\0"
     "on_inventoryPage_deleteButton_clicked\0"
-    "on_customerPage_editButton_clicked\0"
     "on_inventoryPage_editButton_clicked\0"
     "determineUpgradeOrDowngrade\0test_purchase\0"
     "on_m_clicked\0on_InventoryTableView_clicked\0"
-    "QModelIndex\0index"
+    "QModelIndex\0index\0on_customerPage_tableView_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -96,8 +95,8 @@ static const uint qt_meta_data_Admin[] = {
       12,    0,   99,    2, 0x08 /* Private */,
       13,    0,  100,    2, 0x08 /* Private */,
       14,    0,  101,    2, 0x08 /* Private */,
-      15,    0,  102,    2, 0x08 /* Private */,
-      16,    1,  103,    2, 0x08 /* Private */,
+      15,    1,  102,    2, 0x08 /* Private */,
+      18,    1,  105,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -113,8 +112,8 @@ static const uint qt_meta_data_Admin[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 17,   18,
+    QMetaType::Void, 0x80000000 | 16,   17,
+    QMetaType::Void, 0x80000000 | 16,   17,
 
        0        // eod
 };
@@ -134,11 +133,12 @@ void Admin::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         case 6: _t->on_customerPage_addButton_clicked(); break;
         case 7: _t->on_customerPage_deleteButton_clicked(); break;
         case 8: _t->on_inventoryPage_deleteButton_clicked(); break;
-        case 10: _t->on_inventoryPage_editButton_clicked(); break;
-        case 11: _t->determineUpgradeOrDowngrade(); break;
-        case 12: _t->test_purchase(); break;
-        case 13: _t->on_m_clicked(); break;
-        case 14: _t->on_InventoryTableView_clicked((*reinterpret_cast< const QModelIndex(*)>(_a[1]))); break;
+        case 9: _t->on_inventoryPage_editButton_clicked(); break;
+        case 10: _t->determineUpgradeOrDowngrade(); break;
+        case 11: _t->test_purchase(); break;
+        case 12: _t->on_m_clicked(); break;
+        case 13: _t->on_InventoryTableView_clicked((*reinterpret_cast< const QModelIndex(*)>(_a[1]))); break;
+        case 14: _t->on_customerPage_tableView_clicked((*reinterpret_cast< const QModelIndex(*)>(_a[1]))); break;
         default: ;
         }
     }

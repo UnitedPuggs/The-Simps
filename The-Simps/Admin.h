@@ -32,8 +32,6 @@ private slots:
 
     void on_inventoryPage_deleteButton_clicked();
 
-    void on_customerPage_editButton_clicked();
-
     void on_inventoryPage_editButton_clicked();
 
     void determineUpgradeOrDowngrade();
@@ -42,6 +40,8 @@ private slots:
     void on_m_clicked();
 
     void on_InventoryTableView_clicked(const QModelIndex &index);
+
+    void on_customerPage_tableView_clicked(const QModelIndex &index);
 
 private:
     Ui::Admin *ui;

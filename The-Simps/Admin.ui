@@ -68,7 +68,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="customerPage">
     <widget class="QToolButton" name="customerPage_refreshButton">
@@ -95,7 +95,7 @@
       <rect>
        <x>10</x>
        <y>250</y>
-       <width>701</width>
+       <width>562</width>
        <height>341</height>
       </rect>
      </property>
@@ -383,7 +383,7 @@
       <rect>
        <x>0</x>
        <y>270</y>
-       <width>721</width>
+       <width>671</width>
        <height>321</height>
       </rect>
      </property>
@@ -665,7 +665,7 @@
       <rect>
        <x>0</x>
        <y>50</y>
-       <width>711</width>
+       <width>544</width>
        <height>541</height>
       </rect>
      </property>

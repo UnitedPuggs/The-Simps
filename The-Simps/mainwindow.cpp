@@ -9,10 +9,17 @@ mainWindow::mainWindow(QWidget *parent) :
     this->setFixedSize(QSize(640, 480));
 }
 
+
+
+
 mainWindow::~mainWindow()
 {
     delete ui;
 }
+
+
+
+
 
 void mainWindow::on_pushButton_clicked()
 {

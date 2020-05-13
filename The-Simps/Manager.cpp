@@ -17,15 +17,26 @@ Manager::Manager(QWidget *parent) :
     setupRebatesPage();
 }
 
+
+
+
 Manager::~Manager()
 {
     delete ui;
 }
 
+
+
+
+
 void Manager::setupSalesPage()
 {
 
 }
+
+
+
+
 
 void Manager::setupCustomerPage()
 {
@@ -34,6 +45,10 @@ void Manager::setupCustomerPage()
     ui->customerPage_sortBox->addItem("Regular");
     ui->customerPage_sortBox->addItem("Executive");
 }
+
+
+
+
 
 void Manager::setupInventoryPage()
 {
@@ -44,10 +59,17 @@ void Manager::setupInventoryPage()
     ui->inventoryPage_sortBox->addItem("Least Sold");
 }
 
+
+
+
+
 void Manager::setupMembershipPage()
 {
 
 }
+
+
+
 
 void Manager::setupRebatesPage()
 {
@@ -56,10 +78,18 @@ void Manager::setupRebatesPage()
     ui->rebatePage_sortBox->addItem("Descending");
 }
 
+
+
+
+
 void Manager::on_salesButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
 }
+
+
+
+
 
 void Manager::on_customerButton_clicked()
 {
@@ -92,6 +122,11 @@ void Manager::on_customerButton_clicked()
     ui->stackedWidget->setCurrentIndex(1);
 }
 
+
+
+
+
+
 void Manager::on_membershipButton_clicked()
 {
     QSqlQuery query;
@@ -117,6 +152,10 @@ void Manager::on_membershipButton_clicked()
     setupMembershipPage();
     ui->stackedWidget->setCurrentIndex(2);
 }
+
+
+
+
 
 void Manager::on_inventoryButton_clicked()
 {
@@ -145,6 +184,10 @@ void Manager::on_inventoryButton_clicked()
     ui->stackedWidget->setCurrentIndex(3);
 }
 
+
+
+
+
 void Manager::on_rebatesButton_clicked()
 {
     QSqlQuery query, rebate;
@@ -170,11 +213,19 @@ void Manager::on_rebatesButton_clicked()
     ui->stackedWidget->setCurrentIndex(4);
 }
 
+
+
+
+
 void Manager::on_salesPage_previewButton_clicked()
 {
     SalesReport *newSales = new SalesReport;
     newSales->show();
 }
+
+
+
+
 
 void Manager::on_customerPage_sortBox_activated(int index)
 {
@@ -229,6 +280,12 @@ void Manager::on_customerPage_sortBox_activated(int index)
         ui->customerPage_tableView->resizeRowToContents(i);
 }
 
+
+
+
+
+
+
 void Manager::on_rebatePage_sortBox_activated(int index)
 {
     QSqlQuery query;
@@ -264,6 +321,11 @@ void Manager::on_rebatePage_sortBox_activated(int index)
     for (int i = 0; i < model->rowCount(); ++i)
         ui->rebatePage_tableView->resizeRowToContents(i);
 }
+
+
+
+
+
 void Manager::on_inventoryPage_sortBox_activated(int index)
 {
 
@@ -309,6 +371,11 @@ void Manager::on_inventoryPage_sortBox_activated(int index)
         ui->inventoryPage_tableView->resizeRowToContents(i);
 }
 
+
+
+
+
+
 // Searching the Customer Page
 void Manager::on_customerPage_searchButton_clicked()
 {
@@ -344,6 +411,11 @@ void Manager::on_customerPage_searchButton_clicked()
             ui->customerPage_tableView->resizeRowToContents(i);
     }
 }
+
+
+
+
+
 
 // Searching the Membership Page
 void Manager::on_membershipPage_searchButton_clicked()
@@ -403,6 +475,11 @@ void Manager::on_membershipPage_searchButton_clicked()
     }
 }
 
+
+
+
+
+
 void Manager::on_inventoryPage_searchButton_clicked()
 {
     QSqlQuery query;
@@ -440,9 +517,18 @@ void Manager::on_inventoryPage_searchButton_clicked()
     }
 }
 
+
+
+
+
 void Manager::refreshSearch() {
     on_inventoryPage_searchButton_clicked();
 }
+
+
+
+
+
 
 void Manager::generateReport() {
     QSqlQuery query;
@@ -486,13 +572,26 @@ void Manager::generateReport() {
     ui->executiveLine->setText(QString::number(execCount));
 }
 
+
+
+
+
 void Manager::refreshMonthsSearch() {
     on_membershipPage_searchButton_clicked();
 }
 
+
+
+
+
 void Manager::refreshCustomerSearch() {
     on_customerPage_searchButton_clicked();
 }
+
+
+
+
+
 
 void Manager::sales_search() {
     QSqlQuery query;
@@ -553,6 +652,10 @@ void Manager::sales_search() {
         ui->executiveLine->setText(QString::number(execCount));
     }
 }
+
+
+
+
 
 void Manager::refreshSalesSearch() {
     sales_search();

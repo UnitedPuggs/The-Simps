@@ -1,4 +1,8 @@
 #include "sqldatabase.h"
+
+
+
+
 sqlDatabase::sqlDatabase()
 {
     database = QSqlDatabase::addDatabase("QSQLITE");
@@ -9,10 +13,16 @@ sqlDatabase::sqlDatabase()
     database.open();
 }
 
+
+
+
 sqlDatabase::~sqlDatabase()
 {
 
 }
+
+
+
 
 void sqlDatabase::createDatabase()
 {
@@ -43,6 +53,10 @@ void sqlDatabase::createDatabase()
                "Revenue       Decimal(10,2));");
 }
 
+
+
+
+
 //Reads the warehouse shoppers .txt file (Make sure to change the file path to make it work for you)
 void sqlDatabase::readFileCustomer()
 {
@@ -70,6 +84,11 @@ void sqlDatabase::readFileCustomer()
     else
         qDebug() << "Cannot open file thats used to Read File from Customer list";
 }
+
+
+
+
+
 
 //Reads the Sales .txt file (Make sure to change the file path to make it work for you)
 void sqlDatabase::readFileSales()
@@ -116,10 +135,16 @@ void sqlDatabase::readFileSales()
     }
 
 }
+
+
+
+
 QSqlDatabase sqlDatabase::GetDatabase() const
 {
     return database;
 }
+
+
 
 
 //Inserts warehouse info into the customerTable
@@ -143,6 +168,10 @@ void sqlDatabase::addCustomerIntoTable(customerTableInfo& customerData)
         qDebug() << "Failed: " << query.lastError();
 }
 
+
+
+
+
 //Inserts Sales info into the salesTable
 void sqlDatabase::addSalesIntoTable(salesTableInfo& salesData)
 {
@@ -164,6 +193,10 @@ void sqlDatabase::addSalesIntoTable(salesTableInfo& salesData)
     checkInventory();
 }
 
+
+
+
+
 void sqlDatabase::handleInventory()
 {
     QSqlQuery query;
@@ -180,6 +213,11 @@ void sqlDatabase::handleInventory()
         qDebug() << "Failed: " << query.lastError();
     }
 }
+
+
+
+
+
 void sqlDatabase::checkInventory(){
 
     QSqlQuery query;
@@ -223,6 +261,10 @@ void sqlDatabase::checkInventory(){
         }
 
 }
+
+
+
+
 void sqlDatabase::updateDB(int stock,int quant,double dec,double totalRevenue){
     QSqlQuery query;
     query.prepare("UPDATE InventoryTable "

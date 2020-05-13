@@ -12,9 +12,16 @@ SalesReport::SalesReport(QWidget *parent) :
     ui->setupUi(this);
 }
 
+
+
+
 SalesReport::~SalesReport() {
     delete ui;
 }
+
+
+
+
 
 void SalesReport::generateReport() {
     QSqlQuery query1;
